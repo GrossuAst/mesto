@@ -1,3 +1,9 @@
 .page {
-    
+    background-color: #000000;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 1280px;
+    min-width: 320px;
 }
