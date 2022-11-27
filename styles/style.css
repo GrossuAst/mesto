@@ -1,5 +1,13 @@
 .page {
     background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
 }
 
 .content {
@@ -13,10 +21,66 @@
 /* шапка */
 
 .header {
-    min-height: 74px;
     border-bottom: 1px solid #545454;
+    min-height: 74px;
     max-width: 880px;
 }
 
-/*  */
+/* секция профиль */
+.profile {
+    display: flex;
+    margin-top: 40px;
+    min-height: 120px;
+    max-width: 880px;
+}
 
+.profile__avatar {
+    border-radius: 50%;
+    max-width: 120px;
+    max-height: 120px;
+    display: inline-block;
+}
+
+.profile__profile-info {
+    margin-left: 30px;
+    min-height: 73px;
+    max-width: 336px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.profile__name  {
+    margin: 22px 0 0 0;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 48px;
+    /* align-self: center; */
+}
+
+.profile__description {
+    margin: 9px 0 25px 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.profile__edit-button {
+    margin: 30px 0 0 0;
+    display: inline-block;
+    align-self: center;
+    background: #000000 url(../images/edit-button-profile.svg) center no-repeat;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #FFFFFF;
+}
+
+.profile__add-button {
+    background: #000000 url(../images/add-button.svg) center no-repeat;
+    padding: 0;
+    margin: 35px 0 0 244px;
+    width: 150px;
+    height: 50px;
+    border: 2px solid #FFFFFF;
+    display: inline-block;
+}
