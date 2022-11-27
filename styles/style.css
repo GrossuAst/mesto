@@ -30,7 +30,7 @@
 .profile {
     display: flex;
     margin-top: 40px;
-    min-height: 120px;
+    max-height: 120px;
     max-width: 880px;
 }
 
@@ -75,6 +75,11 @@
     border: 1px solid #FFFFFF;
 }
 
+.profile__edit-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
 .profile__add-button {
     background: #000000 url(../images/add-button.svg) center no-repeat;
     padding: 0;
@@ -83,4 +88,81 @@
     height: 50px;
     border: 2px solid #FFFFFF;
     display: inline-block;
+}
+
+.profile__add-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+/* секция элементы */
+
+.elements {
+    max-width: 880px;
+    padding-top: 51px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 17px;
+}
+
+.elements__card {
+    max-width: 282px;
+    /* border-radius: 10px; */
+    display: inline-block;
+}
+
+.elements__photo {
+    max-width: 282px;
+    max-height: 282px;
+    display: block;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* overflow-y: hidden; */
+}
+
+.elements__description {
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    min-height: 79px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 25px 20px 0 21px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.elements__title {
+    color: #000000;
+    margin: 0;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    max-width: 190px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.elements__like {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-top: 5px;
+    background: url(../images/elements-like.svg) no-repeat;
+    background-position: 0% 10%;
+}
+
+.elements__like:hover {
+    opacity: 0.5;
+}
+
+.elements__like_active {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-top: 6px;
+    background: url(../images/elements-like_active.svg) no-repeat;
+    background-position: 0% 10%;
 }
