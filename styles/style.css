@@ -51,113 +51,69 @@
 }
 
 /* секция профиль */
+
 .profile {
-    display: flex;
-    margin-top: 40px;
-    max-height: 120px;
     max-width: 880px;
-}
-
-@media screen and (max-width:870px) {
-    .profile {
-        flex-direction: column;
-        height: 286px;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-    }
-}
-
-.profile__avatar {
-    border-radius: 50%;
-    max-width: 120px;
-    max-height: 120px;
-    display: inline-block;
-}
-
-.profile__profile-info {
-    margin-left: 30px;
-    min-height: 73px;
-    max-width: 336px;
+    min-height: 160px;
+    box-sizing: border-box;
+    padding-top: 40px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
 }
 
-@media screen and (max-width:870px) {
-    .profile__profile-info {
-        margin: 0;
-    }
+.profile__redact {
+    max-width: 700px;
+    display: grid;
+    grid-template-areas: 
+    "avatar name edit"
+    "avatar descripton .";
+    grid-template-columns: max-content 340px 24px;
+    grid-template-rows: 60px 60px;
+    /* column-gap: 30px; */
+    /* grid-template-columns: max-content max-content max-content; */
 }
 
-.profile__name  {
-    margin: 22px 0 0 0;
+.profile__avatar {
+    max-width: 120px;
+    border-radius: 50%;
+    grid-area: avatar;
+}
+
+.profile__name {
+    grid-area: name;
     font-weight: 500;
     font-size: 42px;
     line-height: 48px;
-    /* align-self: center; */
-}
-
-@media screen and (max-width:870px) {
-    .profile__name {
-        font-weight: 500;
-        font-size: 27px;
-        line-height: 33px;
-    }
+    margin: 22px 0 0 30px;
 }
 
 .profile__description {
-    margin: 9px 0 25px 0;
+    grid-area: descripton;
+    display: inline-block;
     font-weight: 400;
     font-size: 18px;
-    line-height: 22px;
-}
-
-@media screen and (max-width:870px) {
-    .profile__description {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        margin: 0;
-    }
+    line-height: 37px;
+    margin: 10px 0 0 30px;
 }
 
 .profile__edit-button {
-    margin: 30px 0 0 0;
+    padding: 0;
+    border: 1px solid #FFFFFF;
     display: inline-block;
-    align-self: center;
-    background: #000000 url(../images/edit-button-profile.svg) center no-repeat;
     width: 24px;
     height: 24px;
-    border: 1px solid #FFFFFF;
-}
-
-.profile__edit-button:hover {
-    opacity: 0.6;
-    cursor: pointer;
+    background: url(../images/edit-button-profile.svg) center no-repeat;
+    margin: 37px 0 0 1px;
+    
 }
 
 .profile__add-button {
-    background: #000000 url(../images/add-button.svg) center no-repeat;
     padding: 0;
-    margin: 35px 0 0 244px;
+    border: 0;
+    background: url(../images/Add-Button2.svg);
     width: 150px;
     height: 50px;
-    border: 2px solid #FFFFFF;
-    display: inline-block;
-}
-
-@media screen and (max-width:870px) {
-    .profile__add-button {
-        margin: 0;
-        width: 282px;
-        height: 50px;
-    }
-}
-
-.profile__add-button:hover {
-    opacity: 0.6;
-    cursor: pointer;
+    align-self: center;
 }
 
 /* секция элементы */
