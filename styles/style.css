@@ -20,9 +20,11 @@
     min-width: 320px;
 }
 
-@media screen and (max-width:870px) {
+@media screen and (max-width:770px) {
     .content {
-        padding-top: 28px;
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -34,17 +36,25 @@
     max-width: 880px;
 }
 
-@media screen and (max-width:870px) {
+@media screen and (max-width:770px) {
     .header {
         min-height: 56px;
+        padding-left: 27px;
+        padding-top: 28px;
     }
 }
 
 .header__logo {
-
+    
 }
 
-@media screen and (max-width:870px) {
+@media screen and (max-width:770px) {
+    .header__logo {
+        max-width: 103.7px;
+    }
+}
+
+@media screen and (max-width:770px) {
     .header__logo {
         max-width: 103.7px;
     }
@@ -61,6 +71,15 @@
     justify-content: space-between;
 }
 
+@media screen and (max-width:770px) {
+    .profile {
+        padding-left: 19px;
+        padding-right: 19px;
+        padding-top: 42px;
+        flex-direction: column;
+    }
+}
+
 .profile__redact {
     max-width: 700px;
     display: grid;
@@ -69,6 +88,20 @@
     "avatar descripton .";
     grid-template-columns: max-content 340px 24px;
     grid-template-rows: 60px 60px;
+    align-items: center;
+}
+
+@media screen and (max-width:770px) {
+    .profile__redact {
+        margin: 0 auto;
+        grid-template-areas: 
+        "avatar-mob avatar-mob"
+        "name-mob edit-mob"
+        "descripton-mob descripton-mob";
+        grid-template-columns: none;
+        grid-template-rows: none;
+        column-gap: 10px;
+    }
 }
 
 .profile__avatar {
@@ -77,12 +110,30 @@
     grid-area: avatar;
 }
 
+@media screen and (max-width:770px) {
+    .profile__avatar {
+        grid-area: avatar-mob;
+        margin: auto;
+    }
+}
+
 .profile__name {
     grid-area: name;
     font-weight: 500;
     font-size: 42px;
     line-height: 48px;
-    margin: 22px 0 0 30px;
+    margin: 29px 0 0 30px;
+}
+
+@media screen and (max-width:770px) {
+    .profile__name {
+        font-size: 27px;
+        line-height: 33px;
+        grid-area: name-mob;
+        margin-top: 26px;
+        margin-left: 26px;
+        display: inline-block;
+    }
 }
 
 .profile__description {
@@ -91,7 +142,17 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 37px;
-    margin: 10px 0 0 30px;
+    margin: 0 0 5px 30px;
+}
+
+@media screen and (max-width:770px) {
+    .profile__description {
+        grid-area: descripton-mob;
+        font-size: 14px;
+        line-height: 17px;
+        margin: auto;
+        margin-top: 6px;
+    }
 }
 
 .profile__edit-button {
@@ -102,16 +163,42 @@
     height: 24px;
     background: url(../images/edit-button-profile.svg) center no-repeat;
     margin: 37px 0 0 1px;
-    
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width:770px) {
+    .profile__edit-button {
+        grid-area: edit-mob;
+        background: url(../images/Edit-Button-mobile.svg) center no-repeat;
+        width: 18px;
+        height: 18px;
+        margin-top: 24px;
+        margin-left: 0;
+    }
 }
 
 .profile__add-button {
     padding: 0;
-    border: 0;
-    background: url(../images/Add-Button2.svg);
+    border: 2px solid #FFFFFF;
+    background: url(../images/add-button.svg) center no-repeat;
     width: 150px;
     height: 50px;
     align-self: center;
+}
+
+.profile__add-button:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width:770px) {
+    .profile__add-button {
+        background: url(../images/add-button-mobile.svg) center no-repeat;
+        width: 282px;
+        margin-top: 33px;
+    }
 }
 
 /* секция элементы */
@@ -130,6 +217,13 @@
         justify-content: center;
         padding-top: 0;
         margin-top: 36px;
+    }
+}
+
+@media screen and (max-width:770px) {
+    .elements {
+        padding-left: 19px;
+        padding-right: 19px;
     }
 }
 
@@ -207,6 +301,15 @@
     color: #545454;
 }
 
+@media screen and (max-width: 770px) {
+    .footer {
+        font-size: 14px;
+        line-height: 17px;
+        padding-left: 19px;
+        padding-top: 35px;
+    }
+}
+
 /* попап */
 
 .popup {
@@ -220,9 +323,15 @@
     display: none;
 }
 
+@media screen and (max-width: 770px) {
+    .popup {
+        
+    }
+}
+
 .popup_opened {
     position: fixed;
-    /* display: flex; */
+    display: flex;
 }
 
 .popup__container {
@@ -239,16 +348,32 @@
     opacity: 1;
 }
 
+@media screen and (max-width: 770px) {
+    .popup__container {
+        max-width: 282px;
+    }
+}
+
 .popup__close-icon {
     width: 32px;
     height: 32px;
     margin: 0;
     padding: 0;
     border: none;
-    background: url(../images/Close-Icon.svg);
+    background: url(../images/Close-Icon.svg) center no-repeat;
     position: absolute;
     top: -40px;
     right: -40px;
+}
+
+@media screen and (max-width: 770px) {
+    .popup__close-icon {
+        background: url(../images/Close-Icon-mob.svg) center no-repeat;
+        width: 20px;
+        height: 20px;
+        top: -36px;
+        right: 0;
+    }
 }
 
 .popup__form {
