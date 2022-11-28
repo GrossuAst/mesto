@@ -69,8 +69,6 @@
     "avatar descripton .";
     grid-template-columns: max-content 340px 24px;
     grid-template-rows: 60px 60px;
-    /* column-gap: 30px; */
-    /* grid-template-columns: max-content max-content max-content; */
 }
 
 .profile__avatar {
