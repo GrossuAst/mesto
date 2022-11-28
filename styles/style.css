@@ -13,9 +13,17 @@
 .content {
     box-sizing: border-box;
     padding-top: 45px;
+    padding-left: 19px;
+    padding-right: 19px;
     margin: 0 auto;
-    max-width: 880px;
+    max-width: 918px;
     min-width: 320px;
+}
+
+@media screen and (max-width:870px) {
+    .content {
+        padding-top: 28px;
+    }
 }
 
 /* шапка */
@@ -26,12 +34,38 @@
     max-width: 880px;
 }
 
+@media screen and (max-width:870px) {
+    .header {
+        min-height: 56px;
+    }
+}
+
+.header__logo {
+
+}
+
+@media screen and (max-width:870px) {
+    .header__logo {
+        max-width: 103.7px;
+    }
+}
+
 /* секция профиль */
 .profile {
     display: flex;
     margin-top: 40px;
     max-height: 120px;
     max-width: 880px;
+}
+
+@media screen and (max-width:870px) {
+    .profile {
+        flex-direction: column;
+        height: 286px;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
 }
 
 .profile__avatar {
@@ -50,6 +84,12 @@
     justify-content: space-between;
 }
 
+@media screen and (max-width:870px) {
+    .profile__profile-info {
+        margin: 0;
+    }
+}
+
 .profile__name  {
     margin: 22px 0 0 0;
     font-weight: 500;
@@ -58,11 +98,28 @@
     /* align-self: center; */
 }
 
+@media screen and (max-width:870px) {
+    .profile__name {
+        font-weight: 500;
+        font-size: 27px;
+        line-height: 33px;
+    }
+}
+
 .profile__description {
     margin: 9px 0 25px 0;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
+}
+
+@media screen and (max-width:870px) {
+    .profile__description {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        margin: 0;
+    }
 }
 
 .profile__edit-button {
@@ -90,6 +147,14 @@
     display: inline-block;
 }
 
+@media screen and (max-width:870px) {
+    .profile__add-button {
+        margin: 0;
+        width: 282px;
+        height: 50px;
+    }
+}
+
 .profile__add-button:hover {
     opacity: 0.6;
     cursor: pointer;
@@ -104,6 +169,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px 17px;
+}
+
+@media screen and (max-width:935px) {
+    .elements {
+        justify-content: center;
+        padding-top: 0;
+        margin-top: 36px;
+    }
 }
 
 .elements__card {
@@ -156,6 +229,7 @@
 
 .elements__like:hover {
     opacity: 0.5;
+    cursor: pointer;
 }
 
 .elements__like_active {
@@ -177,4 +251,68 @@
     font-size: 18px;
     line-height: 22px;
     color: #545454;
+}
+
+/* попап */
+
+.popup {
+    background: rgb(0, 0, 0);
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    display: none;
+}
+
+.popup_opened {
+    position: fixed;
+    /* display: flex; */
+}
+
+.popup__container {
+    width: 430px;
+    height: 330px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 34px 36px 0 36px;
+    margin: 0 auto;
+    position: relative;
+    opacity: 1;
+}
+
+.popup__close-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: url(../images/Close-Icon.svg);
+    position: absolute;
+    top: -40px;
+    right: -40px;
+}
+
+.popup__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup__title {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin: 0;
+    display: inline-block;
+}
+
+.popup__submit-button {
+    min-height: 50px;
+    background: #000000;
+    color: #FFFFFF;
 }

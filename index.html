@@ -11,7 +11,7 @@
 <body class="page">
     <div class="content">
         <header class="header">
-            <img src="./images/header-logo.svg" alt="Логотип страницы, латинскими буквами написано Место">
+            <img src="./images/header-logo.svg" alt="Логотип страницы, латинскими буквами написано Место" class="header__logo">
         </header>
         <main class="main">
             <section class="profile">
@@ -71,6 +71,17 @@
         <footer class="footer">
             <p class="footer__author">&#169; 2020 Mesto Russia</p>
         </footer>
+        <div class="popup popup_opened">
+            <div class="popup__container">
+                <button class="popup__close-icon"></button>
+                <form action="#" class="popup__form">
+                    <h3 class="popup__title">Редактировать профиль</h3>
+                    <input type="text" class="popup__">
+                    <input type="text">
+                    <button class="popup__submit-button">Сохранить</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
