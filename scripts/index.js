@@ -15,3 +15,20 @@ popupClose.addEventListener('click', function() {
 
 // -------------------
 
+// вывод в попап значений профиля
+
+let profileName = document.querySelector('.profile__name');
+let description = document.querySelector('.profile__description');
+let popupName = document.querySelector('.popup__name');
+let popupProf = document.querySelector('.popup__prof');
+
+// console.log(profileName);
+// console.log(description);
+// console.log(popupName);
+// console.log(popupProf);
+
+popupName.value = profileName.textContent;
+popupProf.value = description.textContent;
+
+// ---------------------
+
