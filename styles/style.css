@@ -310,6 +310,7 @@
         line-height: 17px;
         padding-left: 19px;
         padding-top: 35px;
+        min-height: 98px;
     }
 }
 
@@ -324,12 +325,6 @@
     left: 0px;
     position: fixed;
     display: none;
-}
-
-@media screen and (max-width: 770px) {
-    .popup {
-        
-    }
 }
 
 .popup_opened {
@@ -371,6 +366,11 @@
     position: absolute;
     top: -40px;
     right: -40px;
+}
+
+.popup__close-icon:hover {
+    opacity: 0.6;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 770px) {
