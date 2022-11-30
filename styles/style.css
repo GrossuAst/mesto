@@ -123,6 +123,9 @@
     font-size: 42px;
     line-height: 48px;
     margin: 29px 0 0 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media screen and (max-width:770px) {
@@ -133,6 +136,7 @@
         margin-top: 26px;
         margin-left: 26px;
         display: inline-block;
+        
     }
 }
 
@@ -143,6 +147,9 @@
     font-size: 18px;
     line-height: 37px;
     margin: 0 0 5px 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media screen and (max-width:770px) {
@@ -242,6 +249,7 @@
     display: block;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    object-fit: fill;
     /* overflow-y: hidden; */
 }
 
