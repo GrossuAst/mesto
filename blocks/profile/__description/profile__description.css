@@ -12,6 +12,7 @@
 
 @media screen and (max-width:770px) {
     .profile__description {
+        max-width: 250px;
         grid-area: descripton-mob;
         font-size: 14px;
         line-height: 17px;
