@@ -4,8 +4,33 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    height: 25px;
+    padding-bottom: 5px;
 }
 
 .popup__input:focus{
     outline: 0px;
 }
+
+/* .popup__input_type_profession {
+    margin-top: 31px;
+    padding: 0 0 9px 0;
+}
+
+@media screen and (max-width: 770px) {
+    .popup__input_type_profession {
+        padding-bottom: 7px;
+    }
+} */
+
+/* .popup__input_type_name {
+    margin-top: 41px;
+    padding: 7px 0 8px 0;
+}
+
+@media screen and (max-width: 770px) {
+    .popup__input_type_name {
+        margin-top: 69px;
+        padding: 5px 0 10px 0;
+    }
+} */

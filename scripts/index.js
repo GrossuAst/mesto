@@ -14,13 +14,14 @@ function toClosePopup () {
 
 function toOpenPopup() {
     popupOpen.classList.add('popup_opened');
+    nameInput.value = profileName.textContent; 
+    jobInput.value = description.textContent;
 }
 
-// сохранение значений инпутов формы в поля профиля
 function handleFormSubmit (evt) {
     evt.preventDefault();                                     
-profileName.textContent = nameInput.value;
-description.textContent = jobInput.value;
+    profileName.textContent = nameInput.value;
+    description.textContent = jobInput.value;
     toClosePopup ();
 }
 
@@ -28,7 +29,4 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 popupCloseIcon.addEventListener('click', toClosePopup);
 
-editButton.addEventListener('click', toOpenPopup) 
-
-    nameInput.value = profileName.textContent; 
-    jobInput.value = description.textContent;
+editButton.addEventListener('click', toOpenPopup);
