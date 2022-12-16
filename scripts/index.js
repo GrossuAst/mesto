@@ -2,7 +2,6 @@ const editButton = document.querySelector('.profile__edit-button');
 const popupOpen = document.querySelector('.popup');
 const popupCloseIcon = document.querySelector('.popup__close-icon');
 
-
 // открытие - закрытие попап
 
 editButton.addEventListener('click', function() {
@@ -20,10 +19,6 @@ function toClosePopup () {
 }
 
 popupCloseIcon.addEventListener('click', toClosePopup);
-
-// function saveProfileValues () {
-    
-// }
 
 // сохранение значений инпутов формы в поля профиля
 
@@ -46,15 +41,7 @@ description.textContent = jobInput.value;
 
 formElement.addEventListener('submit', handleFormSubmit); 
 
-
-
-
-
-
-
-
 // вывод в попап значений профиля
-
 
 // let popupName = document.querySelector('.popup__name');
 // let popupProf = document.querySelector('.popup__prof');
