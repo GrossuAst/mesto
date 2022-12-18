@@ -74,6 +74,7 @@
         <footer class="footer">
             <p class="footer__author">&#169; 2020 Mesto Russia</p>
         </footer>
+        <!-- попап редактирования профиля -->
         <div class="popup">
             <div class="popup__container">
                 <form action="#" name="profile-form" class="popup__form">
@@ -86,6 +87,28 @@
                     <button type="submit" class="popup__submit-button">Сохранить</button>
                 </form>
             </div>
+        </div>
+        <!-- попап добавления карточки -->
+        <div class="popup">
+            <div class="popup__container">
+                <form action="#" name="profile-form" class="popup__form">
+                    <button type="button" aria-label="закрыть форму" class="popup__close-icon" ></button>
+                    <h2 class="popup__title">Новое место</h2>
+                        <div class="popup__inputs">
+                            <input type="text" name="name" placeholder="Название" class="popup__input popup__input_type_name">
+                            <input type="text" name="hobby" placeholder="Ссылка на картинку" class="popup__input popup__input_type_profession">
+                        </div>
+                    <button type="submit" class="popup__submit-button">Сохранить</button>
+                </form>
+            </div>
+        </div>
+        <!-- попап открытой карточки -->
+        <div class="popup popup_type_fullscreen">
+            <article class="popup__fullsceen-container">
+                <img src="./images/karachaevsk.jpg" alt="фото заснеженной горы на фоне леса" class="popup__fullscreen-image">
+                <h3 class="popup__fullscreen-title">Домбай</h3>
+                <button type="button" aria-label="закрыть форму" class="popup__close-icon"></button>
+            </article>
         </div>
     </div>
     <script src="./scripts/index.js"></script>

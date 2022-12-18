@@ -44,3 +44,9 @@
 @import url(../blocks/popup/__input/_type/popup__input_type_name.css);
 @import url(../blocks/popup/__input/_type/popup_input_type_profession.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
+
+/* попап фуллскрин фото */
+@import url(../blocks/popup/_type/popup_type_fullscreen.css);
+@import url(../blocks/popup/__fullscreen-container/popup__fullscreen-container.css);
+@import url(../blocks/popup/__fullscreen-image/popup__fullscreen-image.css);
+@import url(../blocks/popup/__fullscreen-title/popup__fullscreen-title.css);
