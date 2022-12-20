@@ -27,7 +27,7 @@
                 <button type="button" class="profile__add-button"></button>
             </section>
             <section class="elements">
-                <article class="card">
+                <!-- <article class="card">
                     <img src="./images/karachaevsk.jpg" alt="фото монастыря на холме" class="card__photo">
                     <div class="card__description">
                         <h3 class="card__title">Карачаевск</h3>
@@ -61,14 +61,25 @@
                         <h3 class="card__title">Домбай</h3>
                         <button type="button" class="card__like"></button>
                     </div>
-                </article>
+                </article> -->
                 <article class="card">
+                    <button type="button" class="card__delete-button"></button>
                     <img src="./images/karachaevsk.jpg" alt="фото монастыря на холме" class="card__photo">
                     <div class="card__description">
                         <h3 class="card__title">Карачаево-Черкессия</h3>
                         <button type="button" class="card__like"></button>
                     </div>
                 </article>
+                <template id="card-template">
+                    <article class="card">
+                        <button type="button" class="card__delete-button"></button>
+                        <img src="" alt="" class="card__photo">
+                        <div class="card__description">
+                            <h3 class="card__title"></h3>
+                            <button type="button" class="card__like"></button>
+                        </div>
+                    </article>
+                </template>
             </section>
         </main>
         <footer class="footer">
@@ -89,14 +100,14 @@
             </div>
         </div>
         <!-- попап добавления карточки -->
-        <div class="popup">
+        <div class="popup popup_type_add-card">
             <div class="popup__container">
                 <form action="#" name="profile-form" class="popup__form">
-                    <button type="button" aria-label="закрыть форму" class="popup__close-icon" ></button>
+                    <button type="button" aria-label="закрыть форму" class="popup__close-icon popup__close-icon_type_add-card" ></button>
                     <h2 class="popup__title">Новое место</h2>
                         <div class="popup__inputs">
-                            <input type="text" name="name" placeholder="Название" class="popup__input popup__input_type_name">
-                            <input type="text" name="hobby" placeholder="Ссылка на картинку" class="popup__input popup__input_type_profession">
+                            <input type="text" name="place-name" placeholder="Название" class="popup__input ">
+                            <input type="text" name="place-link" placeholder="Ссылка на картинку" class="popup__input">
                         </div>
                     <button type="submit" class="popup__submit-button">Сохранить</button>
                 </form>
@@ -107,7 +118,7 @@
             <article class="popup__fullsceen-container">
                 <img src="./images/karachaevsk.jpg" alt="фото заснеженной горы на фоне леса" class="popup__fullscreen-image">
                 <h3 class="popup__fullscreen-title">Домбай</h3>
-                <button type="button" aria-label="закрыть форму" class="popup__close-icon"></button>
+                <button type="button" aria-label="закрыть форму" class="popup__close-icon popup__close-icon_type_fullscreen"></button>
             </article>
         </div>
     </div>

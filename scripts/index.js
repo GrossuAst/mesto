@@ -30,3 +30,102 @@ formElement.addEventListener('submit', handleFormSubmit);
 popupCloseIcon.addEventListener('click', toClosePopup);
 
 editButton.addEventListener('click', toOpenPopup);
+
+// проектная 5
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ]; 
+
+// переменные
+
+const sectionElements = document.querySelector('.elements');
+const cardTemplate = document.querySelector('#card-template').content;
+// console.log(cardTemplate);
+const card = cardTemplate.querySelector('.card').cloneNode(true);
+// console.log(card);
+
+const objectValues = initialCards.map(function(item){
+    return {
+        name: item.name,
+        link: item.link
+    };
+})
+console.log(objectValues);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------
+
+// const newCardAddButton = document.querySelector('.profile__add-button');
+// const popupTypeAddCard = document.querySelector('.popup_type_add-card');
+// const popupCloseIconTypeAddCard = document.querySelector('.popup__close-icon_type_add-card');
+// const popupTypeFullScreen = document.querySelector('.popup_type_fullscreen');
+// const cardPhoto = document.querySelector('.card__photo');
+// const popupCloseIconTypeFullscreen = document.querySelector('.popup__close-icon_type_fullscreen');
+
+// открытие попапа добавления карточки
+// newCardAddButton.addEventListener('click', function(){
+//     popupTypeAddCard.classList.add('popup_opened');
+// });
+
+// закрытие попапа добавления карточки
+// popupCloseIconTypeAddCard.addEventListener('click', function(){
+//     popupTypeAddCard.classList.remove('popup_opened');
+// });
+
+// открытие фуллскрин фото
+// cardPhoto.addEventListener('click', function(){
+//     console.log('123');
+//     popupTypeFullScreen.classList.add('popup_opened');
+// });
+
+// закрытие 
+// popupCloseIconTypeFullscreen.addEventListener('click', function(){
+//     console.log('1');
+//     popupTypeFullScreen.classList.remove('popup_opened');
+// });
