@@ -63,10 +63,12 @@ const initialCards = [
 // переменные
 
 const sectionElements = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#card-template').content;
+const cardTemplate = document.querySelector('#card-template');
 // console.log(cardTemplate);
-const card = cardTemplate.querySelector('.card').cloneNode(true);
+// const card = cardTemplate.querySelector('.card').cloneNode(true);
 // console.log(card);
+const cardTitle = document.querySelector('.card__title');
+const cardPhoto = document.querySelector('card__photo');
 
 const objectValues = initialCards.map(function(item){
     return {
@@ -74,13 +76,18 @@ const objectValues = initialCards.map(function(item){
         link: item.link
     };
 })
+
 console.log(objectValues);
 
+//  ---------------------------------------
+const createCards = ({name, link}) => {
+  const card = cardTemplate.content.querySelector('.card').cloneNode(true);
+  card.querySelector('.card__title').textContent = name;
+  card.querySelector('.card__photo').src = link;
+  sectionElements.prepend(card);
+}
 
-
-
-
-
+objectValues.forEach(createCards);
 
 
 
