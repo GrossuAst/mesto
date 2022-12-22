@@ -68,7 +68,6 @@ const cardTitle = document.querySelector('.card__title');
 const cardPhoto = document.querySelector('card__photo');
 const likeButtons = document.querySelector('.card__like');
 
-
 const objectValues = initialCards.map(function(item){
     return {
         name: item.name,
@@ -76,7 +75,7 @@ const objectValues = initialCards.map(function(item){
     };
 })
 
-console.log(objectValues);
+// console.log(objectValues);
 
 // функция создания карточки
 const createCard = ({name, link}) => {
@@ -90,40 +89,12 @@ const createCard = ({name, link}) => {
 
 // ренден карт из массива 
 const renderArray = ({name, link}) => {
-  sectionElements.append(createCard({name, link}));
+  sectionElements.prepend(createCard({name, link}));
 }
 
 objectValues.forEach(({name, link}) => {
   renderArray({name, link});
 })
-
-// function createCard({name, link}){
-//   const card = cardTemplate.content.querySelector('.card').cloneNode(true);
-//   card.querySelector('.card__title').textContent = name;
-//   card.querySelector('.card__photo').src = link;
-//   card.querySelector('.card__photo').alt = name;
-//   sectionElements.prepend(card);
-// }
-
-// objectValues.forEach(createCard);
-
-// const createCards = ({name, link}) => {
-//   const card = cardTemplate.content.querySelector('.card').cloneNode(true);
-//   card.querySelector('.card__title').textContent = name;
-//   card.querySelector('.card__photo').src = link;
-//   card.querySelector('.card__photo').alt = name;
-//   sectionElements.prepend(card);
-// }
-
-// рендер карточек из массива
-// objectValues.forEach(createCards);
-
-// лайк карточек
-// function likeCard(){
-//   likeButtons.forEach.addEventListener('click', function(evt){
-//     evt.target.classList.add('card__like_active');
-//   })
-// }
 
 // --------------------------------------- добавление карточки вручную
 
@@ -143,10 +114,11 @@ function openPopupTypeAddCard(){
 }
 
 // сохранение карточки
+
 function confirmCard(evt) {
   evt.preventDefault();
-  console.log('123');                                   
-  // sectionElements.prepend(createCard);
+  const card = cardTemplate.content.querySelector('.card').cloneNode(true);
+  renderArray(card);
   closePopupTypeAddCard();
 }
 
@@ -162,52 +134,3 @@ newCardAddButton.addEventListener('click', openPopupTypeAddCard);
 
 // слушатель закрытия попапа добавления карточки
 popupCloseButtonTypeAddCard.addEventListener('click', closePopupTypeAddCard);
-
-// ---------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------------------------------------------------------
-
-// const newCardAddButton = document.querySelector('.profile__add-button');
-// const popupTypeAddCard = document.querySelector('.popup_type_add-card');
-// const popupCloseIconTypeAddCard = document.querySelector('.popup__close-icon_type_add-card');
-// const popupTypeFullScreen = document.querySelector('.popup_type_fullscreen');
-// const cardPhoto = document.querySelector('.card__photo');
-// const popupCloseIconTypeFullscreen = document.querySelector('.popup__close-icon_type_fullscreen');
-
-// открытие попапа добавления карточки
-// newCardAddButton.addEventListener('click', function(){
-//     popupTypeAddCard.classList.add('popup_opened');
-// });
-
-// закрытие попапа добавления карточки
-// popupCloseIconTypeAddCard.addEventListener('click', function(){
-//     popupTypeAddCard.classList.remove('popup_opened');
-// });
-
-// открытие фуллскрин фото
-// cardPhoto.addEventListener('click', function(){
-//     console.log('123');
-//     popupTypeFullScreen.classList.add('popup_opened');
-// });
-
-// закрытие 
-// popupCloseIconTypeFullscreen.addEventListener('click', function(){
-//     console.log('1');
-//     popupTypeFullScreen.classList.remove('popup_opened');
-// });
