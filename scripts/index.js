@@ -66,12 +66,21 @@ const sectionElements = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#card-template');
 const cardTitle = document.querySelector('.card__title');
 const cardPhoto = document.querySelector('card__photo');
-const likeButtons = document.querySelector('.card__like');
+const likeButton = document.querySelector('.card__like');
+
+// консты для добавления новой карточки
+const newCardAddButton = document.querySelector('.profile__add-button');
+const popupTypeAddCard = document.querySelector('.popup_type_add-card');
+const popupCloseButtonTypeAddCard = document.querySelector('.popup__close-icon_type_add-card');
+const popupInputTypeCardName = document.querySelector('.popup__input_type_card-name');
+const popupInputTypeCardLink = document.querySelector('.popup__input_type_card-link');
+const formTypeAddCard = document.querySelector('.popup__form_type_add-card');
+
 
 const objectValues = initialCards.map(function(item){
     return {
         name: item.name,
-        link: item.link
+        link: item.link,
     };
 })
 
@@ -83,28 +92,42 @@ const createCard = ({name, link}) => {
   card.querySelector('.card__title').textContent = name;
   card.querySelector('.card__photo').src = link;
   card.querySelector('.card__photo').alt = name;
-  // sectionElements.prepend(card);
   return card;
 }
 
-// ренден карт из массива 
-const renderArray = ({name, link}) => {
+// добавление карт
+const addCard = ({name, link}) => {
   sectionElements.prepend(createCard({name, link}));
 }
 
+// ренден карт из массива 
 objectValues.forEach(({name, link}) => {
-  renderArray({name, link});
+  addCard({name, link});
 })
+
+// отправка карточки
+function confirmCard(evt) {
+  evt.preventDefault();
+  const newCard = {
+    name: popupInputTypeCardName.value,
+    link: popupInputTypeCardLink,
+  }
+  cardTitle.textContent = newCard.name;
+  createCard(newCard.name, newCard.link);
+  addCard(newCard.name, newCard.value);
+  closePopupTypeAddCard();
+}
+
+formTypeAddCard.addEventListener('submit', confirmCard);
+
+// // лайки
+// function  likePlace(){
+//   likeButton.classList.toggle('card__like_active');
+// }
 
 // --------------------------------------- добавление карточки вручную
 
-// консты для добавления новой карточки
-const newCardAddButton = document.querySelector('.profile__add-button');
-const popupTypeAddCard = document.querySelector('.popup_type_add-card');
-const popupCloseButtonTypeAddCard = document.querySelector('.popup__close-icon_type_add-card');
-const popupInputTypeCardName = document.querySelector('.popup__input_type_card-name');
-const popupInputTypeCardLink = document.querySelector('.popup__input_type_card-link');
-const formTypeAddCard = document.querySelector('.popup__form_type_add-card');
+
 
 // функция открытия попапа добавления карточки
 function openPopupTypeAddCard(){
@@ -113,16 +136,7 @@ function openPopupTypeAddCard(){
   popupInputTypeCardLink.value = '';
 }
 
-// сохранение карточки
 
-function confirmCard(evt) {
-  evt.preventDefault();
-  const card = cardTemplate.content.querySelector('.card').cloneNode(true);
-  renderArray(card);
-  closePopupTypeAddCard();
-}
-
-formTypeAddCard.addEventListener('submit', confirmCard);
 
 // функция закрытия поапа добавления карточки
 function closePopupTypeAddCard(){
