@@ -110,11 +110,10 @@ function confirmCard(evt) {
   evt.preventDefault();
   const newCard = {
     name: popupInputTypeCardName.value,
-    link: popupInputTypeCardLink,
+    link: popupInputTypeCardLink.value,
   }
-  cardTitle.textContent = newCard.name;
-  createCard(newCard.name, newCard.link);
-  addCard(newCard.name, newCard.value);
+  createCard(newCard);
+  addCard(newCard);
   closePopupTypeAddCard();
 }
 
