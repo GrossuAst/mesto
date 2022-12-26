@@ -92,7 +92,15 @@ const createCard = ({name, link}) => {
   card.querySelector('.card__title').textContent = name;
   card.querySelector('.card__photo').src = link;
   card.querySelector('.card__photo').alt = name;
+
+  // слушатель лайка
   card.querySelector('.card__like').addEventListener('click', switchLike);
+
+  // функция удаления + слушатель
+  const deleteButton = card.querySelector('.card__delete-button');
+  deleteButton.addEventListener('click', function(){
+    card.remove();
+  });
   return card;
 }
 
