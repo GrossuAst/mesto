@@ -92,7 +92,13 @@ const createCard = ({name, link}) => {
   card.querySelector('.card__title').textContent = name;
   card.querySelector('.card__photo').src = link;
   card.querySelector('.card__photo').alt = name;
+  card.querySelector('.card__like').addEventListener('click', switchLike);
   return card;
+}
+
+// переключатель лайка
+function switchLike(evt){
+  evt.target.classList.toggle('card__like_active');
 }
 
 // добавление карт
@@ -134,8 +140,6 @@ function openPopupTypeAddCard(){
   popupInputTypeCardName.value = '';
   popupInputTypeCardLink.value = '';
 }
-
-
 
 // функция закрытия поапа добавления карточки
 function closePopupTypeAddCard(){
