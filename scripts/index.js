@@ -91,21 +91,27 @@ const objectValues = initialCards.map(function(item){
 
 // функция открытия фуллскрин карточки
 function openPopupTypeFullscreen(link, name){
-  popupTypeFullscreen.classList.add('popup_opened');
   fullscreenImage.src = link;
   fullscreenImage.alt = name;
   fullscreenTitle.textContent = name;
+  popupTypeFullscreen.classList.add('popup_opened');
 }
+
+// закрытие фуллскрин попап
+popupCloseIconFullscreen.addEventListener('click', () => {
+  popupTypeFullscreen.classList.remove('popup_opened');
+})
 
 // функция создания карточки
 const createCard = ({name, link}) => {
+  // сборка карточки
   const card = cardTemplate.content.querySelector('.card').cloneNode(true);
   card.querySelector('.card__title').textContent = name;
   card.querySelector('.card__photo').src = link;
   card.querySelector('.card__photo').alt = name;
     // слушатель лайка
   card.querySelector('.card__like').addEventListener('click', switchLike);
-    // функция удаления + слушатель
+    // функция удаления и его слушатель
   const deleteButton = card.querySelector('.card__delete-button');
   deleteButton.addEventListener('click', function(){
     card.remove();
@@ -113,6 +119,8 @@ const createCard = ({name, link}) => {
     // слушатель открытия фуллскрина
   card.querySelector('.card__photo').addEventListener('click', () => 
     {openPopupTypeFullscreen(link, name)});
+    // слушатель закрытия фуллскрина 
+  // card.querySelector('.popup__close-icon_type_fullscreen').addEventListener('click', )
   return card;
 }
 
