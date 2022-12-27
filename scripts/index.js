@@ -2,11 +2,11 @@ const editButton = document.querySelector('.profile__edit-button');
 const popupOpen = document.querySelector('.popup');
 const popupCloseIcon = document.querySelector('.popup__close-icon');
 
-let profileName = document.querySelector('.profile__name');
-let description = document.querySelector('.profile__description');
-let formElement = document.querySelector('.popup__form');
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_profession');
+const profileName = document.querySelector('.profile__name');
+const description = document.querySelector('.profile__description');
+const formElement = document.querySelector('.popup__form');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_profession');
 
 function toClosePopup () {
     popupOpen.classList.remove('popup_opened');
@@ -76,6 +76,11 @@ const popupInputTypeCardName = document.querySelector('.popup__input_type_card-n
 const popupInputTypeCardLink = document.querySelector('.popup__input_type_card-link');
 const formTypeAddCard = document.querySelector('.popup__form_type_add-card');
 
+// для фуллскрин карточек
+const fullscreenImage = document.querySelector('.popup__fullscreen-image');
+const fullscreenTitle = document.querySelector('.popup__fullscreen-title');
+const popupCloseIconFullscreen = document.querySelector('.popup__close-icon_type_fullscreen');
+const popupTypeFullscreen = document.querySelector('.popup_type_fullscreen');
 
 const objectValues = initialCards.map(function(item){
     return {
@@ -84,7 +89,13 @@ const objectValues = initialCards.map(function(item){
     };
 })
 
-// console.log(objectValues);
+// функция открытия фуллскрин карточки
+function openPopupTypeFullscreen(link, name){
+  popupTypeFullscreen.classList.add('popup_opened');
+  fullscreenImage.src = link;
+  fullscreenImage.alt = name;
+  fullscreenTitle.textContent = name;
+}
 
 // функция создания карточки
 const createCard = ({name, link}) => {
@@ -92,15 +103,16 @@ const createCard = ({name, link}) => {
   card.querySelector('.card__title').textContent = name;
   card.querySelector('.card__photo').src = link;
   card.querySelector('.card__photo').alt = name;
-
-  // слушатель лайка
+    // слушатель лайка
   card.querySelector('.card__like').addEventListener('click', switchLike);
-
-  // функция удаления + слушатель
+    // функция удаления + слушатель
   const deleteButton = card.querySelector('.card__delete-button');
   deleteButton.addEventListener('click', function(){
     card.remove();
   });
+    // слушатель открытия фуллскрина
+  card.querySelector('.card__photo').addEventListener('click', () => 
+    {openPopupTypeFullscreen(link, name)});
   return card;
 }
 
@@ -119,7 +131,7 @@ objectValues.forEach(({name, link}) => {
   addCard({name, link});
 })
 
-// отправка карточки
+// отправка карточки из формы добавления
 function confirmCard(evt) {
   evt.preventDefault();
   const newCard = {
@@ -132,15 +144,6 @@ function confirmCard(evt) {
 }
 
 formTypeAddCard.addEventListener('submit', confirmCard);
-
-// // лайки
-// function  likePlace(){
-//   likeButton.classList.toggle('card__like_active');
-// }
-
-// --------------------------------------- добавление карточки вручную
-
-
 
 // функция открытия попапа добавления карточки
 function openPopupTypeAddCard(){
