@@ -31,7 +31,7 @@ popupCloseIcon.addEventListener('click', toClosePopup);
 
 editButton.addEventListener('click', toOpenPopup);
 
-// проектная 5
+// проектная 5 --------------------------------------------------------------------------
 
 const initialCards = [
     {
@@ -82,6 +82,7 @@ const fullscreenTitle = document.querySelector('.popup__fullscreen-title');
 const popupCloseIconFullscreen = document.querySelector('.popup__close-icon_type_fullscreen');
 const popupTypeFullscreen = document.querySelector('.popup_type_fullscreen');
 
+// массив значений объектов
 const objectValues = initialCards.map(function(item){
     return {
         name: item.name,
