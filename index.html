@@ -22,18 +22,18 @@
                     <img src="./images/avatar.png" alt="фото Жак-Ив Кусто на фоне моря" class="profile__avatar">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <p class="profile__description">Исследователь океана</p>
-                    <button type="button" class="profile__edit-button"></button>
+                    <button type="button" aria-label="кнопка открытия попапа редактирования профиля" class="profile__edit-button"></button>
                 </div>
-                <button type="button" class="profile__add-button"></button>
+                <button type="button" aria-label="кнопка открытия попапа добавления карточки" class="profile__add-button"></button>
             </section>
             <section class="elements">
                 <template id="card-template">
                     <article class="card">
-                        <button type="button" class="card__delete-button"></button>
+                        <button type="button" aria-label="кнопка удаления карточки" class="card__delete-button"></button>
                         <img src="#" alt="#" class="card__photo">
                         <div class="card__description">
                             <h3 class="card__title"></h3>
-                            <button type="button" class="card__like"></button>
+                            <button type="button" aria-label="кнопка переключения лайка" class="card__like"></button>
                         </div>
                     </article>
                 </template>
@@ -43,14 +43,14 @@
             <p class="footer__author">&#169; 2020 Mesto Russia</p>
         </footer>
         <!-- попап редактирования профиля -->
-        <div class="popup">
+        <div class="popup popup_type_profile">
             <div class="popup__container">
-                <form action="#" name="profile-form" class="popup__form">
-                    <button type="button" aria-label="закрыть форму" class="popup__close-icon" ></button>
+                <form action="#" name="profile-form" class="popup__form popup__form_type_profile">
+                    <button type="button" aria-label="закрыть форму редактирования профиля" class="popup__close-icon popup__close-icon_type_profile" ></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
                         <div class="popup__inputs">
-                            <input type="text" name="name" class="popup__input popup__input_type_name">
-                            <input type="text" name="hobby" class="popup__input popup__input_type_profession">
+                            <input type="text" required placeholder="Имя" name="name" class="popup__input popup__input_type_name">
+                            <input type="text" required placeholder="О себе" name="hobby" class="popup__input popup__input_type_profession">
                         </div>
                     <button type="submit" class="popup__submit-button">Сохранить</button>
                 </form>
@@ -60,11 +60,11 @@
         <div class="popup popup_type_add-card">
             <div class="popup__container">
                 <form action="#" name="add-card-form" class="popup__form popup__form_type_add-card">
-                    <button type="button" aria-label="закрыть форму" class="popup__close-icon popup__close-icon_type_add-card" ></button>
+                    <button type="button" aria-label="закрыть форму добавления карточки" class="popup__close-icon popup__close-icon_type_add-card" ></button>
                     <h2 class="popup__title">Новое место</h2>
                         <div class="popup__inputs">
-                            <input type="text" name="place-name" placeholder="Название" class="popup__input popup__input_type_card-name">
-                            <input type="text" name="place-link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_card-link">
+                            <input type="text" required name="place-name" placeholder="Название" class="popup__input popup__input_type_card-name">
+                            <input type="url" required name="place-link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_card-link">
                         </div>
                     <button type="submit" class="popup__submit-button popup__submit-button_type_add-card">Сохранить</button>
                 </form>
@@ -75,10 +75,11 @@
             <article class="popup__fullsceen-container">
                 <img src="#" alt="" class="popup__fullscreen-image">
                 <h3 class="popup__fullscreen-title"></h3>
-                <button type="button" aria-label="закрыть форму" class="popup__close-icon popup__close-icon_type_fullscreen"></button>
+                <button type="button" aria-label="закрыть фуллскрин фото" class="popup__close-icon popup__close-icon_type_fullscreen"></button>
             </article>
         </div>
     </div>
-    <script src="./scripts/index.js"></script>
+    <script defer src="./scripts/constants.js"></script>
+    <script defer src="./scripts/index.js"></script>
 </body>
 </html>
