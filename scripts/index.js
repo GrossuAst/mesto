@@ -32,25 +32,13 @@ const popupTypeFullscreen = document.querySelector('.popup_type_fullscreen');
 // ________________________________________________________________
 
 // функции открытия попапов
-function openPopup(open){
-  open.classList.add('popup_opened');
-  nameInput.value = profileName.textContent;
-  jobInput.value = description.textContent;
-  popupInputTypeCardName.value = ''; 
-  popupInputTypeCardLink.value = '';
+function openPopup(popup){
+  popup.classList.add('popup_opened');
 }
 
 // функция закрытия попапов
-function closePopup(closer){
-  closer.classList.remove('popup_opened');
-}
-
-// функция открытия фуллскрин карточки
-function openPopupTypeFullscreen(link, name){
-  fullscreenImage.src = link;
-  fullscreenImage.alt = name;
-  fullscreenTitle.textContent = name;
-  popupTypeFullscreen.classList.add('popup_opened');
+function closePopup(popup){
+  popup.classList.remove('popup_opened');
 }
 
 // отправка карточки из формы добавления
@@ -79,13 +67,19 @@ popupFormProfile.addEventListener('submit', ProfileFormSubmit);
 formTypeAddCard.addEventListener('submit', confirmCard);
 
 // слушатель открытия попапа профиля
-editButton.addEventListener('click', () => {openPopup(popupProfile)});
+editButton.addEventListener('click', () => {
+  transferProfileValues();
+  openPopup(popupProfile);
+});
 
 // слушатель закрытия попапа профиля
 popupProfileCloseIcon.addEventListener('click', () => {closePopup(popupProfile)});
 
 // слушатель открытия попапа добавления карточки
-newCardAddButton.addEventListener('click', () => openPopup(popupTypeAddCard));
+newCardAddButton.addEventListener('click', () => {
+  resetAddCardPopupValues();
+  openPopup(popupTypeAddCard);
+});
 
 // слушатель закрытия попапа добавления карточки
 popupCloseButtonTypeAddCard.addEventListener('click', () => closePopup(popupTypeAddCard));
@@ -110,8 +104,10 @@ const createCard = (name, link) => {
     card.remove();
   });
     // слушатель открытия фуллскрина
-  card.querySelector('.card__photo').addEventListener('click', () => 
-    {openPopupTypeFullscreen(link, name)});
+  card.querySelector('.card__photo').addEventListener('click', () => {
+    getFullscreenPopupValues(link, name);
+    openPopup(popupTypeFullscreen);
+  });
 
   return card;
 }
@@ -130,3 +126,22 @@ const addCard = (name, link) => {
 initialCards.forEach((card) => {
   addCard(card.name, card.link);
 })
+
+// функция передачи значений профиля в инпуты
+function transferProfileValues () {
+  nameInput.value = profileName.textContent;
+  jobInput.value = description.textContent;
+}
+
+// функция обнуления инпутов попапа добавления карточки
+function resetAddCardPopupValues () {
+  popupInputTypeCardName.value = ''; 
+  popupInputTypeCardLink.value = '';
+}
+
+// функция передачи ссылки и тайтла в попап открытой карточки
+function getFullscreenPopupValues (link, name) {
+  fullscreenImage.src = link;
+  fullscreenImage.alt = name;
+  fullscreenTitle.textContent = name;
+}
