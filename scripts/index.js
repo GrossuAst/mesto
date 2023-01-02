@@ -53,7 +53,7 @@ function confirmCard(evt) {
 }
 
 // отправка формы профиля
-function ProfileFormSubmit (evt) {
+function profileFormSubmit (evt) {
     evt.preventDefault();                                     
     profileName.textContent = nameInput.value;
     description.textContent = jobInput.value;
@@ -61,7 +61,7 @@ function ProfileFormSubmit (evt) {
 }
 
 // слушатель отправки формы
-popupFormProfile.addEventListener('submit', ProfileFormSubmit);
+popupFormProfile.addEventListener('submit', profileFormSubmit);
 
 // слушатель отправки созданной карточки
 formTypeAddCard.addEventListener('submit', confirmCard);
