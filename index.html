@@ -45,12 +45,21 @@
         <!-- попап редактирования профиля -->
         <div class="popup popup_type_profile">
             <div class="popup__container">
-                <form action="#" name="profile-form" class="popup__form popup__form_type_profile">
+                <form action="#"  name="profile-form" class="popup__form popup__form_type_profile">
                     <button type="button" aria-label="закрыть форму редактирования профиля" class="popup__close-icon popup__close-icon_type_profile" ></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
                         <div class="popup__inputs">
-                            <input type="text" required placeholder="Имя" name="name" class="popup__input popup__input_type_name">
-                            <input type="text" required placeholder="О себе" name="hobby" class="popup__input popup__input_type_profession">
+                            
+                            <input type="text" required minlength="2" maxlength="40" placeholder="Имя" name="name" class="popup__input popup__input_type_name">
+
+                            <!-- спан с ошибкой имени профиля-->
+                            <span class="popup__eror"></span>
+                            
+                            <input type="text" required minlength="2" maxlength="200" placeholder="О себе" name="hobby" class="popup__input popup__input_type_profession ">
+
+                            <!-- спан с ошибкой в дискрипшен-->
+                            <span class="popup__eror"></span>
+
                         </div>
                     <button type="submit" class="popup__submit-button">Сохранить</button>
                 </form>
@@ -63,8 +72,17 @@
                     <button type="button" aria-label="закрыть форму добавления карточки" class="popup__close-icon popup__close-icon_type_add-card" ></button>
                     <h2 class="popup__title">Новое место</h2>
                         <div class="popup__inputs">
-                            <input type="text" required name="place-name" placeholder="Название" class="popup__input popup__input_type_card-name">
+
+                            <input type="text" required min="2" maxlength="30" name="place-name" placeholder="Название" class="popup__input popup__input_type_card-name ">
+
+                            <!-- спан с ошибкой в названии места -->
+                            <span class="popup__eror"></span>
+
                             <input type="url" required name="place-link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_card-link">
+                            
+                            <!-- спан с ошибкой ссылки места -->
+                            <span class="popup__eror"></span>
+
                         </div>
                     <button type="submit" class="popup__submit-button popup__submit-button_type_add-card">Сохранить</button>
                 </form>
@@ -79,7 +97,11 @@
             </article>
         </div>
     </div>
+    <!-- массив для карточек -->
     <script defer src="./scripts/constants.js"></script>
+    <!-- валидация форм -->
+    <script src="./scripts/validate.js"></script>
+    <!-- мейн скрипт -->
     <script defer src="./scripts/index.js"></script>
 </body>
 </html>

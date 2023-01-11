@@ -145,3 +145,16 @@ function getFullscreenPopupValues (link, name) {
   fullscreenImage.alt = name;
   fullscreenTitle.textContent = name;
 }
+
+// ____________________________________валидация
+
+validationConfig({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: 'popup__submit-button',               //.popup__button', было изначально
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
+
+enableValidation(validationConfig);

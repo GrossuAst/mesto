@@ -46,6 +46,13 @@
 @import url(../blocks/popup/__input/_type/popup_input_type_profession.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
 
+/* инпутп с ошбкой */
+@import url(../blocks/popup/__input/_type/popup__input_type_error.css);
+
+/* спаны с ошибкой в попапе */
+@import url(../blocks/popup/__error/popup__error.css);
+@import url(../blocks/popup/__error/_visible/popup__error_visible.css);
+
 /* попап фуллскрин фото */
 @import url(../blocks/popup/_type/popup_type_fullscreen.css);
 @import url(../blocks/popup/__fullscreen-container/popup__fullscreen-container.css);
