@@ -45,20 +45,30 @@
         <!-- попап редактирования профиля -->
         <div class="popup popup_type_profile">
             <div class="popup__container">
-                <form action="#"  name="profile-form" class="popup__form popup__form_type_profile">
+                <form action="#" novalidate name="profile-form" class="popup__form popup__form_type_profile">
                     <button type="button" aria-label="закрыть форму редактирования профиля" class="popup__close-icon popup__close-icon_type_profile" ></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
                         <div class="popup__inputs">
-                            
-                            <input type="text" required minlength="2" maxlength="40" placeholder="Имя" name="name" class="popup__input popup__input_type_name">
+<!-- инпут имени профиля -->
+                            <input type="text"
+                            required
+                            minlength="2" maxlength="40"
+                            placeholder="Имя" name="name"
+                            id="input-name"
+                            class="popup__input popup__input_type_name">
 
                             <!-- спан с ошибкой имени профиля-->
-                            <span class="popup__eror"></span>
-                            
-                            <input type="text" required minlength="2" maxlength="200" placeholder="О себе" name="hobby" class="popup__input popup__input_type_profession ">
+                            <span class="popup__error input-name-error"></span>
+<!-- инпут хобби -->
+                            <input type="text" 
+                            required
+                            minlength="2" maxlength="200"
+                            placeholder="О себе" name="hobby"
+                            id="hobby-input"
+                            class="popup__input popup__input_type_profession ">
 
                             <!-- спан с ошибкой в дискрипшен-->
-                            <span class="popup__eror"></span>
+                            <span class="popup__error hobby-input-error"></span>
 
                         </div>
                     <button type="submit" class="popup__submit-button">Сохранить</button>
@@ -68,20 +78,29 @@
         <!-- попап добавления карточки -->
         <div class="popup popup_type_add-card">
             <div class="popup__container">
-                <form action="#" name="add-card-form" class="popup__form popup__form_type_add-card">
+                <form action="#" novalidate name="add-card-form" class="popup__form popup__form_type_add-card">
                     <button type="button" aria-label="закрыть форму добавления карточки" class="popup__close-icon popup__close-icon_type_add-card" ></button>
                     <h2 class="popup__title">Новое место</h2>
                         <div class="popup__inputs">
-
-                            <input type="text" required min="2" maxlength="30" name="place-name" placeholder="Название" class="popup__input popup__input_type_card-name ">
+<!-- инпут названия места -->
+                            <input type="text"
+                            required
+                            minlength="2" maxlength="30"
+                            placeholder="Название" name="place-name"
+                            id="place-name-input"
+                            class="popup__input popup__input_type_card-name ">
 
                             <!-- спан с ошибкой в названии места -->
-                            <span class="popup__eror"></span>
-
-                            <input type="url" required name="place-link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_card-link">
+                            <span class="popup__error place-name-input-error"></span>
+<!-- инпут ссылки на фото -->
+                            <input type="url"
+                            required
+                            placeholder="Ссылка на картинку" name="place-link"
+                            id="place-link-input"
+                            class="popup__input popup__input_type_card-link">
                             
                             <!-- спан с ошибкой ссылки места -->
-                            <span class="popup__eror"></span>
+                            <span class="popup__error place-link-input-error"></span>
 
                         </div>
                     <button type="submit" class="popup__submit-button popup__submit-button_type_add-card">Сохранить</button>
