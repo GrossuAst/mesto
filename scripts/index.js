@@ -120,6 +120,10 @@ popupProfileCloseIcon.addEventListener('click', () => {closePopup(popupProfile)}
 newCardAddButton.addEventListener('click', () => {
   resetAddCardPopupValues();
   openPopup(popupTypeAddCard);
+  
+  const addCardInputs = Array.from(popupTypeAddCard.querySelectorAll('.popup__input'));
+  const addCardSaveButton = popupTypeAddCard.querySelector('.popup__submit-button');
+  toggleButtonState(addCardInputs, addCardSaveButton, enableConfig);
 });
 
 // слушатель закрытия попапа добавления карточки
