@@ -46,13 +46,35 @@ function toggleButtonState(inputList, buttonElement, config) {
     }
 }
 
+// функция удаления ошибок после закрытия попапов, костыль
+function deleteErrors(){
+    const spanError = document.querySelectorAll('.popup__error');
+    const inputs = document.querySelectorAll('.popup__input');
+    spanError.forEach((span) => {
+        // span.classList.remove('popup__error_visible');
+        span.textContent = '';
+    });
+    inputs.forEach((input) => {
+        input.classList.remove('popup__input_type_error');
+    })
+}
+
+// function qwerty(formElememt, config){
+//     const inputList = Array.from(formElememt.querySelectorAll(config.inputSelector));
+//     const buttonElement = formElememt.querySelector(config.submitButtonSelector);
+//     toggleButtonState(inputList, buttonElement, config);
+//     inputList.forEach((inputElement) => {
+//         checkInputValidity(formElememt, inputElement, config);
+//         toggleButtonState(inputList, buttonElement, config);
+//     })
+// }
+
 // функция, вешающая слушатели на форму- найти все инпуты и повесить на них обработчики для события input
 function setEventListeners(formElememt, config) {
     // массив инпутов
     const inputList = Array.from(formElememt.querySelectorAll(config.inputSelector));
     // кнопка сохранить
-    // const buttonElement = formElememt.querySelector(config.submitButtonSelector}); - нерабочий вариант
-    const buttonElement = formElememt.querySelector(config.submitButtonSelector); // рабочий
+    const buttonElement = formElememt.querySelector(config.submitButtonSelector);
 
     // дизейбл кнопок при открытии формы, если они не валидны
     toggleButtonState(inputList, buttonElement, config);

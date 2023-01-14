@@ -50,7 +50,18 @@ function closePopup(popup){
   // hideInputError(popupArray, inputArray, enableConfig);
   // удалить слушатель ескейпа при закрытии попапа
   document.removeEventListener('keydown', closePopupEscapePress);
+  deleteErrors();
 }
+
+// function hideInputError(formElement, inputElement, config) {
+  // нашел спан с ошибкой
+  // const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  // удаляю класс для видимости
+  // errorElement.classList.remove(config.errorClass);
+  // errorElement.textContent = '';
+  // удаляю красный бордер для инпута
+//   inputElement.classList.remove(config.inputErrorClass);
+// }
 
 // закрытие попапов по клику на оверлей. Если клик происходит по попапу, который содержит popup_opened, закрываю его
 popupArray.forEach((popup) => {
@@ -114,7 +125,10 @@ editButton.addEventListener('click', () => {
 });
 
 // слушатель закрытия попапа профиля
-popupProfileCloseIcon.addEventListener('click', () => {closePopup(popupProfile)});
+popupProfileCloseIcon.addEventListener('click', () => {
+  closePopup(popupProfile);
+  // hideInputError(formElement, inputElement, config);
+});
 
 // слушатель открытия попапа добавления карточки
 newCardAddButton.addEventListener('click', () => {
