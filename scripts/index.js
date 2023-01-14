@@ -9,6 +9,11 @@ const popupFormProfile = document.querySelector('.popup__form_type_profile');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_profession');
 
+// массив попапов, включая оверлеи
+const popupArray = document.querySelectorAll('.popup');
+// массив инпутов
+// const inputArray = document.querySelectorAll('.popup__input');
+
 // для фото карточек
 const sectionElements = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#card-template');
@@ -34,11 +39,41 @@ const popupTypeFullscreen = document.querySelector('.popup_type_fullscreen');
 // функции открытия попапов
 function openPopup(popup){
   popup.classList.add('popup_opened');
+  // при открытии попапа добавляется слушатель на кнопку esc, закрывающая попап при нажатии на нее
+  document.addEventListener('keydown', closePopupEscapePress);
 }
+
 
 // функция закрытия попапов
 function closePopup(popup){
   popup.classList.remove('popup_opened');
+  // hideInputError(popupArray, inputArray, enableConfig);
+  // удалить слушатель ескейпа при закрытии попапа
+  document.removeEventListener('keydown', closePopupEscapePress);
+}
+
+// закрытие попапов по клику на оверлей. Если клик происходит по попапу, который содержит popup_opened, закрываю его
+popupArray.forEach((popup) => {
+  // слушатель клика
+  popup.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('popup_opened')){
+      closePopup(popup);
+    }
+  })
+  // popup.addEventListener('keydown', (event) => {
+  //   if(event.key === 27) {
+  //     const openedPopup = popup.classList.contains('popup_opened');
+  //     openedPopup.classList.remove('popup_opened');
+  //   }
+  // })
+})
+
+// функция закрытия попапап на esc
+function closePopupEscapePress(evt) {
+  if(evt.keyCode === 27) {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
 }
 
 // отправка карточки из формы добавления
@@ -66,10 +101,16 @@ popupFormProfile.addEventListener('submit', profileFormSubmit);
 // слушатель отправки созданной карточки
 formTypeAddCard.addEventListener('submit', confirmCard);
 
-// слушатель открытия попапа профиля
+// слушатель открытия попапа профиля, добавил сюда переключатель кнопки
 editButton.addEventListener('click', () => {
   transferProfileValues();
   openPopup(popupProfile);
+// получить массив инпутов в форме профиля, чтобы кнопка работала изначально при открытии
+  const profileInputs = Array.from(popupProfile.querySelectorAll('.popup__input'));
+// кнопка в профиле
+  const profileButton = popupProfile.querySelector('.popup__submit-button');
+// вызываю функцию переключения кнопки, проверит валидны ли инпуты, и включит кнопку если оени валидны
+  toggleButtonState(profileInputs, profileButton, enableConfig);
 });
 
 // слушатель закрытия попапа профиля
@@ -151,7 +192,7 @@ function getFullscreenPopupValues (link, name) {
 const enableConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
-  submitButtonSelector: 'popup__submit-button',
+  submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'

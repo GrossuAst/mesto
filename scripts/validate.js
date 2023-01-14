@@ -30,7 +30,7 @@ function checkInputValidity(formElement, inputElement, config) {
     }
 }
 
-// валидны ли все инпуты списка
+// функция проверяет валидны ли все инпуты списка
 function hasInvalidInput(inputList) {
     return inputList.some((inputElement) => !inputElement.validity.valid);
 }
@@ -52,7 +52,7 @@ function setEventListeners(formElememt, config) {
     const inputList = Array.from(formElememt.querySelectorAll(config.inputSelector));
     // кнопка сохранить
     // const buttonElement = formElememt.querySelector(config.submitButtonSelector}); - нерабочий вариант
-    const buttonElement = formElememt.querySelector(`.${config.submitButtonSelector}`); // рабочий
+    const buttonElement = formElememt.querySelector(config.submitButtonSelector); // рабочий
 
     // дизейбл кнопок при открытии формы, если они не валидны
     toggleButtonState(inputList, buttonElement, config);
