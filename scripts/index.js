@@ -11,8 +11,11 @@ const jobInput = document.querySelector('.popup__input_type_profession');
 
 // массив попапов, включая оверлеи
 const popupArray = document.querySelectorAll('.popup');
-// массив инпутов
-// const inputArray = document.querySelectorAll('.popup__input');
+// массив инпутов в форме профиля
+const profilePopupInputs = Array.from(popupProfile.querySelectorAll('.popup__input'));
+// кнопка в профиле
+const profileSaveButton = popupProfile.querySelector('.popup__submit-button');
+
 
 // для фото карточек
 const sectionElements = document.querySelector('.elements');
@@ -27,6 +30,11 @@ const popupCloseButtonTypeAddCard = document.querySelector('.popup__close-icon_t
 const popupInputTypeCardName = document.querySelector('.popup__input_type_card-name');
 const popupInputTypeCardLink = document.querySelector('.popup__input_type_card-link');
 const formTypeAddCard = document.querySelector('.popup__form_type_add-card');
+
+// массив инпутов попапа добавления карточки
+const addCardPopupInputs = Array.from(popupTypeAddCard.querySelectorAll('.popup__input'));
+// кнопка сохранить в попапе добавления карточки
+const addCardSaveButton = popupTypeAddCard.querySelector('.popup__submit-button');
 
 // для фуллскрин карточек
 const fullscreenImage = document.querySelector('.popup__fullscreen-image');
@@ -50,7 +58,7 @@ function closePopup(popup){
   // hideInputError(popupArray, inputArray, enableConfig);
   // удалить слушатель ескейпа при закрытии попапа
   document.removeEventListener('keydown', closePopupEscapePress);
-  deleteErrors();
+  // deleteErrors();
 }
 
 // function hideInputError(formElement, inputElement, config) {
@@ -61,7 +69,7 @@ function closePopup(popup){
   // errorElement.textContent = '';
   // удаляю красный бордер для инпута
 //   inputElement.classList.remove(config.inputErrorClass);
-// }
+// }                         ________________________________________________удалить после ревью________
 
 // закрытие попапов по клику на оверлей. Если клик происходит по попапу, который содержит popup_opened, закрываю его
 popupArray.forEach((popup) => {
@@ -76,12 +84,12 @@ popupArray.forEach((popup) => {
   //     const openedPopup = popup.classList.contains('popup_opened');
   //     openedPopup.classList.remove('popup_opened');
   //   }
-  // })
+  // })                                 ____________________________________________удалить после ревью
 })
 
 // функция закрытия попапап на esc
 function closePopupEscapePress(evt) {
-  if(evt.keyCode === 27) {
+  if(evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
@@ -114,30 +122,30 @@ formTypeAddCard.addEventListener('submit', confirmCard);
 
 // слушатель открытия попапа профиля, добавил сюда переключатель кнопки
 editButton.addEventListener('click', () => {
+  // вызываю функцию переключения кнопки, проверит валидны ли инпуты, и включит кнопку если оени валидны
+  toggleButtonState(profilePopupInputs, profileSaveButton, enableConfig);
+  // скрываю элекмент с ошибкой при открытии попапа
+  profilePopupInputs.forEach((errorElement) => {
+    hideInputError(popupProfile, errorElement, enableConfig);
+  })
   transferProfileValues();
   openPopup(popupProfile);
-// получить массив инпутов в форме профиля, чтобы кнопка работала изначально при открытии
-  const profileInputs = Array.from(popupProfile.querySelectorAll('.popup__input'));
-// кнопка в профиле
-  const profileButton = popupProfile.querySelector('.popup__submit-button');
-// вызываю функцию переключения кнопки, проверит валидны ли инпуты, и включит кнопку если оени валидны
-  toggleButtonState(profileInputs, profileButton, enableConfig);
 });
 
 // слушатель закрытия попапа профиля
 popupProfileCloseIcon.addEventListener('click', () => {
   closePopup(popupProfile);
-  // hideInputError(formElement, inputElement, config);
 });
 
 // слушатель открытия попапа добавления карточки
 newCardAddButton.addEventListener('click', () => {
   resetAddCardPopupValues();
   openPopup(popupTypeAddCard);
-  
-  const addCardInputs = Array.from(popupTypeAddCard.querySelectorAll('.popup__input'));
-  const addCardSaveButton = popupTypeAddCard.querySelector('.popup__submit-button');
-  toggleButtonState(addCardInputs, addCardSaveButton, enableConfig);
+  toggleButtonState(addCardPopupInputs, addCardSaveButton, enableConfig);
+  // скрываю элекмент с ошибкой при открытии попапа
+  addCardPopupInputs.forEach((errorElement) => {
+    hideInputError(popupTypeAddCard, errorElement, enableConfig);
+  })
 });
 
 // слушатель закрытия попапа добавления карточки
