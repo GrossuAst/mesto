@@ -1,3 +1,5 @@
+import {Card} from './Card.js';
+console.log(Card);
 // переменные
 const editButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -61,16 +63,6 @@ function closePopup(popup){
   // deleteErrors();
 }
 
-// function hideInputError(formElement, inputElement, config) {
-  // нашел спан с ошибкой
-  // const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  // удаляю класс для видимости
-  // errorElement.classList.remove(config.errorClass);
-  // errorElement.textContent = '';
-  // удаляю красный бордер для инпута
-//   inputElement.classList.remove(config.inputErrorClass);
-// }                         ________________________________________________удалить после ревью________
-
 // закрытие попапов по клику на оверлей. Если клик происходит по попапу, который содержит popup_opened, закрываю его
 popupArray.forEach((popup) => {
   // слушатель клика
@@ -79,12 +71,6 @@ popupArray.forEach((popup) => {
       closePopup(popup);
     }
   })
-  // popup.addEventListener('keydown', (event) => {
-  //   if(event.key === 27) {
-  //     const openedPopup = popup.classList.contains('popup_opened');
-  //     openedPopup.classList.remove('popup_opened');
-  //   }
-  // })                                 ____________________________________________удалить после ревью
 })
 
 // функция закрытия попапап на esc
@@ -157,41 +143,46 @@ popupCloseIconFullscreen.addEventListener('click', () => closePopup(popupTypeFul
 // проектная 5 _______________________________________________________________________
 
 // функция создания карточки
-const createCard = (name, link) => {
-  // сборка карточки
-  const card = cardTemplate.content.querySelector('.card').cloneNode(true);
-  card.querySelector('.card__title').textContent = name;
-  card.querySelector('.card__photo').src = link;
-  card.querySelector('.card__photo').alt = name;
-    // слушатель лайка
-  card.querySelector('.card__like').addEventListener('click', switchLike);
-    // функция удаления карточки и его слушатель
-  const deleteButton = card.querySelector('.card__delete-button');
-  deleteButton.addEventListener('click', function(){
-    card.remove();
-  });
-    // слушатель открытия фуллскрина
-  card.querySelector('.card__photo').addEventListener('click', () => {
-    getFullscreenPopupValues(link, name);
-    openPopup(popupTypeFullscreen);
-  });
+// const createCard = (name, link) => {
+//   // сборка карточки
+//   const card = cardTemplate.content.querySelector('.card').cloneNode(true);
+//   card.querySelector('.card__title').textContent = name;
+//   card.querySelector('.card__photo').src = link;
+//   card.querySelector('.card__photo').alt = name;
+//     // слушатель лайка
+//   card.querySelector('.card__like').addEventListener('click', switchLike);
+//     // функция удаления карточки и его слушатель
+//   const deleteButton = card.querySelector('.card__delete-button');
+//   deleteButton.addEventListener('click', function(){
+//     card.remove();
+//   });
+//     // слушатель открытия фуллскрина
+//   card.querySelector('.card__photo').addEventListener('click', () => {
+//     getFullscreenPopupValues(link, name);
+//     openPopup(popupTypeFullscreen);
+//   });
 
-  return card;
-}
+//   return card;
+// }
 
-// переключатель лайка
-function switchLike(evt){
-  evt.target.classList.toggle('card__like_active');
-}
+// // переключатель лайка
+// function switchLike(evt){
+//   evt.target.classList.toggle('card__like_active');
+// }
 
 // добавление карт
-const addCard = (name, link) => {
-  sectionElements.prepend(createCard(name, link));
-}
+// const addCard = (name, link) => {
+//   const card = new Card(data, cardTemplate);
+//   sectionElements.prepend(card.getView());
+// }
 
 // ренден карт из массива 
-initialCards.forEach((card) => {
-  addCard(card.name, card.link);
+initialCards.forEach((element) => {
+  const card = new Card(element, '#card-template');
+  const cardElement = card.generateCard();
+  document.querySelector('.elements').append(cardElement);
+  // sectionElements.prepend(cardElemen);
+  // addCard(element.name, element.link);
 })
 
 // функция передачи значений профиля в инпуты
