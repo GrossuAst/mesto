@@ -176,13 +176,14 @@ popupCloseIconFullscreen.addEventListener('click', () => closePopup(popupTypeFul
 //   sectionElements.prepend(card.getView());
 // }
 
-// ренден карт из массива 
+// ренден карт из массива__________
 initialCards.forEach((element) => {
+  // создаю для каждого объекта из массива новую карточку, для этого в конструктор класса передаю каждый объект массива и темплейт карточки по id
   const card = new Card(element, '#card-template');
+  // полученный шаблон передаю в генерейтКарт для заполнения содержимым
   const cardElement = card.generateCard();
-  document.querySelector('.elements').append(cardElement);
-  // sectionElements.prepend(cardElemen);
-  // addCard(element.name, element.link);
+  // вставляю в ДОМ
+  sectionElements.prepend(cardElement);
 })
 
 // функция передачи значений профиля в инпуты
