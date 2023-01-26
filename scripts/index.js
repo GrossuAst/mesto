@@ -1,5 +1,5 @@
 import {Card} from './Card.js';
-console.log(Card);
+
 // переменные
 const editButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -81,16 +81,7 @@ function closePopupEscapePress(evt) {
   }
 }
 
-// отправка карточки из формы добавления
-function confirmCard(evt) {
-  evt.preventDefault();
-  const newCard = {
-    name: popupInputTypeCardName.value,
-    link: popupInputTypeCardLink.value,
-  }
-  addCard(newCard.name, newCard.link);
-  closePopup(popupTypeAddCard);
-}
+
 
 // отправка формы профиля
 function profileFormSubmit (evt) {
@@ -170,11 +161,18 @@ popupCloseIconFullscreen.addEventListener('click', () => closePopup(popupTypeFul
 //   evt.target.classList.toggle('card__like_active');
 // }
 
-// добавление карт
-// const addCard = (name, link) => {
-//   const card = new Card(data, cardTemplate);
-//   sectionElements.prepend(card.getView());
-// }
+// отправка карточки из формы добавления
+function confirmCard(evt) {
+  evt.preventDefault();
+  const object = {
+    name: popupInputTypeCardName.value,
+    link: popupInputTypeCardLink.value,
+  }
+  const card = new Card(object, '#card-template');
+  const cardElement = card.generateCard();
+  sectionElements.prepend(cardElement);
+  closePopup(popupTypeAddCard);
+}
 
 // ренден карт из массива__________
 initialCards.forEach((element) => {
@@ -217,3 +215,5 @@ const enableConfig = {
 };
 
 enableValidation(enableConfig);
+
+export {openPopup};
