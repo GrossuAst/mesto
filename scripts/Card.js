@@ -1,9 +1,11 @@
 class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, fullscreen) {
         this._title = data.name;
         this._photo = data.link;
         this._templateSelector = templateSelector;
-    }
+        this._openFullscreen = fullscreen;
+    };
+
 // получаю шаблон для создания новой карточки, будет передаваться в метод generateCard для заполнения содержимым. Метод возвращает в консте разметку html
     _getTemplate() {
         const cardElement = document.querySelector(this._templateSelector).content.querySelector('.card').cloneNode(true);
@@ -35,6 +37,8 @@ class Card {
         deleteButton.addEventListener('click', () => {this._deleteCard()});
         const likeButton = this._newCard.querySelector('.card__like');
         likeButton.addEventListener('click', () => {this._switchLike()});
+        const cardImage = this._newCard.querySelector('.card__photo');
+        cardImage.addEventListener('click', () => {this._openFullscreen(this._title, this._photo)});
     };
 
 // наполняю содержимым

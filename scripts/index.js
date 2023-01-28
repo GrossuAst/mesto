@@ -81,8 +81,6 @@ function closePopupEscapePress(evt) {
   }
 }
 
-
-
 // отправка формы профиля
 function profileFormSubmit (evt) {
     evt.preventDefault();                                     
@@ -161,28 +159,37 @@ popupCloseIconFullscreen.addEventListener('click', () => closePopup(popupTypeFul
 //   evt.target.classList.toggle('card__like_active');
 // }
 
+// функция добавления карточки
+function createCard(object) {
+  const card = new Card(object, '#card-template', openFullscreenPhoto);
+  const cardElement = card.generateCard();
+  sectionElements.prepend(cardElement);
+}
+
 // отправка карточки из формы добавления
 function confirmCard(evt) {
   evt.preventDefault();
-  const object = {
+  const newObject = {
     name: popupInputTypeCardName.value,
     link: popupInputTypeCardLink.value,
   }
-  const card = new Card(object, '#card-template');
-  const cardElement = card.generateCard();
-  sectionElements.prepend(cardElement);
+  createCard(newObject);
   closePopup(popupTypeAddCard);
 }
 
-// ренден карт из массива__________
+// // ренден карт из массива__________
 initialCards.forEach((element) => {
-  // создаю для каждого объекта из массива новую карточку, для этого в конструктор класса передаю каждый объект массива и темплейт карточки по id
-  const card = new Card(element, '#card-template');
-  // полученный шаблон передаю в генерейтКарт для заполнения содержимым
-  const cardElement = card.generateCard();
-  // вставляю в ДОМ
-  sectionElements.prepend(cardElement);
+  createCard(element);
 })
+
+// функция открытия фото
+function openFullscreenPhoto(title, photo) {
+  // getFullscreenPopupValues(object.link, object.name);
+  fullscreenImage.src = photo;
+  fullscreenImage.alt = title;
+  fullscreenTitle.textContent = title;
+  openPopup(popupTypeFullscreen);
+}
 
 // функция передачи значений профиля в инпуты
 function transferProfileValues () {
@@ -197,11 +204,11 @@ function resetAddCardPopupValues () {
 }
 
 // функция передачи ссылки и тайтла в попап открытой карточки
-function getFullscreenPopupValues (link, name) {
-  fullscreenImage.src = link;
-  fullscreenImage.alt = name;
-  fullscreenTitle.textContent = name;
-}
+// function getFullscreenPopupValues (link, name) {
+//   fullscreenImage.src = link;
+//   fullscreenImage.alt = name;
+//   fullscreenTitle.textContent = name;
+// }
 
 // ____________________________________валидация
 
