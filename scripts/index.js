@@ -1,4 +1,5 @@
-import {Card} from './Card.js';
+import { Card } from './Card.js';
+import { initialCards } from './constants.js';
 
 // переменные
 const editButton = document.querySelector('.profile__edit-button');
@@ -18,12 +19,8 @@ const profilePopupInputs = Array.from(popupProfile.querySelectorAll('.popup__inp
 // кнопка в профиле
 const profileSaveButton = popupProfile.querySelector('.popup__submit-button');
 
-
 // для фото карточек
 const sectionElements = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#card-template');
-const cardPhoto = document.querySelector('card__photo');
-const likeButton = document.querySelector('.card__like');
 
 // консты для добавления новой карточки
 const newCardAddButton = document.querySelector('.profile__add-button');
@@ -44,15 +41,14 @@ const fullscreenTitle = document.querySelector('.popup__fullscreen-title');
 const popupCloseIconFullscreen = document.querySelector('.popup__close-icon_type_fullscreen');
 const popupTypeFullscreen = document.querySelector('.popup_type_fullscreen');
 
-// ________________________________________________________________
+// ______________________общие функции______________________________
 
 // функции открытия попапов
 function openPopup(popup){
   popup.classList.add('popup_opened');
   // при открытии попапа добавляется слушатель на кнопку esc, закрывающая попап при нажатии на нее
   document.addEventListener('keydown', closePopupEscapePress);
-}
-
+};
 
 // функция закрытия попапов
 function closePopup(popup){
@@ -60,8 +56,7 @@ function closePopup(popup){
   // hideInputError(popupArray, inputArray, enableConfig);
   // удалить слушатель ескейпа при закрытии попапа
   document.removeEventListener('keydown', closePopupEscapePress);
-  // deleteErrors();
-}
+};
 
 // закрытие попапов по клику на оверлей. Если клик происходит по попапу, который содержит popup_opened, закрываю его
 popupArray.forEach((popup) => {
@@ -71,7 +66,7 @@ popupArray.forEach((popup) => {
       closePopup(popup);
     }
   })
-})
+});
 
 // функция закрытия попапап на esc
 function closePopupEscapePress(evt) {
@@ -79,21 +74,9 @@ function closePopupEscapePress(evt) {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
+};
 
-// отправка формы профиля
-function profileFormSubmit (evt) {
-    evt.preventDefault();                                     
-    profileName.textContent = nameInput.value;
-    description.textContent = jobInput.value;
-    closePopup (popupProfile);
-}
-
-// слушатель отправки формы
-popupFormProfile.addEventListener('submit', profileFormSubmit);
-
-// слушатель отправки созданной карточки
-formTypeAddCard.addEventListener('submit', confirmCard);
+// ______________________для попапа профиля_________________________
 
 // слушатель открытия попапа профиля, добавил сюда переключатель кнопки
 editButton.addEventListener('click', () => {
@@ -107,10 +90,29 @@ editButton.addEventListener('click', () => {
   openPopup(popupProfile);
 });
 
+// слушатель отправки формы профиля
+popupFormProfile.addEventListener('submit', profileFormSubmit);
+
 // слушатель закрытия попапа профиля
 popupProfileCloseIcon.addEventListener('click', () => {
   closePopup(popupProfile);
 });
+
+// отправка формы профиля
+function profileFormSubmit (evt) {
+  evt.preventDefault();                                     
+  profileName.textContent = nameInput.value;
+  description.textContent = jobInput.value;
+  closePopup (popupProfile);
+};
+
+// функция передачи значений профиля в инпуты
+function transferProfileValues () {
+  nameInput.value = profileName.textContent;
+  jobInput.value = description.textContent;
+};
+
+// ______________________для создания карточки______________________
 
 // слушатель открытия попапа добавления карточки
 newCardAddButton.addEventListener('click', () => {
@@ -126,45 +128,15 @@ newCardAddButton.addEventListener('click', () => {
 // слушатель закрытия попапа добавления карточки
 popupCloseButtonTypeAddCard.addEventListener('click', () => closePopup(popupTypeAddCard));
 
-// слушатель закрытия фуллскрин попапа (открытие встроено в функию создания карточки)
-popupCloseIconFullscreen.addEventListener('click', () => closePopup(popupTypeFullscreen));
-
-// проектная 5 _______________________________________________________________________
-
-// функция создания карточки
-// const createCard = (name, link) => {
-//   // сборка карточки
-//   const card = cardTemplate.content.querySelector('.card').cloneNode(true);
-//   card.querySelector('.card__title').textContent = name;
-//   card.querySelector('.card__photo').src = link;
-//   card.querySelector('.card__photo').alt = name;
-//     // слушатель лайка
-//   card.querySelector('.card__like').addEventListener('click', switchLike);
-//     // функция удаления карточки и его слушатель
-//   const deleteButton = card.querySelector('.card__delete-button');
-//   deleteButton.addEventListener('click', function(){
-//     card.remove();
-//   });
-//     // слушатель открытия фуллскрина
-//   card.querySelector('.card__photo').addEventListener('click', () => {
-//     getFullscreenPopupValues(link, name);
-//     openPopup(popupTypeFullscreen);
-//   });
-
-//   return card;
-// }
-
-// // переключатель лайка
-// function switchLike(evt){
-//   evt.target.classList.toggle('card__like_active');
-// }
+// слушатель отправки созданной карточки
+formTypeAddCard.addEventListener('submit', confirmCard);
 
 // функция добавления карточки
 function createCard(object) {
   const card = new Card(object, '#card-template', openFullscreenPhoto);
   const cardElement = card.generateCard();
   sectionElements.prepend(cardElement);
-}
+};
 
 // отправка карточки из формы добавления
 function confirmCard(evt) {
@@ -175,40 +147,29 @@ function confirmCard(evt) {
   }
   createCard(newObject);
   closePopup(popupTypeAddCard);
-}
+};
 
 // // ренден карт из массива__________
 initialCards.forEach((element) => {
   createCard(element);
-})
+});
 
 // функция открытия фото
 function openFullscreenPhoto(title, photo) {
-  // getFullscreenPopupValues(object.link, object.name);
   fullscreenImage.src = photo;
   fullscreenImage.alt = title;
   fullscreenTitle.textContent = title;
   openPopup(popupTypeFullscreen);
-}
+};
 
-// функция передачи значений профиля в инпуты
-function transferProfileValues () {
-  nameInput.value = profileName.textContent;
-  jobInput.value = description.textContent;
-}
+// слушатель закрытия фуллскрин попапа (слушатель открытия встроен в класс Card)
+popupCloseIconFullscreen.addEventListener('click', () => closePopup(popupTypeFullscreen));
 
 // функция обнуления инпутов попапа добавления карточки
 function resetAddCardPopupValues () {
   popupInputTypeCardName.value = ''; 
   popupInputTypeCardLink.value = '';
-}
-
-// функция передачи ссылки и тайтла в попап открытой карточки
-// function getFullscreenPopupValues (link, name) {
-//   fullscreenImage.src = link;
-//   fullscreenImage.alt = name;
-//   fullscreenTitle.textContent = name;
-// }
+};
 
 // ____________________________________валидация
 
@@ -222,5 +183,3 @@ const enableConfig = {
 };
 
 enableValidation(enableConfig);
-
-export {openPopup};
