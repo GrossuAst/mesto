@@ -80,25 +80,100 @@
 
 class FormValidator {
     constructor(config, form) {
-        this._config = config;
-        this._form = form;
-    }
+      this._config = config;
+      this._form = form;
+    };
+  
+//прячет ошибки
+    _hideInputError(inputElement) {
+        inputElement.classList.remove(this._config.inputErrorClass);
+//спан с ошибкой
+        const errorSpan = this._form.querySelector(`.${inputElement.id}-error`);
+        errorSpan.classList.remove(this._config.errorClass);
+        errorSpan.textContent = '';
+    };
+  
+//показывает ошибки
+    _showInputError(inputElement) {
+        inputElement.classList.add(this._config.inputErrorClass);
+//спан с ошибкой
+        const errorSpan = this._form.querySelector(`.${inputElement.id}-error`);
+        errorSpan.classList.add(this._config.errorClass);
+        errorSpan.textContent = inputElement.validationMessage;
+    };
 
-    _checkInputValidity() {
-
-    }
-
+//проверяет есть ли в форме хотя бы 1 невалидный инпут
+    _hasInvalidInput(inputList) {
+        return inputList.some((inputElement) => !inputElement.validity.valid);
+    };
+  
+//переключатель кнопки
+    _toggleButtonState(inputList, buttonElement) {
+        if (this._hasInvalidInput(inputList)) {
+            buttonElement.classList.add(this._config.inactiveButtonClass);
+            buttonElement.disabled = true;
+        } else {
+            buttonElement.classList.remove(this._config.inactiveButtonClass);
+            buttonElement.disabled = false;
+        }
+    };
+  
+//вызывает функцию скрыть/показать ошибку если поле валидно/невалидно
+    _checkInputValidity(inputElement) {
+        if (inputElement.validity.valid) {
+            this._hideInputError(inputElement);
+        }
+        else { this._showInputError(inputElement) }
+    };
+  
+//находит все поля формы и на каждое вешает событие input, вызывает цепочку проверки поля
     _setEventListeners() {
+//массив инпутов
         const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+//кнопка
+        const buttonElement = this._form.querySelector(this._config.submitButtonSelector);
+    
+        // _toggleButtonState(inputList, buttonElement);
+
         inputList.forEach((inputElement) => {
-            console.log(inputList);
-            _checkInputValidity();
+            inputElement.addEventListener('input', () => {
+                this._checkInputValidity(inputElement);
+                this._toggleButtonState(inputList, buttonElement);
+            })
         })
     };
-    
+  
+//глобальная функция, вызывается в индексе для каждой формы________________
     enableValidation() {
         this._setEventListeners();
     };
-};
+
+// функция отключает кнопку в форме добавления карточки при первом открытии
+    disableAddCardPopupButton() {
+        const button = document.querySelector('.popup__submit-button_type_add-card');
+        button.classList.add(this._config.inactiveButtonClass);
+        button.disabled = true;
+    };
+
+// функция активирует кнопку профиля при открытии попапа
+    switchProfileButtonMode() {
+        const button = document.querySelector('.popup__submit-button');
+        button.classList.remove(this._config.inactiveButtonClass);
+        button.disabled = false;
+    };
+
+// функция скрывает спаны с ошибкой и удаляет стили невалидных инпутов
+    switchErrorMode() {
+        const spanErrors = document.querySelectorAll('.popup__error');
+        const inputs = document.querySelectorAll('.popup__input_type_error');
+        spanErrors.forEach((span) => {
+            span.textContent = '';
+        })
+        inputs.forEach((input) => {
+            input.classList.remove('popup__input_type_error');
+        })
+    };
+
+    };
 
 export { FormValidator };
