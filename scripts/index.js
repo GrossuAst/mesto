@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { initialCards } from './constants.js';
+import { FormValidator } from './validate.js';
 
 // переменные
 const editButton = document.querySelector('.profile__edit-button');
@@ -81,11 +82,11 @@ function closePopupEscapePress(evt) {
 // слушатель открытия попапа профиля, добавил сюда переключатель кнопки
 editButton.addEventListener('click', () => {
   // вызываю функцию переключения кнопки, проверит валидны ли инпуты, и включит кнопку если оени валидны
-  toggleButtonState(profilePopupInputs, profileSaveButton, enableConfig);
-  // скрываю элекмент с ошибкой при открытии попапа
-  profilePopupInputs.forEach((errorElement) => {
-    hideInputError(popupProfile, errorElement, enableConfig);
-  })
+  // toggleButtonState(profilePopupInputs, profileSaveButton, enableConfig);
+  // // скрываю элекмент с ошибкой при открытии попапа
+  // profilePopupInputs.forEach((errorElement) => {
+  //   hideInputError(popupProfile, errorElement, enableConfig);
+  // })
   transferProfileValues();
   openPopup(popupProfile);
 });
@@ -118,11 +119,11 @@ function transferProfileValues () {
 newCardAddButton.addEventListener('click', () => {
   resetAddCardPopupValues();
   openPopup(popupTypeAddCard);
-  toggleButtonState(addCardPopupInputs, addCardSaveButton, enableConfig);
+  // toggleButtonState(addCardPopupInputs, addCardSaveButton, enableConfig);
   // скрываю элекмент с ошибкой при открытии попапа
-  addCardPopupInputs.forEach((errorElement) => {
-    hideInputError(popupTypeAddCard, errorElement, enableConfig);
-  })
+  // addCardPopupInputs.forEach((errorElement) => {
+  //   hideInputError(popupTypeAddCard, errorElement, enableConfig);
+  // })
 });
 
 // слушатель закрытия попапа добавления карточки
@@ -182,4 +183,15 @@ const enableConfig = {
   errorClass: 'popup__error_visible'
 };
 
-enableValidation(enableConfig);
+// enableValidation(enableConfig);
+
+console.log(FormValidator);
+
+// для валидации нужно передать в конструктор 1й параметр- конфиг, 2й - саму форму
+// валидатор формы профиля
+const validatorProfileForm = new FormValidator(enableConfig, popupFormProfile);
+validatorProfileForm.enableValidation();
+
+// валидатор формы добавления карточки
+const validatorAddCardForm = new FormValidator(enableConfig, formTypeAddCard);
+validatorAddCardForm.enableValidation();
