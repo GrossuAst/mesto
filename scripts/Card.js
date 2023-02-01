@@ -28,22 +28,28 @@ class Card {
 
 // переключатель лайка
     _switchLike() {
-        this._newCard.querySelector('.card__like').classList.toggle('card__like_active');
+        this._likeButton.classList.toggle('card__like_active');
     };
 
 // метод вешает обработчики
     _setEventListeners() {
-        const deleteButton = this._newCard.querySelector('.card__delete-button');
-        deleteButton.addEventListener('click', () => {this._deleteCard()});
-        const likeButton = this._newCard.querySelector('.card__like');
-        likeButton.addEventListener('click', () => {this._switchLike()});
-        const cardImage = this._newCard.querySelector('.card__photo');
-        cardImage.addEventListener('click', () => {this._openFullscreen(this._title, this._photo)});
+        this._deleteButton.addEventListener('click', () => { this._deleteCard() });
+
+        this._likeButton.addEventListener('click', () => { this._switchLike() });
+
+        this._cardImage.addEventListener('click', () => { this._openFullscreen(this._title, this._photo) });
     };
 
 // наполняю содержимым
     generateCard() {
         this._newCard = this._getTemplate();
+
+        this._cardImage = this._newCard.querySelector('.card__photo');
+
+        this._deleteButton = this._newCard.querySelector('.card__delete-button');
+
+        this._likeButton = this._newCard.querySelector('.card__like');
+
         this._setData();
         this._setEventListeners();
 
