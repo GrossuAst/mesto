@@ -1,5 +1,6 @@
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
 import { 
   initialCards,
   editButton,
@@ -121,9 +122,16 @@ function confirmCard(evt) {
 };
 
 // // ренден карт из массива__________
-initialCards.forEach((element) => {
-  sectionElements.prepend(createCard(element));
-});
+// initialCards.forEach((element) => {
+//   sectionElements.prepend(createCard(element));
+// });
+
+console.log(sectionElements);
+const cardList = new Section({
+  items: initialCards, 
+  renderer: () => {
+    
+}}, sectionElements);
 
 // функция открытия фото
 function openFullscreenPhoto(title, photo) {
