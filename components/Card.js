@@ -1,4 +1,4 @@
-class Card {
+export class Card {
     constructor(data, templateSelector, fullscreen) {
         this._title = data.name;
         this._photo = data.link;
@@ -56,5 +56,3 @@ class Card {
         return this._newCard;
     };
 };
-
-export {Card};

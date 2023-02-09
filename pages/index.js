@@ -1,37 +1,26 @@
 import { Card } from '../components/Card.js';
-import { initialCards } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
-
-// переменные
-const editButton = document.querySelector('.profile__edit-button');
-const popupProfile = document.querySelector('.popup_type_profile');
-
-const profileName = document.querySelector('.profile__name');
-const description = document.querySelector('.profile__description');
-const popupFormProfile = document.querySelector('.popup__form_type_profile');
-const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_profession');
-
-//кнопеки закрытия попапов
-const closeButtons = document.querySelectorAll('.popup__close-icon');
-
-// массив попапов, включая оверлеи
-const popupArray = document.querySelectorAll('.popup');
-
-// для фото карточек
-const sectionElements = document.querySelector('.elements');
-
-// консты для добавления новой карточки
-const newCardAddButton = document.querySelector('.profile__add-button');
-const popupTypeAddCard = document.querySelector('.popup_type_add-card');
-const popupInputTypeCardName = document.querySelector('.popup__input_type_card-name');
-const popupInputTypeCardLink = document.querySelector('.popup__input_type_card-link');
-const formTypeAddCard = document.querySelector('.popup__form_type_add-card');
-
-// для фуллскрин карточек
-const fullscreenImage = document.querySelector('.popup__fullscreen-image');
-const fullscreenTitle = document.querySelector('.popup__fullscreen-title');
-const popupTypeFullscreen = document.querySelector('.popup_type_fullscreen');
+import { 
+  initialCards,
+  editButton,
+  popupProfile,
+  profileName,
+  description,
+  popupFormProfile,
+  nameInput,
+  jobInput,
+  closeButtons,
+  popupArray,
+  sectionElements,
+  newCardAddButton,
+  popupTypeAddCard,
+  popupInputTypeCardName,
+  popupInputTypeCardLink,
+  formTypeAddCard,
+  fullscreenImage,
+  fullscreenTitle,
+  popupTypeFullscreen
+} from '../utils/constants.js';
 
 // ______________________общие функции______________________________
 
