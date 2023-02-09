@@ -1,6 +1,6 @@
-import { Card } from './Card.js';
-import { initialCards } from './constants.js';
-import { FormValidator } from './FormValidator.js';
+import { Card } from '../components/Card.js';
+import { initialCards } from '../utils/constants.js';
+import { FormValidator } from '../components/FormValidator.js';
 
 // переменные
 const editButton = document.querySelector('.profile__edit-button');
