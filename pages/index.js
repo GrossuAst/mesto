@@ -1,5 +1,4 @@
 import { Card } from '../components/Card.js';
-import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { 
   initialCards,
@@ -22,6 +21,7 @@ import {
   fullscreenTitle,
   popupTypeFullscreen
 } from '../utils/constants.js';
+import { FormValidator } from '../components/FormValidator.js';
 
 // ______________________общие функции______________________________
 
@@ -121,7 +121,8 @@ function confirmCard(evt) {
   closePopup(popupTypeAddCard);
 };
 
-// // ренден карт из массива__________
+// _______удалить после ревью==========
+// // ренден карт из массива
 // initialCards.forEach((element) => {
 //   sectionElements.prepend(createCard(element));
 // });
@@ -129,9 +130,11 @@ function confirmCard(evt) {
 console.log(sectionElements);
 const cardList = new Section({
   items: initialCards, 
-  renderer: () => {
-    
-}}, sectionElements);
+  renderer: (card) => {
+    cardList.addItem(createCard(card));
+}}, '.elements');
+
+cardList.renderCards();
 
 // функция открытия фото
 function openFullscreenPhoto(title, photo) {

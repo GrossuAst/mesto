@@ -12,8 +12,8 @@ export class Section{
 
     // метод рендерит карточку
     renderCards() {
-        this._initialArray.forEach(item => {
-            _renderer(item);
+        this._initialArray.forEach((item) => {
+            this._renderer(item);
         })
     };
 };
