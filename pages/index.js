@@ -1,5 +1,6 @@
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
+import { Popup } from '../components/Popup.js';
 import { 
   initialCards,
   editButton,
@@ -26,51 +27,51 @@ import { FormValidator } from '../components/FormValidator.js';
 // ______________________общие функции______________________________
 
 // функции открытия попапов
-function openPopup(popup){
-  popup.classList.add('popup_opened');
+// function openPopup(popup){
+  // popup.classList.add('popup_opened');
   // при открытии попапа добавляется слушатель на кнопку esc, закрывающая попап при нажатии на нее
-  document.addEventListener('keydown', closePopupEscapePress);
-};
+  // document.addEventListener('keydown', closePopupEscapePress);
+// };
 
 // функция закрытия попапов
-function closePopup(popup){
-  popup.classList.remove('popup_opened');
+// function closePopup(popup){
+  // popup.classList.remove('popup_opened');
   // удалить слушатель ескейпа при закрытии попапа
-  document.removeEventListener('keydown', closePopupEscapePress);
-};
+  // document.removeEventListener('keydown', closePopupEscapePress);
+// };
 
 // закрытие попапов по клику на оверлей. Если клик происходит по попапу, который содержит popup_opened, закрываю его
-popupArray.forEach((popup) => {
+// popupArray.forEach((popup) => {
   // слушатель клика
-  popup.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('popup_opened')){
-      closePopup(popup);
-    }
-  })
-});
+  // popup.addEventListener('click', (evt) => {
+    // if(evt.target.classList.contains('popup_opened')){
+      // closePopup(popup);
+    // }
+  // })
+// });
 
 // функция закрытия попапап на esc
-function closePopupEscapePress(evt) {
-  if(evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
+// function closePopupEscapePress(evt) {
+//   if(evt.key === 'Escape') {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     closePopup(openedPopup);
+//   }
+// };
 
 // вешает слушатель на все крестики функцию закрытия попапов
-closeButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-});
+// closeButtons.forEach((button) => {
+//   const popup = button.closest('.popup');
+//   button.addEventListener('click', () => closePopup(popup));
+// });
 
 // ______________________для попапа профиля_________________________
 
-// слушатель открытия попапа профиля, добавил сюда переключатель кнопки
+// слушатель открытия попапа профиля
 editButton.addEventListener('click', () => {
   validatorProfileForm.switchErrorMode();
   validatorProfileForm.switchProfileButtonMode();
   transferProfileValues();
-  openPopup(popupProfile);
+  // openPopup(popupProfile);
 });
 
 // слушатель отправки формы профиля
@@ -85,20 +86,20 @@ function profileFormSubmit (evt) {
 };
 
 // функция передачи значений профиля в инпуты
-function transferProfileValues () {
-  nameInput.value = profileName.textContent;
-  jobInput.value = description.textContent;
-};
+// function transferProfileValues () {
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = description.textContent;
+// };
 
 // ______________________для создания карточки______________________
 
 // слушатель открытия попапа добавления карточки
-newCardAddButton.addEventListener('click', () => {
-  resetAddCardPopupValues();
-  openPopup(popupTypeAddCard);
-  validatorAddCardForm.switchErrorMode();
-  validatorAddCardForm.disableAddCardPopupButton();
-});
+// newCardAddButton.addEventListener('click', () => {
+//   resetAddCardPopupValues();
+//   openPopup(popupTypeAddCard);
+//   validatorAddCardForm.switchErrorMode();
+//   validatorAddCardForm.disableAddCardPopupButton();
+// });
 
 // слушатель отправки созданной карточки
 formTypeAddCard.addEventListener('submit', confirmCard);
@@ -127,7 +128,7 @@ function confirmCard(evt) {
 //   sectionElements.prepend(createCard(element));
 // });
 
-console.log(sectionElements);
+// console.log(sectionElements);
 const cardList = new Section({
   items: initialCards, 
   renderer: (card) => {
@@ -145,10 +146,10 @@ function openFullscreenPhoto(title, photo) {
 };
 
 // функция обнуления инпутов попапа добавления карточки
-function resetAddCardPopupValues () {
-  popupInputTypeCardName.value = ''; 
-  popupInputTypeCardLink.value = '';
-};
+// function resetAddCardPopupValues () {
+//   popupInputTypeCardName.value = ''; 
+//   popupInputTypeCardLink.value = '';
+// };
 
 // ____________________________________валидация__________________
 

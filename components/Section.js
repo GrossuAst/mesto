@@ -1,4 +1,4 @@
-export class Section{
+export class Section {
     constructor({items, renderer}, container) {
         this._initialArray = items;
         this._renderer = renderer;
