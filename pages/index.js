@@ -26,6 +26,8 @@ import { FormValidator } from '../components/FormValidator.js';
 
 // ______________________общие функции______________________________
 
+// проверяю гитхаб
+
 // функции открытия попапов
 // function openPopup(popup){
   // popup.classList.add('popup_opened');
