@@ -107,6 +107,7 @@ function profileFormSubmit (evt) {
 
 // экземпляр попап с картинкой______________
 const imagePopup = new PopupWithImage('.popup_type_fullscreen');
+imagePopup.setEventListeners();
 // imagePopup();
 
 // слушатель отправки созданной карточки
@@ -114,7 +115,7 @@ formTypeAddCard.addEventListener('submit', confirmCard);
 
 // функция создания экземпляра
 function createCard(object) {
-  const card = new Card(object, '#card-template',) //openFullscreenPhoto);
+  const card = new Card(object, '#card-template', openFullscreenPhoto);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -146,12 +147,12 @@ const cardList = new Section({
 cardList.renderCards();
 
 // функция открытия фото
-// function openFullscreenPhoto(title, photo) {
+function openFullscreenPhoto(title, photo) {
   // fullscreenImage.src = photo;
   // fullscreenImage.alt = title;
   // fullscreenTitle.textContent = title;
   // openPopup(popupTypeFullscreen);
-// };
+};
 
 // функция обнуления инпутов попапа добавления карточки
 // function resetAddCardPopupValues () {

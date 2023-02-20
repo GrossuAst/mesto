@@ -7,8 +7,8 @@ export class PopupWithImage extends Popup {
         // this._image = popupSelector.querySelector('.popup__fullscreen-image');
     };
 
-    open(title, link) {
-        super.open();
+    open() {
+        super.open(title, link);
         // this._title = title;
         // this._image = link;
     };

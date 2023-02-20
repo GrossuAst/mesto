@@ -22,7 +22,7 @@ export class Popup {
 
     // навешивает слушатели закрытия на крестик и оверлей
     setEventListeners() {
-        this._closeIcon.addEventListener('click', this.close());
+        // this._closeIcon.addEventListener('click', this.close());
         // this._image.addEventListener('click', this.open());
     };
 }
