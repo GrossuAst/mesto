@@ -37,7 +37,7 @@ export class Card {
 
         this._likeButton.addEventListener('click', () => { this._switchLike() });
 
-        this._cardImage.addEventListener('click', () => { this._openFullscreen(this._title, this._photo) });
+        // this._cardImage.addEventListener('click', () => { this._openFullscreen(this._title, this._photo) });
     };
 
 // наполняю содержимым

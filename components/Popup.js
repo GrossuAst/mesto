@@ -1,6 +1,8 @@
 export class Popup {
     constructor(popupSelector) {
         this._selector = document.querySelector(popupSelector);
+        this._closeIcon = this._selector.querySelector('.popup__close-icon');
+        // this._image = _this._selector.querySelector('.card__photo');
     };
 
     // метод открытия попапа
@@ -20,6 +22,7 @@ export class Popup {
 
     // навешивает слушатели закрытия на крестик и оверлей
     setEventListeners() {
-
+        this._closeIcon.addEventListener('click', this.close());
+        // this._image.addEventListener('click', this.open());
     };
 }

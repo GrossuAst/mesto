@@ -1,6 +1,7 @@
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 import { 
   initialCards,
   editButton,
@@ -23,6 +24,7 @@ import {
   popupTypeFullscreen
 } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
+// import { PopupWithImage } from '../components/PopupWithImage.js';
 
 // ______________________общие функции______________________________
 
@@ -69,12 +71,12 @@ import { FormValidator } from '../components/FormValidator.js';
 // ______________________для попапа профиля_________________________
 
 // слушатель открытия попапа профиля
-editButton.addEventListener('click', () => {
-  validatorProfileForm.switchErrorMode();
-  validatorProfileForm.switchProfileButtonMode();
-  transferProfileValues();
-  // openPopup(popupProfile);
-});
+// editButton.addEventListener('click', () => {
+//   validatorProfileForm.switchErrorMode();
+//   validatorProfileForm.switchProfileButtonMode();
+//   transferProfileValues();
+//   // openPopup(popupProfile);
+// });
 
 // слушатель отправки формы профиля
 popupFormProfile.addEventListener('submit', profileFormSubmit);
@@ -103,12 +105,16 @@ function profileFormSubmit (evt) {
 //   validatorAddCardForm.disableAddCardPopupButton();
 // });
 
+// экземпляр попап с картинкой______________
+const imagePopup = new PopupWithImage('.popup_type_fullscreen');
+// imagePopup();
+
 // слушатель отправки созданной карточки
 formTypeAddCard.addEventListener('submit', confirmCard);
 
 // функция создания экземпляра
 function createCard(object) {
-  const card = new Card(object, '#card-template', openFullscreenPhoto);
+  const card = new Card(object, '#card-template',) //openFullscreenPhoto);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -140,12 +146,12 @@ const cardList = new Section({
 cardList.renderCards();
 
 // функция открытия фото
-function openFullscreenPhoto(title, photo) {
-  fullscreenImage.src = photo;
-  fullscreenImage.alt = title;
-  fullscreenTitle.textContent = title;
-  openPopup(popupTypeFullscreen);
-};
+// function openFullscreenPhoto(title, photo) {
+  // fullscreenImage.src = photo;
+  // fullscreenImage.alt = title;
+  // fullscreenTitle.textContent = title;
+  // openPopup(popupTypeFullscreen);
+// };
 
 // функция обнуления инпутов попапа добавления карточки
 // function resetAddCardPopupValues () {
