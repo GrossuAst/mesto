@@ -110,6 +110,15 @@ const imagePopup = new PopupWithImage('.popup_type_fullscreen');
 imagePopup.setEventListeners();
 // imagePopup();
 
+// функция открытия фото
+function openFullscreenPhoto() {
+  imagePopup.open();
+  // fullscreenImage.src = photo;
+  // fullscreenImage.alt = title;
+  // fullscreenTitle.textContent = title;
+  // openPopup(popupTypeFullscreen);
+};
+
 // слушатель отправки созданной карточки
 formTypeAddCard.addEventListener('submit', confirmCard);
 
@@ -145,14 +154,6 @@ const cardList = new Section({
 }}, '.elements');
 
 cardList.renderCards();
-
-// функция открытия фото
-function openFullscreenPhoto(title, photo) {
-  // fullscreenImage.src = photo;
-  // fullscreenImage.alt = title;
-  // fullscreenTitle.textContent = title;
-  // openPopup(popupTypeFullscreen);
-};
 
 // функция обнуления инпутов попапа добавления карточки
 // function resetAddCardPopupValues () {
