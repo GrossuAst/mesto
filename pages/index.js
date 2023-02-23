@@ -111,8 +111,8 @@ imagePopup.setEventListeners();
 // imagePopup();
 
 // функция открытия фото
-function openFullscreenPhoto() {
-  imagePopup.open();
+function openFullscreenPhoto(title, link) {
+  imagePopup.open(title, link);
   // fullscreenImage.src = photo;
   // fullscreenImage.alt = title;
   // fullscreenTitle.textContent = title;
@@ -120,7 +120,7 @@ function openFullscreenPhoto() {
 };
 
 // слушатель отправки созданной карточки
-formTypeAddCard.addEventListener('submit', confirmCard);
+// formTypeAddCard.addEventListener('submit', confirmCard);
 
 // функция создания экземпляра
 function createCard(object) {
@@ -130,15 +130,15 @@ function createCard(object) {
 };
 
 // отправка карточки из формы добавления
-function confirmCard(evt) {
-  evt.preventDefault();
-  const newObject = {
-    name: popupInputTypeCardName.value,
-    link: popupInputTypeCardLink.value,
-  }
-  sectionElements.prepend(createCard(newObject));
-  closePopup(popupTypeAddCard);
-};
+// function confirmCard(evt) {
+//   evt.preventDefault();
+//   const newObject = {
+//     name: popupInputTypeCardName.value,
+//     link: popupInputTypeCardLink.value,
+//   }
+//   sectionElements.prepend(createCard(newObject));
+//   closePopup(popupTypeAddCard);
+// };
 
 // _______удалить после ревью==========
 // // ренден карт из массива
