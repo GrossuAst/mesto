@@ -3,7 +3,6 @@ export class Popup {
         this._selector = document.querySelector(popupSelector);
         this._closeIcon = this._selector.querySelector('.popup__close-icon');
         // this._image = _this._selector.querySelector('.card__photo');
-
     };
 
     // метод открытия попапа

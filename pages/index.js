@@ -1,7 +1,13 @@
+import { FormValidator } from '../components/FormValidator.js';
+
 import { Card } from '../components/Card.js';
+
 import { Section } from '../components/Section.js';
-import { Popup } from '../components/Popup.js';
+
 import { PopupWithImage } from '../components/PopupWithImage.js';
+
+import { PopupWithForm } from '../components/PopupWithForm.js';
+
 import { 
   initialCards,
   editButton,
@@ -23,7 +29,8 @@ import {
   fullscreenTitle,
   popupTypeFullscreen
 } from '../utils/constants.js';
-import { FormValidator } from '../components/FormValidator.js';
+
+// import { PopupWithForm } from '../components/PopupWithForm.js';
 // import { PopupWithImage } from '../components/PopupWithImage.js';
 
 // ______________________общие функции______________________________
@@ -78,16 +85,40 @@ import { FormValidator } from '../components/FormValidator.js';
 //   // openPopup(popupProfile);
 // });
 
-// слушатель отправки формы профиля
-popupFormProfile.addEventListener('submit', profileFormSubmit);
+// попап редактирования профиля, слушатель открытия и сабмит__________
+
+const profileForm = new PopupWithForm('.popup_type_profile', profileFormSubmit);
+profileForm.setEventListeners();
+
+function openProfilePopup() {
+  profileForm.open();
+}
+
+editButton.addEventListener('click', () => {openProfilePopup()});
 
 // отправка формы профиля
 function profileFormSubmit (evt) {
   evt.preventDefault();                                     
   profileName.textContent = nameInput.value;
   description.textContent = jobInput.value;
-  closePopup (popupProfile);
+  // closePopup (popupProfile);
 };
+
+// попап добавления карточки, слушатель открытия и сабмит__________
+
+const addCardForm = new PopupWithForm('.popup_type_add-card', addCardFormSubmit);
+addCardForm.setEventListeners();
+
+function openAddCardPopup() {
+  addCardForm.open();
+}
+
+newCardAddButton.addEventListener('click', () => {openAddCardPopup()});
+
+function addCardFormSubmit(evt) {
+  evt.preventDefault();
+  // closePopup();
+}
 
 // функция передачи значений профиля в инпуты
 // function transferProfileValues () {
