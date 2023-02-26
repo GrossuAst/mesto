@@ -8,6 +8,8 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 
 import { PopupWithForm } from '../components/PopupWithForm.js';
 
+import { UserInfo } from '../components/UserInfo.js';
+
 import { 
   initialCards,
   editButton,
@@ -85,9 +87,20 @@ import {
 //   // openPopup(popupProfile);
 // });
 
+// инстанс класса UserInfo_________
+const UserInfoObject = {
+  userName: profileName.value,
+  userAbout: description.value
+}
+
+const user = new UserInfo(UserInfoObject);
+
+
+// ________________________________
+
 // попап редактирования профиля, слушатель открытия и сабмит__________
 
-const profileForm = new PopupWithForm('.popup_type_profile', profileFormSubmit);
+const profileForm = new PopupWithForm('.popup_type_profile', () => {profileFormSubmit()});
 profileForm.setEventListeners();
 
 function openProfilePopup() {
@@ -97,16 +110,16 @@ function openProfilePopup() {
 editButton.addEventListener('click', () => {openProfilePopup()});
 
 // отправка формы профиля
-function profileFormSubmit (evt) {
-  evt.preventDefault();                                     
-  profileName.textContent = nameInput.value;
-  description.textContent = jobInput.value;
+// function profileFormSubmit (evt) {
+  // evt.preventDefault();
+  // profileName.textContent = nameInput.value;
+  // description.textContent = jobInput.value;
   // closePopup (popupProfile);
-};
+// };
 
 // попап добавления карточки, слушатель открытия и сабмит__________
 
-const addCardForm = new PopupWithForm('.popup_type_add-card', addCardFormSubmit);
+const addCardForm = new PopupWithForm('.popup_type_add-card', () => {addCardFormSubmit()});
 addCardForm.setEventListeners();
 
 function openAddCardPopup() {
@@ -115,10 +128,10 @@ function openAddCardPopup() {
 
 newCardAddButton.addEventListener('click', () => {openAddCardPopup()});
 
-function addCardFormSubmit(evt) {
-  evt.preventDefault();
+// function addCardFormSubmit(evt) {
+  // evt.preventDefault();
   // closePopup();
-}
+// }
 
 // функция передачи значений профиля в инпуты
 // function transferProfileValues () {

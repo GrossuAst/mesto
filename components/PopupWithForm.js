@@ -1,11 +1,12 @@
 import { Popup } from './Popup.js';
 
-export class PopupWithForm extends Popup{
+export class PopupWithForm extends Popup {
     constructor(popupSelector, callback) {
         super(popupSelector);
         this._submitForm = callback;
-        // this._submitButton = this.querySelector('.popup__submit-button');
-    }
+        this._form = this._selector.querySelector('.popup__form');
+        this._formValues = this._form.
+    };
     
     _getInputValues() {
         
@@ -13,12 +14,15 @@ export class PopupWithForm extends Popup{
 
     setEventListeners() {
         super.setEventListeners();
-        // this._submitButton = this.
         // обработчик сабмита формы
-        // this._selector.addEventListener('submit', () => this._submitForm);
+        this._form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this.close();
+        });
     };
 
     close() {
         super.close();
+        this._form.reset();
     };
 }
