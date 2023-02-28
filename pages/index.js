@@ -88,13 +88,14 @@ import {
 // });
 
 // инстанс класса UserInfo_________
-const UserInfoObject = {
-  userName: profileName.value,
-  userAbout: description.value
-}
+const userInfoObject = {
+  userName: profileName.textContent,
+  userAbout: description.textContent
+};
+console.log(userInfoObject);
 
-const user = new UserInfo(UserInfoObject);
-
+const user = new UserInfo(userInfoObject);
+console.log(user.getUserInfo)
 
 // ________________________________
 
@@ -105,26 +106,31 @@ profileForm.setEventListeners();
 
 function openProfilePopup() {
   profileForm.open();
-}
+  // profileForm.getUserInfo();
+  // console.log(profileForm.getUserInfo());
+  user.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.about
+};
 
 editButton.addEventListener('click', () => {openProfilePopup()});
 
 // отправка формы профиля
-// function profileFormSubmit (evt) {
-  // evt.preventDefault();
+function profileFormSubmit () {
   // profileName.textContent = nameInput.value;
   // description.textContent = jobInput.value;
-  // closePopup (popupProfile);
-// };
+};
 
 // попап добавления карточки, слушатель открытия и сабмит__________
+
+
 
 const addCardForm = new PopupWithForm('.popup_type_add-card', () => {addCardFormSubmit()});
 addCardForm.setEventListeners();
 
 function openAddCardPopup() {
   addCardForm.open();
-}
+};
 
 newCardAddButton.addEventListener('click', () => {openAddCardPopup()});
 
