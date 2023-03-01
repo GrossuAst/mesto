@@ -5,11 +5,18 @@ export class PopupWithForm extends Popup {
         super(popupSelector);
         this._submitForm = callback;
         this._form = this._selector.querySelector('.popup__form');
-        // this._formValues = this._form.
+
+        // массив инпутов формы
+        this._formInputList = this._form.querySelectorAll('.popup__input');
     };
     
     _getInputValues() {
-        
+        this._inputsObject = { };
+        // присваюваю каждому инпуту списка значение и записываю в объект из инпутов
+        this._formInputList.forEach((input) => {
+            this._inputsObject[input.name] = input.value;
+        });
+        return this._inputsObject;
     };
 
     setEventListeners() {

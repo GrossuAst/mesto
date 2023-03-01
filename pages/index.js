@@ -88,14 +88,16 @@ import {
 // });
 
 // инстанс класса UserInfo_________
-const userInfoObject = {
-  userName: profileName.textContent,
-  userAbout: description.textContent
-};
-console.log(userInfoObject);
+// const userInfoObject = {
+//   userName: profileName.textContent,
+//   userAbout: description.textContent
+// };
+// console.log(userInfoObject);
 
-const user = new UserInfo(userInfoObject);
-console.log(user.getUserInfo)
+const user = new UserInfo();
+// console.log(user.getUserInfo)
+
+
 
 // ________________________________
 
@@ -109,14 +111,15 @@ function openProfilePopup() {
   // profileForm.getUserInfo();
   // console.log(profileForm.getUserInfo());
   user.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.about
+  // nameInput.value = userData.name;
+  // jobInput.value = userData.about
 };
 
 editButton.addEventListener('click', () => {openProfilePopup()});
 
 // отправка формы профиля
 function profileFormSubmit () {
+  // evt.preventDefault();
   // profileName.textContent = nameInput.value;
   // description.textContent = jobInput.value;
 };
