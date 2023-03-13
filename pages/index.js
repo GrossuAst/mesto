@@ -35,7 +35,88 @@ import {
 // import { PopupWithForm } from '../components/PopupWithForm.js';
 // import { PopupWithImage } from '../components/PopupWithImage.js';
 
-// ______________________общие функции______________________________
+
+// инстанс Section________________________________
+
+const cardList = new Section({
+  items: initialCards, 
+  renderer: (card) => {
+    cardList.addItem(createCard(card));
+}}, '.elements');
+
+cardList.renderCards();
+
+
+
+// функция создания инстанса карточки_____________________
+
+function createCard(object) {
+  const card = new Card(object, '#card-template', openFullscreenPhoto);
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
+
+
+// инстанс UserInfo
+const user = new UserInfo({
+  userNameSelector: '.profile__name',
+  userAboutSelector: '.profile__description'
+});
+
+// user.getUserInfo();
+
+
+
+// попап формы профиля_______________________________
+
+const profileForm = new PopupWithForm('.popup_type_profile', profileFormSubmit);
+profileForm.setEventListeners();
+
+// функция открытия и ее слушатель
+function openProfilePopup() {
+  profileForm.open();
+};
+
+editButton.addEventListener('click', () => {
+  const userData = {};
+  user.getUserInfo();
+  openProfilePopup()});
+
+// отправка формы профиля
+function profileFormSubmit () {
+
+};
+
+
+
+// попап формы карточки_______________________________
+
+const addCardForm = new PopupWithForm('.popup_type_add-card', () => {addCardFormSubmit()});
+addCardForm.setEventListeners();
+
+// функция открытия и ее слушатель
+function openAddCardPopup() {
+  addCardForm.open();
+};
+
+newCardAddButton.addEventListener('click', () => {openAddCardPopup()});
+
+
+
+// попап с фото________________________________________
+
+const imagePopup = new PopupWithImage('.popup_type_fullscreen');
+
+imagePopup.setEventListeners();
+
+// функция открытия фото
+function openFullscreenPhoto(title, link) {
+  imagePopup.open(title, link);
+};
+
+
+
 
 // проверяю гитхаб
 
@@ -94,7 +175,6 @@ import {
 // };
 // console.log(userInfoObject);
 
-const user = new UserInfo();
 // console.log(user.getUserInfo)
 
 
@@ -103,39 +183,13 @@ const user = new UserInfo();
 
 // попап редактирования профиля, слушатель открытия и сабмит__________
 
-const profileForm = new PopupWithForm('.popup_type_profile', () => {profileFormSubmit()});
-profileForm.setEventListeners();
 
-function openProfilePopup() {
-  profileForm.open();
-  // profileForm.getUserInfo();
-  // console.log(profileForm.getUserInfo());
-  user.getUserInfo();
-  // nameInput.value = userData.name;
-  // jobInput.value = userData.about
-};
-
-editButton.addEventListener('click', () => {openProfilePopup()});
-
-// отправка формы профиля
-function profileFormSubmit () {
-  // evt.preventDefault();
-  // profileName.textContent = nameInput.value;
-  // description.textContent = jobInput.value;
-};
 
 // попап добавления карточки, слушатель открытия и сабмит__________
 
 
 
-const addCardForm = new PopupWithForm('.popup_type_add-card', () => {addCardFormSubmit()});
-addCardForm.setEventListeners();
 
-function openAddCardPopup() {
-  addCardForm.open();
-};
-
-newCardAddButton.addEventListener('click', () => {openAddCardPopup()});
 
 // function addCardFormSubmit(evt) {
   // evt.preventDefault();
@@ -159,28 +213,13 @@ newCardAddButton.addEventListener('click', () => {openAddCardPopup()});
 // });
 
 // экземпляр попап с картинкой______________
-const imagePopup = new PopupWithImage('.popup_type_fullscreen');
-imagePopup.setEventListeners();
-// imagePopup();
 
-// функция открытия фото
-function openFullscreenPhoto(title, link) {
-  imagePopup.open(title, link);
-  // fullscreenImage.src = photo;
-  // fullscreenImage.alt = title;
-  // fullscreenTitle.textContent = title;
-  // openPopup(popupTypeFullscreen);
-};
 
 // слушатель отправки созданной карточки
 // formTypeAddCard.addEventListener('submit', confirmCard);
 
 // функция создания экземпляра
-function createCard(object) {
-  const card = new Card(object, '#card-template', openFullscreenPhoto);
-  const cardElement = card.generateCard();
-  return cardElement;
-};
+
 
 // отправка карточки из формы добавления
 // function confirmCard(evt) {
@@ -200,13 +239,7 @@ function createCard(object) {
 // });
 
 // console.log(sectionElements);
-const cardList = new Section({
-  items: initialCards, 
-  renderer: (card) => {
-    cardList.addItem(createCard(card));
-}}, '.elements');
 
-cardList.renderCards();
 
 // функция обнуления инпутов попапа добавления карточки
 // function resetAddCardPopupValues () {
