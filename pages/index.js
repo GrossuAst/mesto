@@ -70,13 +70,13 @@ const user = new UserInfo({
 
 // попап формы профиля_______________________________
 
-const profileForm = new PopupWithForm('.popup_type_profile', profileFormSubmit);
-profileForm.setEventListeners();
+const profileForm = new PopupWithForm('.popup_type_profile', () => {
+  console.log('334');
+  // user.getUserInfo();
+  console.log(user.getUserInfo());
+});
 
-// функция открытия и ее слушатель
-// function openProfilePopup() {
-  // profileForm.open();
-// };
+profileForm.setEventListeners();
 
 editButton.addEventListener('click', () => {
   const userData = user.getUserInfo();
@@ -88,9 +88,10 @@ editButton.addEventListener('click', () => {
 });
 
 // отправка формы профиля
-function profileFormSubmit () {
+// function profileFormSubmit () {
   // user.setUserInfo();
-};
+  
+// };
 
 
 

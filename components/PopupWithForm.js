@@ -1,3 +1,4 @@
+import { jobInput, nameInput } from '../utils/constants.js';
 import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
@@ -10,6 +11,7 @@ export class PopupWithForm extends Popup {
         this._formInputList = this._form.querySelectorAll('.popup__input');
     };
     
+    // метод собирает данные всех полей формы
     _getInputValues() {
         this._inputsObject = { };
         // присваюваю каждому инпуту списка значение и записываю в объект из инпутов
@@ -23,9 +25,18 @@ export class PopupWithForm extends Popup {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._getInputValues();
-            console.log('qwer');
-            console.log(this._getInputValues());
+            this._submitForm();
+
+            // получить значения инпутов можно только внутри этого класса
+            // this._getInputValues();
+            // console.log(this._inputsObject);
+
+
+            // profileName.textContent = this._inputsObject.name;
+            // description.textContent = 'qwer'
+            // nameInput.textContent = this._inputsObject.name.value;
+            // console.log('qwer');
+            // console.log(this._getInputValues());
             this.close();
         });
     };
