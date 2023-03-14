@@ -10,12 +10,13 @@ export class UserInfo {
             name: this._userName.textContent,
             about: this._userAbout.textContent
         }
-        console.log(userData);
+        // console.log(userData);
         return userData;
     };
 
     // принимает новые данные пользователя и добавляет их на страницу
-    setUserInfo(userData) {
+    setUserInfo() {
         // this._userName.textContent = 
+        console.log('zxcv');
     };
 }

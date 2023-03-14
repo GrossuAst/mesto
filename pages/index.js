@@ -74,18 +74,22 @@ const profileForm = new PopupWithForm('.popup_type_profile', profileFormSubmit);
 profileForm.setEventListeners();
 
 // функция открытия и ее слушатель
-function openProfilePopup() {
-  profileForm.open();
-};
+// function openProfilePopup() {
+  // profileForm.open();
+// };
 
 editButton.addEventListener('click', () => {
-  const userData = {};
-  user.getUserInfo();
-  openProfilePopup()});
+  const userData = user.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.about;
+  console.log(userData);
+  // openProfilePopup();
+  profileForm.open();
+});
 
 // отправка формы профиля
 function profileFormSubmit () {
-
+  // user.setUserInfo();
 };
 
 
