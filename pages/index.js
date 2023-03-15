@@ -32,10 +32,6 @@ import {
   popupTypeFullscreen
 } from '../utils/constants.js';
 
-// import { PopupWithForm } from '../components/PopupWithForm.js';
-// import { PopupWithImage } from '../components/PopupWithImage.js';
-
-
 // инстанс Section________________________________
 
 const cardList = new Section({
@@ -64,15 +60,15 @@ const user = new UserInfo({
   userAboutSelector: '.profile__description'
 });
 
-// user.getUserInfo();
-
 
 
 // попап формы профиля_______________________________
 
 const profileForm = new PopupWithForm('.popup_type_profile', () => {
-  console.log('334');
-  // user.getUserInfo();
+
+  profileName.textContent = '1234';
+  description.textContent = '4567';
+
   console.log(user.getUserInfo());
 });
 
@@ -83,29 +79,25 @@ editButton.addEventListener('click', () => {
   nameInput.value = userData.name;
   jobInput.value = userData.about;
   console.log(userData);
-  // openProfilePopup();
   profileForm.open();
 });
-
-// отправка формы профиля
-// function profileFormSubmit () {
-  // user.setUserInfo();
-  
-// };
 
 
 
 // попап формы карточки_______________________________
 
-const addCardForm = new PopupWithForm('.popup_type_add-card', () => {addCardFormSubmit()});
+const addCardForm = new PopupWithForm('.popup_type_add-card', addCardFormSubmit);
 addCardForm.setEventListeners();
 
-// функция открытия и ее слушатель
-function openAddCardPopup() {
-  addCardForm.open();
+function addCardFormSubmit(cardData) {
+  sectionElements.createCard(cardData);
+  // alert('hello')
 };
 
-newCardAddButton.addEventListener('click', () => {openAddCardPopup()});
+newCardAddButton.addEventListener('click', () => {
+  console.log('addcard');
+  addCardForm.open();
+});
 
 
 
@@ -122,8 +114,29 @@ function openFullscreenPhoto(title, link) {
 
 
 
+// валидация________________________________
 
-// проверяю гитхаб
+const enableConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+// для валидации нужно передать в конструктор 1й параметр- конфиг, 2й - саму форму
+// валидатор формы профиля
+const validatorProfileForm = new FormValidator(enableConfig, popupFormProfile);
+validatorProfileForm.enableValidation();
+
+// валидатор формы добавления карточки
+const validatorAddCardForm = new FormValidator(enableConfig, formTypeAddCard);
+validatorAddCardForm.enableValidation();
+
+
+
+// удалить после ревью___________________________________
 
 // функции открытия попапов
 // function openPopup(popup){
@@ -251,23 +264,3 @@ function openFullscreenPhoto(title, link) {
 //   popupInputTypeCardName.value = ''; 
 //   popupInputTypeCardLink.value = '';
 // };
-
-// ____________________________________валидация__________________
-
-const enableConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-// для валидации нужно передать в конструктор 1й параметр- конфиг, 2й - саму форму
-// валидатор формы профиля
-const validatorProfileForm = new FormValidator(enableConfig, popupFormProfile);
-validatorProfileForm.enableValidation();
-
-// валидатор формы добавления карточки
-const validatorAddCardForm = new FormValidator(enableConfig, formTypeAddCard);
-validatorAddCardForm.enableValidation();

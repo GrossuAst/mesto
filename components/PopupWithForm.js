@@ -18,25 +18,19 @@ export class PopupWithForm extends Popup {
         this._formInputList.forEach((input) => {
             this._inputsObject[input.name] = input.value;
         });
+        console.log(this._inputsObject)
         return this._inputsObject;
     };
 
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
+
             evt.preventDefault();
-            this._submitForm();
-
-            // получить значения инпутов можно только внутри этого класса
-            // this._getInputValues();
-            // console.log(this._inputsObject);
-
-
-            // profileName.textContent = this._inputsObject.name;
-            // description.textContent = 'qwer'
-            // nameInput.textContent = this._inputsObject.name.value;
-            // console.log('qwer');
-            // console.log(this._getInputValues());
+            
+            this._submitForm(this._getInputValues());
+            // console.log(cardData)
+            // console.log(this._submitForm(this._getInputValues()));
             this.close();
         });
     };
