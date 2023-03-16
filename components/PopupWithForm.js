@@ -1,4 +1,3 @@
-import { jobInput, nameInput } from '../utils/constants.js';
 import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {

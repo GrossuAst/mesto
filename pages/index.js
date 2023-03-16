@@ -72,6 +72,10 @@ const profileForm = new PopupWithForm('.popup_type_profile', (userData) => {
 profileForm.setEventListeners();
 
 editButton.addEventListener('click', () => {
+
+  validatorProfileForm.switchErrorMode();
+  validatorProfileForm.switchProfileButtonMode();
+
   const userData = user.getUserInfo();
 
   nameInput.value = userData.name;
@@ -84,15 +88,25 @@ editButton.addEventListener('click', () => {
 
 // попап формы карточки_______________________________
 
-const addCardForm = new PopupWithForm('.popup_type_add-card', addCardFormSubmit);
+const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
+  console.log('hello');
+  const object = {
+    name: popupInputTypeCardName.value,
+    link: popupInputTypeCardLink.value,
+  }; 
+  sectionElements.prepend(createCard(object));
+  // console.log(sectionElements.append.createCard(object));
+});
 addCardForm.setEventListeners();
 
-function addCardFormSubmit(cardData) {
-  sectionElements.createCard(cardData);
+// function addCardFormSubmit(cardData) {
+  // sectionElements.createCard(cardData);
   // alert('hello')
-};
+// };
 
 newCardAddButton.addEventListener('click', () => {
+  validatorAddCardForm.switchErrorMode();
+  validatorAddCardForm.disableAddCardPopupButton();
   console.log('addcard');
   addCardForm.open();
 });
@@ -123,7 +137,8 @@ const enableConfig = {
   errorClass: 'popup__error_visible'
 };
 
-// для валидации нужно передать в конструктор 1й параметр- конфиг, 2й - саму форму
+
+
 // валидатор формы профиля
 const validatorProfileForm = new FormValidator(enableConfig, popupFormProfile);
 validatorProfileForm.enableValidation();
