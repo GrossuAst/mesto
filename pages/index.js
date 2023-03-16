@@ -64,21 +64,19 @@ const user = new UserInfo({
 
 // попап формы профиля_______________________________
 
-const profileForm = new PopupWithForm('.popup_type_profile', () => {
-
-  profileName.textContent = '1234';
-  description.textContent = '4567';
-
-  console.log(user.getUserInfo());
+const profileForm = new PopupWithForm('.popup_type_profile', (userData) => {
+  user.setUserInfo(userData);
+  console.log(userData, 'объект из коллбэка формы');
 });
 
 profileForm.setEventListeners();
 
 editButton.addEventListener('click', () => {
   const userData = user.getUserInfo();
+
   nameInput.value = userData.name;
   jobInput.value = userData.about;
-  console.log(userData);
+
   profileForm.open();
 });
 

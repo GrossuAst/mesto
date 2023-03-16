@@ -10,13 +10,14 @@ export class UserInfo {
             name: this._userName.textContent,
             about: this._userAbout.textContent
         }
-        // console.log(userData);
+        console.log(userData, '-', 'объект из getUserInfo');
         return userData;
     };
 
     // принимает новые данные пользователя и добавляет их на страницу
-    setUserInfo() {
-        // this._userName.textContent = 
-        console.log('zxcv');
+    setUserInfo(newUserData) {
+        this._userName.textContent = newUserData.name;
+        this._userAbout.textContent = newUserData.about;
+        console.log(newUserData, '- объект из setUserInfo метода');
     };
 }
