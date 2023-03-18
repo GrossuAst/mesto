@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import { FormValidator } from '../components/FormValidator.js';
 
 import { Card } from '../components/Card.js';
@@ -93,7 +95,7 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
   const object = {
     name: popupInputTypeCardName.value,
     link: popupInputTypeCardLink.value,
-  }; 
+  };
   sectionElements.prepend(createCard(object));
   // console.log(sectionElements.append.createCard(object));
 });

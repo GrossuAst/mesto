@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
     <!-- <link rel="stylesheet" href="./styles/style.css"> -->
     <meta name="author" content="Гроссу Максим">
     <meta name="description" content="Проектная работа на курсе Яндекс Практикум по направлению веб-разработчик">
@@ -14,12 +14,12 @@
 <body class="page">
     <div class="content">
         <header class="header">
-            <img src="./images/icons/header-logo.svg" alt="Логотип страницы, латинскими буквами написано Место" class="header__logo">
+            <img src="<%=require('../images/icons/header-logo.svg')%>" alt="Логотип страницы, латинскими буквами написано Место" class="header__logo">
         </header>
         <main class="main">
             <section class="profile">
                 <div class="profile__redact">
-                    <img src="./images/avatar.png" alt="фото Жак-Ив Кусто на фоне моря" class="profile__avatar">
+                    <img src="<%=require('../images/avatar.png')%>" alt="фото Жак-Ив Кусто на фоне моря" class="profile__avatar">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <p class="profile__description">Исследователь океана</p>
                     <button type="button" aria-label="кнопка открытия попапа редактирования профиля" class="profile__edit-button"></button>
@@ -119,6 +119,6 @@
     <!-- валидация форм -->
     <!-- <script src="./scripts/validate.js"></script> -->
     <!-- мейн скрипт -->
-    <script defer type="module" src="./pages/index.js"></script>
+    <script defer type="module" src="./src/index.js"></script>
 </body>
 </html>

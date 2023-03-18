@@ -15,6 +15,7 @@ export class Popup {
     // метод закрытия
     close() {
         this._selector.classList.remove('popup_opened');
+        document.removeEventListener('keydown', this._handleEscClose.bind(this));
     };
 
     // закрытие на ESC
