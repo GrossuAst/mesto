@@ -15,9 +15,9 @@ export class Card {
 
 // метод добавляет значения для тайтла и фото
     _setData() {
-        this._newCard.querySelector('.card__title').textContent = this._title;
-        this._newCard.querySelector('.card__photo').src = this._photo;
-        this._newCard.querySelector('.card__photo').alt = this._title;
+        this._cardTitle.textContent = this._title;
+        this._cardImage.src = this._photo;
+        this._cardImage.alt = this._title;
     };
 
 // метод удаляет карточку
@@ -43,6 +43,8 @@ export class Card {
 // наполняю содержимым
     generateCard() {
         this._newCard = this._getTemplate();
+
+        this._cardTitle = this._newCard.querySelector('.card__title');
 
         this._cardImage = this._newCard.querySelector('.card__photo');
 

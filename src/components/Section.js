@@ -7,7 +7,7 @@ export class Section {
 
     // метод добавляет карточку в контейнер
     addItem(element) {
-        this._container.append(element);
+        this._container.prepend(element);
     };
 
     // метод рендерит карточку

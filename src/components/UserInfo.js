@@ -10,7 +10,7 @@ export class UserInfo {
             name: this._userName.textContent,
             about: this._userAbout.textContent
         }
-        console.log(userData, '-', 'объект из getUserInfo');
+        // console.log(userData, '-', 'объект из getUserInfo');
         return userData;
     };
 
@@ -18,6 +18,6 @@ export class UserInfo {
     setUserInfo(newUserData) {
         this._userName.textContent = newUserData.name;
         this._userAbout.textContent = newUserData.about;
-        console.log(newUserData, '- объект из setUserInfo метода');
+        // console.log(newUserData, '- объект из setUserInfo метода');
     };
 }
