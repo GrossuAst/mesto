@@ -12,7 +12,11 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 
 import { UserInfo } from '../components/UserInfo.js';
 
+import { Api } from '../components/Api';
+
 import { 
+  avatarForm,
+  avatar,
   initialCards,
   editButton,
   popupProfile,
@@ -34,15 +38,60 @@ import {
   popupTypeFullscreen
 } from '../utils/constants.js';
 
+
+const aboutMe = new Api(
+  fetch('https://nomoreparties.co/v1/cohort-63/users/me', {
+    headers: {
+      authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
+    }
+  }
+  )
+    // .then(res => res.json())
+    // .then((result) => {
+    //   console.log(result);
+    // })
+);
+
+aboutMe.getInfoAboutMe();
+
+// загрузка массива начальных карточек
+const arrayCards = new Api(
+  fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
+    headers: {
+      authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
+    }
+  }
+  )
+    .then(res => res.json())
+    .then((result) => {
+
+      console.log(result);
+
+      const cardList = new Section({
+        items: result, 
+        renderer: (card) => {
+          cardList.addItem(createCard(card));
+      }}, '.elements');
+      
+      cardList.renderCards();
+
+    })
+);
+arrayCards.getInitialCards();
+
+
+
+
+
 // инстанс Section________________________________
 
-const cardList = new Section({
-  items: initialCards, 
-  renderer: (card) => {
-    cardList.addItem(createCard(card));
-}}, '.elements');
+// const cardList = new Section({
+//   items: initialCards, 
+//   renderer: (card) => {
+//     cardList.addItem(createCard(card));
+// }}, '.elements');
 
-cardList.renderCards();
+// cardList.renderCards();
 
 
 
@@ -61,6 +110,21 @@ const user = new UserInfo({
   userNameSelector: '.profile__name',
   userAboutSelector: '.profile__description'
 });
+
+
+
+// попап аватарки
+const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
+  
+});
+
+formWithAvatar.setEventListeners();
+
+avatar.addEventListener('click', () => {
+  // formWithAvatar.disableFormWithAvatarButton();
+  formWithAvatar.open();
+})
+
 
 
 
@@ -135,7 +199,7 @@ const enableConfig = {
   errorClass: 'popup__error_visible'
 };
 
-
+// console.log(formWithAvatar.disableFormWithAvatarButton)
 
 // валидатор формы профиля
 const validatorProfileForm = new FormValidator(enableConfig, popupFormProfile);
@@ -144,3 +208,7 @@ validatorProfileForm.enableValidation();
 // валидатор формы добавления карточки
 const validatorAddCardForm = new FormValidator(enableConfig, formTypeAddCard);
 validatorAddCardForm.enableValidation();
+
+// валидатор формы аватарки
+const validatorAvatarForm = new FormValidator(enableConfig, avatarForm);
+// validatorAvatarForm.enableValidation();

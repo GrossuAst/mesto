@@ -8,6 +8,11 @@ export const popupFormProfile = document.querySelector('.popup__form_type_profil
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup__input_type_profession');
 
+// для аватарки
+export const avatar = document.querySelector('.profile__avatar');
+export const avatarForm = document.querySelector('.popup__form_type_avatar');
+
+
 //кнопеки закрытия попапов
 export const closeButtons = document.querySelectorAll('.popup__close-icon');
 

@@ -88,7 +88,7 @@
                             minlength="2" maxlength="30"
                             placeholder="Название" name="place-name"
                             id="place-name-input"
-                            class="popup__input popup__input_type_card-name ">
+                            class="popup__input popup__input_type_card-name">
 
                             <!-- спан с ошибкой в названии места -->
                             <span class="popup__error place-name-input-error"></span>
@@ -115,7 +115,36 @@
                 <button type="button" aria-label="закрыть фуллскрин фото" class="popup__close-icon popup__close-icon_type_fullscreen"></button>
             </article>
         </div>
+
+            <!-- попап редактирования аватара -->
+        <div class="popup popup_type_avatar">
+            <div class="popup__container">
+                <form action="#" novalidate name="avatar-form" class="popup__form popup__form_type_avatar">
+                    <button type="button" aria-label="закрыть форму редактирования аватара" class="popup__close-icon popup__close-icon_type_avatar" ></button>
+                    <h2 class="popup__title">Обновить аватар</h2>
+                        <div class="popup__inputs">
+    <!-- инпут ссылки на фото аватара -->
+                            <input type="url"           
+
+                            required            
+                                           
+                            placeholder="Ссылка на аватар" name="avatar-input"
+                            id="input-avatar"
+
+                            class="popup__input popup__input_type_avatar">
+
+                            <!-- спан с ошибкой в инпуте аватара-->
+                            <span class="popup__error avatar-link-input-error"></span>
+
+                        </div>
+                    <button type="submit" class="popup__submit-button popup__submit-button_type_avatar">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
     </div>
+
+    
     <!-- валидация форм -->
     <!-- <script src="./scripts/validate.js"></script> -->
     <!-- мейн скрипт -->
