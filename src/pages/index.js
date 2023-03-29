@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 
 import { FormValidator } from '../components/FormValidator.js';
 
@@ -39,59 +39,31 @@ import {
 } from '../utils/constants.js';
 
 
-const aboutMe = new Api(
-  fetch('https://nomoreparties.co/v1/cohort-63/users/me', {
-    headers: {
-      authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
-    }
+
+const configApi = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-63/cards',
+  headers: {
+    authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
   }
-  )
-    // .then(res => res.json())
-    // .then((result) => {
-    //   console.log(result);
-    // })
-);
+};
 
-aboutMe.getInfoAboutMe();
+const api = new Api(configApi);
 
-// загрузка массива начальных карточек
-const arrayCards = new Api(
-  fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
-    headers: {
-      authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
-    }
-  }
-  )
-    .then(res => res.json())
-    .then((result) => {
-
-      console.log(result);
-
-      const cardList = new Section({
-        items: result, 
-        renderer: (card) => {
-          cardList.addItem(createCard(card));
-      }}, '.elements');
-      
-      cardList.renderCards();
-
-    })
-);
-arrayCards.getInitialCards();
-
-
+api.getInitialCards()
+  .then((res) => {
+    console.log(res);
+    cardList.renderCards(res);
+  })
 
 
 
 // инстанс Section________________________________
 
-// const cardList = new Section({
-//   items: initialCards, 
-//   renderer: (card) => {
-//     cardList.addItem(createCard(card));
-// }}, '.elements');
-
-// cardList.renderCards();
+const cardList = new Section({
+  items: [], 
+  renderer: (card) => {
+    cardList.addItem(createCard(card));
+}}, '.elements');
 
 
 

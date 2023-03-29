@@ -1,36 +1,43 @@
-// import { Section } from "./Section";
-// import { createCard } from '../script/index.js';
-
 export class Api {
-    constructor(options) {
-        this._options = options;
-    }
-
-    getInfoAboutMe() {
-        this._options
-            .then(res => res.json())
-            .then((result) => {
-                console.log(result);
-        })
+    constructor(config) {
+        this._url = config.url;
+        this._headers = config.headers;
     }
 
     getInitialCards() {
-        this._options
-            .then(res => res.json())
-            .then((result) => {
-                console.log(result);
-            
-                
-
-                //   console.log(result);
-
-    //   const cardList = new Section({
-    //     items: result, 
-    //     renderer: (card) => {
-    //       cardList.addItem(createCard(card));
-    //   }}, '.elements');
-
-    //   cardList.renderCards();
+        return fetch(this._url, {
+            headers: this._headers
+        })
+            .then((res) => {
+                if(res.ok) {
+                    return res.json()
+                }
+                console.log('ошибка получения данных');
             })
     }
+
+
+
+
+
+
+
+
+    
+    // getInfoAboutMe() {
+    //     this._options
+    //         .then(res => res.json())
+    //         .then((result) => {
+    //             console.log(result);
+    //     })
+    // };
+
+    // getInitialCards()  {
+    //     this._options
+    //         .then(res => res.json())
+    //         .then((result) => {
+    //             console.log(result);
+    //             // return result;
+    //     })
+    // }
 }

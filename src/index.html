@@ -19,7 +19,8 @@
         <main class="main">
             <section class="profile">
                 <div class="profile__redact">
-                    <img src="<%=require('./images/avatar.png')%>" alt="фото Жак-Ив Кусто на фоне моря" class="profile__avatar">
+                    <img src="<%=require('./images/avatar.png')%>" alt="фото пользователя" class="profile__avatar">
+                        <!-- <div class="profile__overlay"></div>                                                  -->
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <p class="profile__description">Исследователь океана</p>
                     <button type="button" aria-label="кнопка открытия попапа редактирования профиля" class="profile__edit-button"></button>
@@ -148,6 +149,6 @@
     <!-- валидация форм -->
     <!-- <script src="./scripts/validate.js"></script> -->
     <!-- мейн скрипт -->
-    <script defer type="module" src="./script/index.js"></script>
+    <script defer type="module" src="./pages/index.js"></script>
 </body>
 </html>
