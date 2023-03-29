@@ -38,8 +38,7 @@ import {
   popupTypeFullscreen
 } from '../utils/constants.js';
 
-
-
+// сеттинг для получения массива с сервера
 const configApi = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-63/cards',
   headers: {
@@ -47,15 +46,40 @@ const configApi = {
   }
 };
 
+// сеттинг для отправки карточки
+const addCardSettings = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-63/cards',
+  headers: {
+    authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a',
+    'content-type': 'application/json'
+  }
+}
+
+// fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
+//   method: 'POST',
+//   body: JSON.stringify({
+//     name: 'qwer',
+//     link: 'https://s9.travelask.ru/system/images/files/000/333/620/wysiwyg_jpg/olen-kartinki-55.jpg?1501687420'
+//   })
+// })
+// .then((res) => {
+//   if(res.ok) {
+//       console.log('asdfasdf')
+//       return res.json()
+//   }
+//   console.log('ошибка');
+// })
+
+
+
+// инстанс апи___________________________________
 const api = new Api(configApi);
 
 api.getInitialCards()
   .then((res) => {
-    console.log(res);
+    console.log(res, 'массив с серва');
     cardList.renderCards(res);
   })
-
-
 
 // инстанс Section________________________________
 
@@ -65,8 +89,6 @@ const cardList = new Section({
     cardList.addItem(createCard(card));
 }}, '.elements');
 
-
-
 // функция создания инстанса карточки_____________________
 
 function createCard(object) {
@@ -75,15 +97,11 @@ function createCard(object) {
   return cardElement;
 };
 
-
-
 // инстанс UserInfo
 const user = new UserInfo({
   userNameSelector: '.profile__name',
   userAboutSelector: '.profile__description'
 });
-
-
 
 // попап аватарки
 const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
@@ -96,8 +114,6 @@ avatar.addEventListener('click', () => {
   // formWithAvatar.disableFormWithAvatarButton();
   formWithAvatar.open();
 })
-
-
 
 
 // попап формы профиля_______________________________
@@ -122,8 +138,6 @@ editButton.addEventListener('click', () => {
   profileForm.open();
 });
 
-
-
 // попап формы карточки_______________________________
 
 const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
@@ -133,10 +147,29 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
     link: popupInputTypeCardLink.value,
   };
   cardList.addItem(createCard(object));
+  console.log('poi')
+
+  fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
+  method: 'POST',
+  headers: {
+    authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a',
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: popupInputTypeCardName.value,
+    link: popupInputTypeCardLink.value
+  })
+})
+.then((res) => {
+  if(res.ok) {
+      console.log('asdfasdf')
+      return res.json()
+  }
+  console.log('ошибка');
+})
+
 });
 addCardForm.setEventListeners();
-
-
 
 newCardAddButton.addEventListener('click', () => {
   validatorAddCardForm.switchErrorMode();
@@ -144,8 +177,6 @@ newCardAddButton.addEventListener('click', () => {
   // console.log('addcard');
   addCardForm.open();
 });
-
-
 
 // попап с фото________________________________________
 
@@ -157,8 +188,6 @@ imagePopup.setEventListeners();
 function openFullscreenPhoto(title, link) {
   imagePopup.open(title, link);
 };
-
-
 
 // валидация________________________________
 
