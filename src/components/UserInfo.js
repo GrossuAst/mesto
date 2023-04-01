@@ -1,10 +1,11 @@
 export class UserInfo {
-    constructor(userInfo, api, profileName, description) {
+    constructor(userInfo, api, profileName, description, avatar) {
         this._userName = document.querySelector(userInfo.userNameSelector);
         this._userAbout = document.querySelector(userInfo.userAboutSelector);
         this._api = api;
         this._profileName = profileName;
         this._description = description;
+        this._avatar = avatar;
     };
 
     // возвращает объект с данными пользователя
@@ -25,6 +26,7 @@ export class UserInfo {
         // console.log(newUserData, '- объект из setUserInfo метода');
     };
 
+    // отрисовка данных профиля, приходящих с сервера
     renderUserInfo() {
         this._api.getInfoAboutUser()
             .then((res) => {
@@ -32,5 +34,14 @@ export class UserInfo {
                 this._profileName.textContent = res.name;
                 this._description.textContent = res.about;
             })        
+    };
+    
+    // отрисовка аватара, приходящего с сервера
+    renderAvatar() {
+        this._api.getInfoAboutUser()
+            .then((res) => {
+                console.log(res)
+                this._avatar.src = res.avatar;
+            })
     }
 }

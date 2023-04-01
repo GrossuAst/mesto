@@ -42,7 +42,8 @@ import {
 const apiConfig = {
   url: {
     usersUrl: 'https://nomoreparties.co/v1/cohort-63/users/me',
-    cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-63/cards'
+    cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-63/cards',
+    avatarUrl: 'https://mesto.nomoreparties.co/v1/cohort-63/users/me/avatar'
 },
   headers: {
     authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a',
@@ -54,12 +55,28 @@ const apiConfig = {
 const api = new Api(apiConfig);
 
 // получение данных о пользователе__________________
-let infoAboutMe;
-api.getInfoAboutUser()
-  .then((res) => {
-    const infoAboutUser = res;
-    console.log(infoAboutUser);
-  })
+// инстанс UserInfo
+const user = new UserInfo({
+  userNameSelector: '.profile__name',
+  userAboutSelector: '.profile__description'
+}, api, profileName, description, avatar);
+
+user.renderUserInfo();
+
+// попап аватарки
+const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
+  const urlAvatar = document.querySelector('.popup__input_type_avatar').value;
+    
+    console.log(urlAvatar, 'ссылка на аватар')
+  
+    api.editAvatar(urlAvatar)
+      .then((res) => {
+        console.log(res, 'результат работы аватара');
+        user.renderAvatar();
+      })
+  });
+  
+  user.renderAvatar();
 
 // получение карточки и их отрисовка________________
 api.getInitialCards()
@@ -67,12 +84,6 @@ api.getInitialCards()
     console.log(res);
     cardList.renderCards(res.reverse());
   })
-
-// проверка запроса на редактирование профиля
-// api.editProfileInfo()
-//   .then((res) => {
-//     console.log(res)
-//   })
 
 // инстанс Section________________________________
 
@@ -90,18 +101,10 @@ function createCard(object) {
   return cardElement;
 };
 
-// инстанс UserInfo
-const user = new UserInfo({
-  userNameSelector: '.profile__name',
-  userAboutSelector: '.profile__description'
-}, api, profileName, description);
 
-user.renderUserInfo();
 
-// попап аватарки
-const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
-  
-});
+
+
 
 formWithAvatar.setEventListeners();
 
@@ -109,8 +112,6 @@ avatar.addEventListener('click', () => {
   // formWithAvatar.disableFormWithAvatarButton();
   formWithAvatar.open();
 })
-
-
 
 
 // попап формы профиля_______________________________

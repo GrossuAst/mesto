@@ -1,10 +1,9 @@
 export class Api {
     constructor(config) {
-        // this._url = config.url;
         this._usersUrl = config.url.usersUrl;
         this._cardsUrl = config.url.cardsUrl;
+        this._avatarUrl = config.url.avatarUrl;
         this._headers = config.headers;
-        // this._usersProfile = usersProfile;
     }
     
     // метод для получения информации о пользователе
@@ -15,7 +14,6 @@ export class Api {
         })
             .then((res) => {
                 if(res.ok) {
-                    // console.log(res);
                     return res.json();
                 }
                 console.log('ошибка получения данных');
@@ -54,6 +52,23 @@ export class Api {
                 console.log('ошибка обработки данных');
             })
     }
+
+    // метод для отрисовки аватарки
+    editAvatar(urlAvatar) {
+        return fetch(this._avatarUrl, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+            avatar: urlAvatar
+        })},
+        )
+            .then((res) => {
+                if(res.ok) {
+                    return res.json()
+                }
+                console.log('ошибка обработки данных аватара');
+            })
+    }
     
     // отправка карточки на сервер
     sendCard(object) {
@@ -71,39 +86,6 @@ export class Api {
         })
     }
 
-    editProfile() {
-        return fetch('https://mesto.nomoreparties.co/v1/cohortId/users/me', {
-            method: 'PATCH',
-            headers: {
-            authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
-            'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: 'Marie Skłodowska Curie',
-    about: 'Physicist and Chemist'
-  })
-}); 
-    }
 
 
-
-
-
-    
-    // getInfoAboutMe() {
-    //     this._options
-    //         .then(res => res.json())
-    //         .then((result) => {
-    //             console.log(result);
-    //     })
-    // };
-
-    // getInitialCards()  {
-    //     this._options
-    //         .then(res => res.json())
-    //         .then((result) => {
-    //             console.log(result);
-    //             // return result;
-    //     })
-    // }
 }
