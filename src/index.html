@@ -19,7 +19,7 @@
         <main class="main">
             <section class="profile">
                 <div class="profile__redact">
-                    <img src="#" alt="фото пользователя" class="profile__avatar">
+                    <img src="<%=require('./images/no-avatar-icon.png')%>" alt="фото пользователя" class="profile__avatar">
                         <!-- <div class="profile__overlay"></div>                                                  -->
                     <h1 class="profile__name"></h1>
                     <p class="profile__description"></p>
@@ -34,7 +34,10 @@
                         <img src="#" alt="#" class="card__photo">
                         <div class="card__description">
                             <h3 class="card__title"></h3>
-                            <button type="button" aria-label="кнопка переключения лайка" class="card__like"></button>
+                            <div class="card__likes-section">
+                                <button type="button" aria-label="кнопка переключения лайка" class="card__like"></button>
+                                <span calss="card__likes-counter">0</span>
+                            </div>
                         </div>
                     </article>
                 </template>

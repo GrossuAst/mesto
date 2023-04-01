@@ -61,9 +61,36 @@ const user = new UserInfo({
   userAboutSelector: '.profile__description'
 }, api, profileName, description, avatar);
 
-user.renderUserInfo();
 
-// попап аватарки
+
+// попап формы профиля_________________________________
+const profileForm = new PopupWithForm('.popup_type_profile', (userData) => {
+  user.setUserInfo(userData);
+
+  api.editProfileInfo(userData)
+    .then((res) => {
+      console.log(res)
+      user.setUserInfo(res)
+    })
+});
+
+// открытие формы редактирования профиля
+editButton.addEventListener('click', () => {
+  validatorProfileForm.switchErrorMode();
+  validatorProfileForm.switchProfileButtonMode();
+  const userData = user.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.about;
+  profileForm.open();
+});
+
+// рендер информации профиля и слушатели попапа профиля
+user.renderUserInfo();
+profileForm.setEventListeners();
+
+
+
+// попап аватарки____________________________________________________________
 const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
   const urlAvatar = document.querySelector('.popup__input_type_avatar').value;
     
@@ -75,8 +102,19 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
         user.renderAvatar();
       })
   });
-  
+
+  // рендер аватарки и слушатели формы аватарки
   user.renderAvatar();
+  formWithAvatar.setEventListeners();
+
+  // открытие формы аватарки
+  avatar.addEventListener('click', () => {
+    // formWithAvatar.disableFormWithAvatarButton();
+    formWithAvatar.open();
+  })
+
+
+
 
 // получение карточки и их отрисовка________________
 api.getInitialCards()
@@ -103,60 +141,7 @@ function createCard(object) {
 
 
 
-
-
-
-formWithAvatar.setEventListeners();
-
-avatar.addEventListener('click', () => {
-  // formWithAvatar.disableFormWithAvatarButton();
-  formWithAvatar.open();
-})
-
-
-// попап формы профиля_______________________________
-
-const profileForm = new PopupWithForm('.popup_type_profile', (userData) => {
-  user.setUserInfo(userData);
-
-  api.editProfileInfo(userData)
-    .then((res) => {
-      console.log(res)
-      user.setUserInfo(res)
-    })
-  
-  // console.log(userData, 'объект из коллбэка формы');
-});
-
-profileForm.setEventListeners();
-
-editButton.addEventListener('click', () => {
-
-  validatorProfileForm.switchErrorMode();
-  validatorProfileForm.switchProfileButtonMode();
-
-  const userData = user.getUserInfo();
-
-  nameInput.value = userData.name;
-  jobInput.value = userData.about;
-
-  profileForm.open();
-});
-
-// попап формы карточки_______________________________
-
-const addCardSettings = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-63/cards',
-  headers: {
-    authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a',
-    'content-type': 'application/json'
-  },
-  body: JSON.stringify({
-        // name: object.name,
-        // link: object.link
-      })
-}
-
+// попап добавления карточки__________________________________________
 const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
 
   const object = {
@@ -165,52 +150,32 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
   };
 
   cardList.addItem(createCard(object));
-  console.log('poi')
 
-  const confirmCard = new Api(addCardSettings);
-  confirmCard.sendCard(object);
-
-  
-
-//   fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
-//   method: 'POST',
-//   headers: {
-//     authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a',
-//     'content-type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     name: object.name,
-//     link: object.link
-//   })
-// })
-// .then((res) => {
-//   if(res.ok) {
-//       console.log('asdfasdf')
-//       return res.json()
-//   }
-//   console.log('ошибка');
-// })
-
+  api.sendCard(object)
+    .then((res) => {
+      console.log(res)
+    })
+    .then((res) => {
+      cardList.renderCards(res)
+    })
 });
-addCardForm.setEventListeners();
 
+// слушатель открытия формы добавления карточки и слушатели попапа
+addCardForm.setEventListeners();
 newCardAddButton.addEventListener('click', () => {
   validatorAddCardForm.switchErrorMode();
   validatorAddCardForm.disableAddCardPopupButton();
-  // console.log('addcard');
   addCardForm.open();
 });
-
-// попап с фото________________________________________
-
+// попап открытой карточки и его слушатели
 const imagePopup = new PopupWithImage('.popup_type_fullscreen');
-
 imagePopup.setEventListeners();
-
 // функция открытия фото
 function openFullscreenPhoto(title, link) {
   imagePopup.open(title, link);
 };
+
+
 
 // валидация________________________________
 

@@ -72,7 +72,7 @@ export class Api {
     
     // отправка карточки на сервер
     sendCard(object) {
-        return fetch(this._url, {
+        return fetch(this._cardsUrl, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({name: object.name, link: object.link})
@@ -84,6 +84,7 @@ export class Api {
             }
             console.log('ошибка получения данных');
         })
+        
     }
 
 

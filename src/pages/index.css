@@ -29,7 +29,10 @@
 @import url(../blocks/card/__photo/card__photo.css);
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__title/card__title.css);
+/* лайк карточек */
+@import url(../blocks/card/__likes-section/card__likes-section.css);
 @import url(../blocks/card/__like/card__like.css);
+@import url(../blocks/card/__likes-counter/card__likes-counter.css);
 @import url(../blocks/card/__like/_active/card__like_active.css);
 
 /* подвал */

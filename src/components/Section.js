@@ -18,7 +18,7 @@ export class Section {
         })
     };
 
-    saveCards(card) {
-        this._api.addItem
-    }
+    // saveCards(card) {
+    //     this._api.addItem
+    // }
 };
