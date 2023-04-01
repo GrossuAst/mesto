@@ -1,8 +1,9 @@
 export class Section {
-    constructor({items, renderer}, container) {
+    constructor({items, renderer}, container, api) {
         // this._initialArray = items;
         this._renderer = renderer;
         this._container = document.querySelector(container);
+        this._api = api;
     }
 
     // метод добавляет карточку в контейнер
