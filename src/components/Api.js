@@ -28,7 +28,7 @@ export class Api {
         })
             .then((res) => {
                 if(res.ok) {
-                    return res.json()
+                    return res.json();
                 }
                 console.log('ошибка получения данных');
             })
@@ -47,7 +47,7 @@ export class Api {
         )
             .then((res) => {
                 if(res.ok) {
-                    return res.json()
+                    return res.json();
                 }
                 console.log('ошибка обработки данных');
             })
@@ -64,7 +64,7 @@ export class Api {
         )
             .then((res) => {
                 if(res.ok) {
-                    return res.json()
+                    return res.json();
                 }
                 console.log('ошибка обработки данных аватара');
             })
@@ -80,13 +80,24 @@ export class Api {
         .then((res) => {
             if(res.ok) {
                 console.log('отправка карточки прошла успешно')
-                return res.json()
+                return res.json();
             }
             console.log('ошибка получения данных');
         })
         
     }
 
-
-
+    // удаление карточки с сервера
+    deleteCard(cardID) {
+        return fetch(this._cardsUrl`${cardID}`, {
+            method: 'DELETE',
+            headers: this._headers 
+        })
+            .then((res) => {
+                if(res.ok) {
+                    return res.json();
+                }
+                console.log('ошибка удаления карточки');
+            })
+    }
 }

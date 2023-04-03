@@ -1,9 +1,10 @@
 export class Card {
-    constructor(data, templateSelector, fullscreen) {
+    constructor(data, templateSelector, fullscreen, openRemoveCardPopup) {
         this._title = data.name;
         this._photo = data.link;
         this._templateSelector = templateSelector;
         this._openFullscreen = fullscreen;
+        this._openRemoveCardPopup = openRemoveCardPopup;
     };
 
 // получаю шаблон для создания новой карточки, будет передаваться в метод generateCard для заполнения содержимым. Метод возвращает в консте разметку html
@@ -26,6 +27,11 @@ export class Card {
         this._newCard = null;
     };
 
+// открывает попап удаления карточки 
+    // _openRemoveCardPopup() {
+
+    // }
+
 // переключатель лайка
     _switchLike() {
         this._likeButton.classList.toggle('card__like_active');
@@ -33,7 +39,10 @@ export class Card {
 
 // метод вешает обработчики
     _setEventListeners() {
-        this._deleteButton.addEventListener('click', () => { this._deleteCard() });
+        this._deleteButton.addEventListener('click', () => { 
+            // this._deleteCard();
+            this._openRemoveCardPopup();
+        });
 
         this._likeButton.addEventListener('click', () => { this._switchLike() });
 

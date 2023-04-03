@@ -34,6 +34,8 @@ export const fullscreenImage = document.querySelector('.popup__fullscreen-image'
 export const fullscreenTitle = document.querySelector('.popup__fullscreen-title');
 export const popupTypeFullscreen = document.querySelector('.popup_type_fullscreen');
 
+export const deleteCardPopup = document.querySelector('.popup_type_delete-card');
+
 
 // начальный массив_______________________________________________________________
 // export const initialCards = [
