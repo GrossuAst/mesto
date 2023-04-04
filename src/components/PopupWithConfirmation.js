@@ -16,6 +16,12 @@ export class PopupWithConfirmation extends Popup {
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             console.log('урааа');
+
+            this._deleteCard()
+                .then((res) => {
+                    console.log(res);
+                })
+
             this.close();
     });
     }

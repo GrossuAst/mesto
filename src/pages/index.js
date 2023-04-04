@@ -45,7 +45,7 @@ import {
 const apiConfig = {
   url: {
     usersUrl: 'https://nomoreparties.co/v1/cohort-63/users/me',
-    cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-63/cards/',
+    cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-63/cards',
     avatarUrl: 'https://mesto.nomoreparties.co/v1/cohort-63/users/me/avatar'
 },
   headers: {
@@ -137,12 +137,10 @@ const cardList = new Section({
 // функция создания инстанса карточки_____________________
 
 function createCard(object) {
-  const card = new Card(object, '#card-template', openFullscreenPhoto, openRemoveCardPopup);
+  const card = new Card(object, '#card-template', openFullscreenPhoto, openRemoveCardPopup, );
   const cardElement = card.generateCard();
   return cardElement;
 };
-
-
 
 // попап добавления карточки__________________________________________
 const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
@@ -180,7 +178,7 @@ function openFullscreenPhoto(title, link) {
 
 
 // попап удаления карточки_____________________________
-const removeCardPopup = new PopupWithConfirmation('.popup_type_delete-card', api.deleteCard);
+const removeCardPopup = new PopupWithConfirmation('.popup_type_delete-card', api.deleteCard); 
 removeCardPopup.setEventListeners();
 // открытие попапа удаления карточки
 function openRemoveCardPopup() {

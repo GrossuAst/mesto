@@ -88,10 +88,10 @@ export class Api {
     }
 
     // удаление карточки с сервера
-    deleteCard(cardID) {
-        return fetch(this._cardsUrl`${cardID}`, {
+    deleteCard(cardId) {
+        return fetch(this._cardsUrl + '/' + cardId, {
             method: 'DELETE',
-            headers: this._headers 
+            headers: this._headers
         })
             .then((res) => {
                 if(res.ok) {
