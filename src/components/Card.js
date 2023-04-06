@@ -6,6 +6,7 @@ export class Card {
         this._likes = data.likes;
         this._owner = data.owner;
         this._id = data._id;
+        this._myId = 'bde8a9ef60187f2d6a67a8f7';
 
         // селектор
         this._templateSelector = templateSelector;
@@ -14,9 +15,9 @@ export class Card {
         this._openRemoveCardPopup = openRemoveCardPopup;
     };
 
-    // look() {
-    // console.log(this._likes.length)
-    // }
+    _showLike() {
+        // const myId = 'bde8a9ef60187f2d6a67a8f7';
+    }
 
 // получаю шаблон для создания новой карточки, будет передаваться в метод generateCard для заполнения содержимым. Метод возвращает в консте разметку html
     _getTemplate() {
@@ -30,7 +31,7 @@ export class Card {
         this._cardTitle.textContent = this._title;
         this._cardImage.src = this._photo;
         this._cardImage.alt = this._title;
-        this._likesCounter.textContent = '2';
+        this._likesCounter.textContent = this._likes.length;
     };
 
 // метод удаляет карточку
@@ -38,11 +39,6 @@ export class Card {
         this._newCard.remove();
         this._newCard = null;
     };
-
-// открывает попап удаления карточки 
-    // _openRemoveCardPopup() {
-
-    // }
 
 // переключатель лайка
     _switchLike() {

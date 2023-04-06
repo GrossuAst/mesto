@@ -54,21 +54,21 @@ export class Api {
     }
 
     // метод для отрисовки аватарки
-    editAvatar(urlAvatar) {
-        return fetch(this._avatarUrl, {
-            method: 'PATCH',
-            headers: this._headers,
-            body: JSON.stringify({
-            avatar: urlAvatar
-        })},
-        )
-            .then((res) => {
-                if(res.ok) {
-                    return res.json();
-                }
-                console.log('ошибка обработки данных аватара');
-            })
-    }
+    // editAvatar(urlAvatar) {
+    //     return fetch(this._avatarUrl, {
+    //         method: 'PATCH',
+    //         headers: this._headers,
+    //         body: JSON.stringify({
+    //         avatar: urlAvatar
+    //     })},
+    //     )
+    //         .then((res) => {
+    //             if(res.ok) {
+    //                 return res.json();
+    //             }
+    //             console.log('ошибка обработки данных аватара');
+    //         })
+    // }
     
     // отправка карточки на сервер
     sendCard(object) {

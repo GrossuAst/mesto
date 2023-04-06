@@ -62,33 +62,77 @@ const api = new Api(apiConfig);
 const user = new UserInfo({
   userNameSelector: '.profile__name',
   userAboutSelector: '.profile__description'
-}, api, profileName, description, avatar);
+}, profileName, description, avatar);
 
+// запрос получения данных о пользователе и просвоение переменной
+// let myData = null;
 
+// async function getMyData() { api.getInfoAboutUser()
+  // .then((res) => {
+    // const myData = res._id;
+    // console.log(res, 'новый запрос', myData)
+  // })}
+// console.log(myData, '12221');
+// getMyData();
 
 // попап формы профиля_________________________________
 const profileForm = new PopupWithForm('.popup_type_profile', (userData) => {
-  user.setUserInfo(userData);
+  // user.setUserInfo(userData);
 
   api.editProfileInfo(userData)
     .then((res) => {
-      console.log(res)
-      user.setUserInfo(res)
+      console.log(res, 'данные в момент отправления новой информации профиля');
+      profileName.textContent = res.name;
+      description.textContent = res.about;
     })
+
+
+  // api.editProfileInfo(userData)
+  //   .then((res) => {
+  //     console.log(res)
+  //     user.setUserInfo(res)
+  //   })
+  //   user.setUserInfo(userData);
 });
+
+// рендер профиля в момент открытия страницы
+function renderProfileInfo() {
+api.getInfoAboutUser()
+  .then((res) => {
+    profileName.textContent = res.name;
+    description.textContent = res.about;
+    avatar.src = res.avatar;
+  })}; 
+  renderProfileInfo();
 
 // открытие формы редактирования профиля
 editButton.addEventListener('click', () => {
   validatorProfileForm.switchErrorMode();
   validatorProfileForm.switchProfileButtonMode();
-  const userData = user.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.about;
+  // const userData = user.getUserInfo();
+  // nameInput.value = userData.name;
+  // jobInput.value = userData.about;
+  api.getInfoAboutUser()
+    .then((res) => {
+      console.log(res, 'данные приходят в момент открытия формы профиля')
+      user.setUserInfo(res);
+      nameInput.value = res.name;
+      jobInput.value = res.about;  
+    })
   profileForm.open();
 });
 
+// переделываю запросы
+Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
+  .then(
+    ([userInfo, cards]) => {
+      console.log(userInfo, cards, 'вооооооооооооооот они!!!');
+      
+    }
+  )
+
 // рендер информации профиля и слушатели попапа профиля
-user.renderUserInfo();
+// user.renderUserInfo();
 profileForm.setEventListeners();
 
 
@@ -107,7 +151,7 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
   });
 
   // рендер аватарки и слушатели формы аватарки
-  user.renderAvatar();
+  // user.renderAvatar();
   formWithAvatar.setEventListeners();
 
   // открытие формы аватарки
@@ -116,15 +160,19 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
     formWithAvatar.open();
   })
 
+//   Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(([userInfo, cards])=> {
+//     console.log(userInfo, cards);
+//  })
+
 
 
 
 // получение карточки и их отрисовка________________
-api.getInitialCards()
-  .then((res) => {
-    console.log(res);
-    cardList.renderCards(res.reverse());
-  })
+// api.getInitialCards()
+//   .then((res) => {
+//     console.log(res);
+//     cardList.renderCards(res.reverse());
+//   })
 
 // инстанс Section________________________________
 
@@ -137,7 +185,7 @@ const cardList = new Section({
 // функция создания инстанса карточки_____________________
 
 function createCard(object) {
-  const card = new Card(object, '#card-template', openFullscreenPhoto, openRemoveCardPopup, );
+  const card = new Card(object, '#card-template', openFullscreenPhoto, openRemoveCardPopup);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -185,12 +233,12 @@ function openRemoveCardPopup() {
   removeCardPopup.open();
 }
 
-let userID = null;
-api.getInfoAboutUser()
-  .then((res) => {
-    userID = res._id;
-    console.log(userID, 'qwerq');
-  })
+// let userID = null;
+// api.getInfoAboutUser()
+//   .then((res) => {
+//     userID = res._id;
+//     console.log(userID, 'qwerq');
+//   })
 
 
 
