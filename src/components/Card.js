@@ -1,12 +1,12 @@
 export class Card {
-    constructor(data, templateSelector, fullscreen, openRemoveCardPopup) {
+    constructor(data, owner, templateSelector, fullscreen, openRemoveCardPopup) {
         // свойства карточки
         this._title = data.name;
         this._photo = data.link;
         this._likes = data.likes;
         this._owner = data.owner;
         this._id = data._id;
-        this._myId = 'bde8a9ef60187f2d6a67a8f7';
+        this._myId = owner;
 
         // селектор
         this._templateSelector = templateSelector;
@@ -14,6 +14,13 @@ export class Card {
         this._openFullscreen = fullscreen;
         this._openRemoveCardPopup = openRemoveCardPopup;
     };
+
+    // орисовка урны, если карточка моя
+    _showUrn(){
+        if(this._myId !== this._owner) {
+            this._deleteButton.style.display = 'none';
+        }
+    }
 
     _showLike() {
         // const myId = 'bde8a9ef60187f2d6a67a8f7';
@@ -31,7 +38,9 @@ export class Card {
         this._cardTitle.textContent = this._title;
         this._cardImage.src = this._photo;
         this._cardImage.alt = this._title;
+        // console.log(this._likes)
         this._likesCounter.textContent = this._likes.length;
+        // console.log(this._likes.length)
     };
 
 // метод удаляет карточку
@@ -51,7 +60,10 @@ export class Card {
             this._openRemoveCardPopup();
         });
 
-        this._likeButton.addEventListener('click', () => { this._switchLike() });
+        this._likeButton.addEventListener('click', () => { 
+            this._switchLike();
+
+        });
 
         this._cardImage.addEventListener('click', () => { this._openFullscreen(this._title, this._photo) });
     };
@@ -69,6 +81,8 @@ export class Card {
         this._likeButton = this._newCard.querySelector('.card__like');
 
         this._likesCounter = this._newCard.querySelector('.card__likes-counter');
+        // console.log(this._likesCounter)
+        this._showUrn();
         
         this._setData();
         this._setEventListeners();

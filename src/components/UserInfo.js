@@ -3,8 +3,8 @@ export class UserInfo {
         this._userName = document.querySelector(userInfo.userNameSelector);
         this._userAbout = document.querySelector(userInfo.userAboutSelector);
         // this._api = api;
-        this._profileName = profileName;
-        this._description = description;
+        // this._profileName = profileName;
+        // this._description = description;
         this._avatar = avatar;
     };
 
@@ -14,7 +14,6 @@ export class UserInfo {
             name: this._userName.textContent,
             about: this._userAbout.textContent
         }
-        // console.log(userData, '-', 'объект из getUserInfo');
         return userData;
     };
 
@@ -23,23 +22,5 @@ export class UserInfo {
         this._userName.textContent = newUserData.name;
         this._userAbout.textContent = newUserData.about;
     };
-
-    // отрисовка данных профиля, приходящих с сервера
-    // renderUserInfo() {
-    //     this._api.getInfoAboutUser()
-    //         .then((res) => {
-    //             console.log(res)
-    //             this._profileName.textContent = res.name;
-    //             this._description.textContent = res.about;
-    //         })        
-    // };
     
-    // // отрисовка аватара, приходящего с сервера
-    // renderAvatar() {
-    //     this._api.getInfoAboutUser()
-    //         .then((res) => {
-    //             console.log(res)
-    //             this._avatar.src = res.avatar;
-    //         })
-    // }
 }

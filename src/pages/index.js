@@ -54,104 +54,69 @@ const apiConfig = {
   }
 }
 
+
+
 // инстанс API_________________________________
 const api = new Api(apiConfig);
 
-// получение данных о пользователе__________________
+
+
+// рендер профиля в момент открытия страницы__________
+function renderProfileInfo() {
+  api.getInfoAboutUser()
+    .then((res) => {
+      profileName.textContent = res.name;
+      description.textContent = res.about;
+      avatar.src = res.avatar;
+    })}; 
+renderProfileInfo();
+
+
+
 // инстанс UserInfo
 const user = new UserInfo({
   userNameSelector: '.profile__name',
   userAboutSelector: '.profile__description'
 }, profileName, description, avatar);
 
-// запрос получения данных о пользователе и просвоение переменной
-// let myData = null;
 
-// async function getMyData() { api.getInfoAboutUser()
-  // .then((res) => {
-    // const myData = res._id;
-    // console.log(res, 'новый запрос', myData)
-  // })}
-// console.log(myData, '12221');
-// getMyData();
 
 // попап формы профиля_________________________________
 const profileForm = new PopupWithForm('.popup_type_profile', (userData) => {
-  // user.setUserInfo(userData);
-
   api.editProfileInfo(userData)
     .then((res) => {
       console.log(res, 'данные в момент отправления новой информации профиля');
       profileName.textContent = res.name;
       description.textContent = res.about;
     })
-
-
-  // api.editProfileInfo(userData)
-  //   .then((res) => {
-  //     console.log(res)
-  //     user.setUserInfo(res)
-  //   })
-  //   user.setUserInfo(userData);
 });
+// слушатели попапа профиля
+profileForm.setEventListeners();
 
-// рендер профиля в момент открытия страницы
-function renderProfileInfo() {
-api.getInfoAboutUser()
-  .then((res) => {
-    profileName.textContent = res.name;
-    description.textContent = res.about;
-    avatar.src = res.avatar;
-  })}; 
-  renderProfileInfo();
+
 
 // открытие формы редактирования профиля
 editButton.addEventListener('click', () => {
   validatorProfileForm.switchErrorMode();
   validatorProfileForm.switchProfileButtonMode();
-  // const userData = user.getUserInfo();
-  // nameInput.value = userData.name;
-  // jobInput.value = userData.about;
-  api.getInfoAboutUser()
-    .then((res) => {
-      console.log(res, 'данные приходят в момент открытия формы профиля')
-      user.setUserInfo(res);
-      nameInput.value = res.name;
-      jobInput.value = res.about;  
-    })
+  nameInput.value = profileName.textContent;
+  jobInput.value = description.textContent;
   profileForm.open();
 });
-
-// переделываю запросы
-Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
-  .then(
-    ([userInfo, cards]) => {
-      console.log(userInfo, cards, 'вооооооооооооооот они!!!');
-      
-    }
-  )
-
-// рендер информации профиля и слушатели попапа профиля
-// user.renderUserInfo();
-profileForm.setEventListeners();
 
 
 
 // попап аватарки____________________________________________________________
 const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
   const urlAvatar = document.querySelector('.popup__input_type_avatar').value;
-    
+
     console.log(urlAvatar, 'ссылка на аватар')
-  
     api.editAvatar(urlAvatar)
       .then((res) => {
         console.log(res, 'результат работы аватара');
-        user.renderAvatar();
+        avatar.src = res.avatar;
       })
   });
-
-  // рендер аватарки и слушатели формы аватарки
-  // user.renderAvatar();
   formWithAvatar.setEventListeners();
 
   // открытие формы аватарки
@@ -159,20 +124,26 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
     // formWithAvatar.disableFormWithAvatarButton();
     formWithAvatar.open();
   })
-
-//   Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(([userInfo, cards])=> {
-//     console.log(userInfo, cards);
-//  })
+// ______________________________________________________________________________
 
 
+const ownerId = 'bde8a9ef60187f2d6a67a8f7';
+// переделываю запросы
+Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
+  .then(
+    ([userInfo, cards]) => {
+      console.log(userInfo, cards, 'вооооооооооооооот они!!!');
+
+      // if(userInfo._id === cards.owner._id) {
+        
+      // }
+
+      cardList.renderCards(cards.reverse());
+      
+    }
+  )
 
 
-// получение карточки и их отрисовка________________
-// api.getInitialCards()
-//   .then((res) => {
-//     console.log(res);
-//     cardList.renderCards(res.reverse());
-//   })
 
 // инстанс Section________________________________
 
@@ -185,7 +156,7 @@ const cardList = new Section({
 // функция создания инстанса карточки_____________________
 
 function createCard(object) {
-  const card = new Card(object, '#card-template', openFullscreenPhoto, openRemoveCardPopup);
+  const card = new Card(object, ownerId, '#card-template', openFullscreenPhoto, openRemoveCardPopup);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -196,6 +167,10 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
   const object = {
     name: popupInputTypeCardName.value,
     link: popupInputTypeCardLink.value,
+    likes: [],
+    owner: {
+      _id: ownerId
+    }
   };
 
   cardList.addItem(createCard(object));
@@ -204,9 +179,6 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
     .then((res) => {
       console.log(res)
     })
-    // .then((res) => {
-      // cardList.renderCards(res)
-    // })
 });
 
 // слушатель открытия формы добавления карточки и слушатели попапа
