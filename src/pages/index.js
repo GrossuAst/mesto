@@ -62,14 +62,14 @@ const api = new Api(apiConfig);
 
 
 // рендер профиля в момент открытия страницы__________
-function renderProfileInfo() {
-  api.getInfoAboutUser()
-    .then((res) => {
-      profileName.textContent = res.name;
-      description.textContent = res.about;
-      avatar.src = res.avatar;
-    })}; 
-renderProfileInfo();
+// function renderProfileInfo() {
+//   api.getInfoAboutUser()
+//     .then((res) => {
+//       profileName.textContent = res.name;
+//       description.textContent = res.about;
+//       avatar.src = res.avatar;
+//     })}; 
+// renderProfileInfo();
 
 
 
@@ -127,21 +127,29 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
 // ______________________________________________________________________________
 
 
-const ownerId = 'bde8a9ef60187f2d6a67a8f7';
+
+let userId = null;
 // переделываю запросы
 Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
   .then(
     ([userInfo, cards]) => {
       console.log(userInfo, cards, 'вооооооооооооооот они!!!');
-
-      // if(userInfo._id === cards.owner._id) {
-        
-      // }
-
-      cardList.renderCards(cards.reverse());
-      
+      userId = userInfo._id;
+      console.log(userId, 'hahahaahha')
+      // рендер профиля
+      const renderProfile = () => {
+        profileName.textContent = userInfo.name;
+        description.textContent = userInfo.about;
+        avatar.src = userInfo.avatar;
+      }; 
+      renderProfile();      
+      // рендер карточек
+        cardList.renderCards(cards.reverse());
     }
   )
+  .catch((err) => {
+    // alert(`Страница временно недоступна, ошибка - ${(err)}`);
+  })
 
 
 
@@ -156,7 +164,7 @@ const cardList = new Section({
 // функция создания инстанса карточки_____________________
 
 function createCard(object) {
-  const card = new Card(object, ownerId, '#card-template', openFullscreenPhoto, openRemoveCardPopup);
+  const card = new Card(object, userId, '#card-template', openFullscreenPhoto, openRemoveCardPopup);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -169,7 +177,7 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
     link: popupInputTypeCardLink.value,
     likes: [],
     owner: {
-      _id: ownerId
+      _id:  userId
     }
   };
 
@@ -177,7 +185,7 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
 
   api.sendCard(object)
     .then((res) => {
-      console.log(res)
+      // console.log(res);
     })
 });
 

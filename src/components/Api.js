@@ -30,7 +30,6 @@ export class Api {
                 if(res.ok) {
                     return res.json();
                 }
-                console.log('ошибка получения данных');
             })
             // .catch(alert('ошибка'))
     };
@@ -89,16 +88,22 @@ export class Api {
 
     // удаление карточки с сервера
     deleteCard(cardId) {
-        return fetch(this._cardsUrl + '/' + cardId, {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-63/cards/${cardId}`, {
             method: 'DELETE',
-            headers: this._headers
+            headers: {
+                authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a',
+              }
         })
             .then((res) => {
                 if(res.ok) {
+                    console.log('blablablalba')
                     return res.json();
-                }
-                console.log('ошибка удаления карточки');
+                } 
+                console.log('ошибка удаления карточки.', 'не проходит проверку res.ok');
+            })
+            .catch((err) => {
+                console.log('не работает', err)
             })
     }
-
+    
 }

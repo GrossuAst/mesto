@@ -1,12 +1,13 @@
 export class Card {
-    constructor(data, owner, templateSelector, fullscreen, openRemoveCardPopup) {
+    constructor(data, userId, templateSelector, fullscreen, openRemoveCardPopup) {
         // свойства карточки
         this._title = data.name;
         this._photo = data.link;
         this._likes = data.likes;
-        this._owner = data.owner;
-        this._id = data._id;
-        this._myId = owner;
+        this._ownerId = data.owner._id;
+        this._cardId = data._id;
+
+        this._userId = userId;
 
         // селектор
         this._templateSelector = templateSelector;
@@ -16,8 +17,8 @@ export class Card {
     };
 
     // орисовка урны, если карточка моя
-    _showUrn(){
-        if(this._myId !== this._owner) {
+    _showUrn() {
+        if(this._userId !== this._ownerId) {
             this._deleteButton.style.display = 'none';
         }
     }
@@ -57,7 +58,7 @@ export class Card {
 // метод вешает обработчики
     _setEventListeners() {
         this._deleteButton.addEventListener('click', () => { 
-            this._openRemoveCardPopup();
+            this._openRemoveCardPopup(this);
         });
 
         this._likeButton.addEventListener('click', () => { 
@@ -83,6 +84,10 @@ export class Card {
         this._likesCounter = this._newCard.querySelector('.card__likes-counter');
         // console.log(this._likesCounter)
         this._showUrn();
+
+        // console.log(this._userId);
+        // console.log(this._likes);
+        // console.log(this._ownerId);
         
         this._setData();
         this._setEventListeners();
