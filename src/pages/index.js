@@ -129,12 +129,14 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
 
 
 let userId = null;
+// let cardId = null;
 // переделываю запросы
 Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
   .then(
     ([userInfo, cards]) => {
       console.log(userInfo, cards, 'вооооооооооооооот они!!!');
       userId = userInfo._id;
+      // cardId = cards.owner._id;
       console.log(userId, 'hahahaahha')
       // рендер профиля
       const renderProfile = () => {
@@ -142,13 +144,13 @@ Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
         description.textContent = userInfo.about;
         avatar.src = userInfo.avatar;
       }; 
-      renderProfile();      
+      renderProfile();
       // рендер карточек
-        cardList.renderCards(cards.reverse());
-    }
+      cardList.renderCards(cards.reverse());
+    } 
   )
   .catch((err) => {
-    // alert(`Страница временно недоступна, ошибка - ${(err)}`);
+    alert(`Страница временно недоступна, ошибка - ${(err)}`);
   })
 
 
@@ -164,7 +166,16 @@ const cardList = new Section({
 // функция создания инстанса карточки_____________________
 
 function createCard(object) {
-  const card = new Card(object, userId, '#card-template', openFullscreenPhoto, openRemoveCardPopup);
+  const card = new Card(object, userId, '#card-template', openFullscreenPhoto, () => {
+    removeCardPopup.open();
+    removeCardPopup.setSubmitAction(() => {
+      api.deleteCard(object._id)
+        .then(() => {
+          card.deleteCard()
+        })
+    })
+  }
+);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -180,12 +191,10 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
       _id:  userId
     }
   };
-
-  cardList.addItem(createCard(object));
-
+  // запрос на добавление
   api.sendCard(object)
     .then((res) => {
-      // console.log(res);
+      cardList.addItem(createCard(res));
     })
 });
 
@@ -206,19 +215,8 @@ function openFullscreenPhoto(title, link) {
 
 
 // попап удаления карточки_____________________________
-const removeCardPopup = new PopupWithConfirmation('.popup_type_delete-card', api.deleteCard); 
+const removeCardPopup = new PopupWithConfirmation('.popup_type_delete-card'); 
 removeCardPopup.setEventListeners();
-// открытие попапа удаления карточки
-function openRemoveCardPopup() {
-  removeCardPopup.open();
-}
-
-// let userID = null;
-// api.getInfoAboutUser()
-//   .then((res) => {
-//     userID = res._id;
-//     console.log(userID, 'qwerq');
-//   })
 
 
 

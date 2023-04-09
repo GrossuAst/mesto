@@ -1,5 +1,5 @@
 export class Card {
-    constructor(data, userId, templateSelector, fullscreen, openRemoveCardPopup) {
+    constructor(data, userId, templateSelector, fullscreen, openRemoveCardPopup ) {
         // свойства карточки
         this._title = data.name;
         this._photo = data.link;
@@ -21,6 +21,7 @@ export class Card {
         if(this._userId !== this._ownerId) {
             this._deleteButton.style.display = 'none';
         }
+        
     }
 
     _showLike() {
@@ -45,7 +46,7 @@ export class Card {
     };
 
 // метод удаляет карточку
-    _deleteCard() {
+    deleteCard() {
         this._newCard.remove();
         this._newCard = null;
     };

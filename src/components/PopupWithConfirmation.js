@@ -1,33 +1,24 @@
 import { Popup } from './Popup.js';
 
 export class PopupWithConfirmation extends Popup {
-    constructor(selector, apiMethod) {
+    constructor(selector, submitCallback) {
         super(selector);
-        // this._callback = callback;
-        this._form = this._selector.querySelector('.popup__form_type_delete-card');
-        this._deleteCard = apiMethod;
-        // this._deleteCard = deleteCardFunction;       
-        // this._deleteButton = this._selector.querySelector('.popup__submit-button_type_delete-card');
-        // this._confirmButton = selector.querySelector('.popup__submit-button_type_delete-card');
+        this._form = this._selector.querySelector('.popup__form_type_delete-card');        
+        this._deleteButton = this._selector.querySelector('.popup__submit-button_type_delete-card');
+        this._submitCallback = submitCallback;
     }
 
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            // console.log('урааа');
-
-            this._deleteCard()
-                .then((res) => {
-                    console.log('получилось?');
-                    console.log(res);
-                })
-                .catch((err) => {
-                    console.log('неа, не получилось!')
-                })
-
-            // console.log(this._deleteCard, '44312');
+            this._submitCallback();
             this.close();
-    });
+        })
     }
+
+    setSubmitAction(action) {
+        this._submitCallback = action;
+    }
+
 }
