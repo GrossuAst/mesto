@@ -88,7 +88,7 @@ export class Api {
 
     // удаление карточки с сервера
     deleteCard(cardId) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-63/cards/${cardId}`, {
+        return fetch(this._cardsUrl + '/' + cardId, {
             method: 'DELETE',
             headers: {
                 authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
@@ -96,7 +96,6 @@ export class Api {
         })
             .then((res) => {
                 if(res.ok) {
-                    console.log('blablablalba')
                     return res.json();
                 } 
                 console.log('ошибка удаления карточки.', 'не проходит проверку res.ok');
@@ -106,4 +105,34 @@ export class Api {
             })
     }
     
+    putLike() {
+        return fetch(this.cardsUrl + '/' + cardId + '/likes', {
+            method: 'PUT',
+            headers: {
+                authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
+            }
+        })
+        .then((res) => {
+            if(res.ok) {
+                console.log('лайк ставится')
+                return res.json();
+            }
+        })
+    }
+
+    delteLike() {
+        return fetch(this.cardsUrl + '/' + cardId + '/likes', {
+            method: 'DELETE',
+            headers: {
+                authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
+            }
+        })
+        .then((res) => {
+            if(res.ok) {
+                console.log('лайк ставится')
+                return res.json();
+            }
+        })
+    }
+
 }

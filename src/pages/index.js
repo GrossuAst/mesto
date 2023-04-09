@@ -61,18 +61,6 @@ const api = new Api(apiConfig);
 
 
 
-// рендер профиля в момент открытия страницы__________
-// function renderProfileInfo() {
-//   api.getInfoAboutUser()
-//     .then((res) => {
-//       profileName.textContent = res.name;
-//       description.textContent = res.about;
-//       avatar.src = res.avatar;
-//     })}; 
-// renderProfileInfo();
-
-
-
 // инстанс UserInfo
 const user = new UserInfo({
   userNameSelector: '.profile__name',
@@ -129,8 +117,8 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
 
 
 let userId = null;
-// let cardId = null;
-// переделываю запросы
+
+// запросы userinfo и initialcards
 Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
   .then(
     ([userInfo, cards]) => {
