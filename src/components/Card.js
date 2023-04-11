@@ -1,5 +1,5 @@
 export class Card {
-    constructor(data, userId, templateSelector, fullscreen, openRemoveCardPopup ) {
+    constructor(data, userId, templateSelector, fullscreen, openRemoveCardPopup, handleLikeCard) {
         // свойства карточки
         this._title = data.name;
         this._photo = data.link;
@@ -14,18 +14,35 @@ export class Card {
         // функции открытия модалок
         this._openFullscreen = fullscreen;
         this._openRemoveCardPopup = openRemoveCardPopup;
+
+        // обработка лайка
+        this._handleLikeCard = handleLikeCard;
+        // this._isLiked = false;
     };
+
+    // работа лайков 
+    addLike() {
+        this._likeButton.classList.add('card__like_active');
+        // debugger
+    }
+
+    deleteLike() {
+        this._likeButton.classList.remove('card__like_active');
+    }
+
+    countLikes(likesArray) {
+        this._likesArray = likesArray;
+        const likesCounter = this._newCard.querySelector('.card__likes-counter');
+        likesCounter.textContent = this._likesArray.length;
+    }
+
+
 
     // орисовка урны, если карточка моя
     _showUrn() {
         if(this._userId !== this._ownerId) {
             this._deleteButton.style.display = 'none';
         }
-        
-    }
-
-    _showLike() {
-        // const myId = 'bde8a9ef60187f2d6a67a8f7';
     }
 
 // получаю шаблон для создания новой карточки, будет передаваться в метод generateCard для заполнения содержимым. Метод возвращает в консте разметку html
@@ -40,9 +57,14 @@ export class Card {
         this._cardTitle.textContent = this._title;
         this._cardImage.src = this._photo;
         this._cardImage.alt = this._title;
-        // console.log(this._likes)
+
+        // счетчик лайков при рендере
         this._likesCounter.textContent = this._likes.length;
-        // console.log(this._likes.length)
+
+        // отрисовка активных лайков
+        if(this._likes.some(user => user._id === this._userId)) {
+            this._likeButton.classList.add('card__like_active');
+        }
     };
 
 // метод удаляет карточку
@@ -62,9 +84,10 @@ export class Card {
             this._openRemoveCardPopup(this);
         });
 
-        this._likeButton.addEventListener('click', () => { 
-            this._switchLike();
-
+        this._likeButton.addEventListener('click', () => {
+            this._handleLikeCard(this._cardId, this._isLiked, this.checkMyLikeStatus);
+            // this._switchLike();
+            // this._likesCounter = this._likes.length;
         });
 
         this._cardImage.addEventListener('click', () => { this._openFullscreen(this._title, this._photo) });
@@ -83,12 +106,8 @@ export class Card {
         this._likeButton = this._newCard.querySelector('.card__like');
 
         this._likesCounter = this._newCard.querySelector('.card__likes-counter');
-        // console.log(this._likesCounter)
-        this._showUrn();
 
-        // console.log(this._userId);
-        // console.log(this._likes);
-        // console.log(this._ownerId);
+        this._showUrn();
         
         this._setData();
         this._setEventListeners();

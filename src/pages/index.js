@@ -59,6 +59,21 @@ const apiConfig = {
 // инстанс API_________________________________
 const api = new Api(apiConfig);
 
+function handleLikeCard(cardId, checkLike, card) {
+  if(checkLike) {
+    api.deleteLike(cardId)
+      .then((res) => {
+        console.log('удалил лайк');
+      })
+  }
+  else {
+    api.putLike(cardId)
+      .then((res) => {
+        console.log('поставил лайк');
+      })
+  }
+}
+
 
 
 // инстанс UserInfo
@@ -151,10 +166,11 @@ const cardList = new Section({
     cardList.addItem(createCard(card));
 }}, '.elements');
 
-// функция создания инстанса карточки_____________________
-
+// функция создания инстанса карточки_____________________________________________
 function createCard(object) {
-  const card = new Card(object, userId, '#card-template', openFullscreenPhoto, () => {
+  const card = new Card(object, userId, '#card-template', openFullscreenPhoto, 
+// удаление карточки
+  () => {
     removeCardPopup.open();
     removeCardPopup.setSubmitAction(() => {
       api.deleteCard(object._id)
@@ -162,6 +178,27 @@ function createCard(object) {
           card.deleteCard()
         })
     })
+  },
+// работа лайка
+  () => {
+    if(object.likes.some(user => user._id === userId)) {
+      api.deleteLike(object._id)
+        .then((res) => {
+          console.log('удалил лайк');
+          card.deleteLike();
+          object.likes = res.likes;
+          card.countLikes(res.likes);
+        })
+    }
+    else {
+      api.putLike(object._id)
+        .then((res) => {
+          console.log('поставил лайк');
+          card.addLike();
+          object.likes = res.likes;
+          card.countLikes(res.likes);
+        })
+    }
   }
 );
   const cardElement = card.generateCard();
@@ -232,34 +269,3 @@ validatorAddCardForm.enableValidation();
 // валидатор формы аватарки
 const validatorAvatarForm = new FormValidator(enableConfig, avatarForm);
 // validatorAvatarForm.enableValidation();
-
-
-// const infoAboutMe = new Api(userInfoSetting);
-// infoAboutMe.getInfoAboutUser();
-
-// _______________________________________________________
-
-
-// 2 сеттинг для получения массива с сервера________________
-// const configApi = {
-//   url: 'https://mesto.nomoreparties.co/v1/cohort-63/cards',
-//   headers: {
-//     authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
-//   }
-// };
-
-// const api = new Api(configApi);
-// ________________________________________________________
-
-
-// 3 сеттинг для отправки карточки__________________________
-
-// _________________________________________________________
-
-
-// api.getInitialCards()
-//   .then((res) => {
-//     console.log(res, 'массив с серва');
-//     cardList.renderCards(res.reverse());
-//   })
-//   .catch((err) => {alert('ошибка доступа, попробуйте позже')});

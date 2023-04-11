@@ -105,8 +105,8 @@ export class Api {
             })
     }
     
-    putLike() {
-        return fetch(this.cardsUrl + '/' + cardId + '/likes', {
+    putLike(cardId) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-63/cards/${cardId}/likes`, {
             method: 'PUT',
             headers: {
                 authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
@@ -114,14 +114,13 @@ export class Api {
         })
         .then((res) => {
             if(res.ok) {
-                console.log('лайк ставится')
                 return res.json();
             }
         })
     }
 
-    delteLike() {
-        return fetch(this.cardsUrl + '/' + cardId + '/likes', {
+    deleteLike(cardId) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-63/cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: {
                 authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
@@ -129,7 +128,6 @@ export class Api {
         })
         .then((res) => {
             if(res.ok) {
-                console.log('лайк ставится')
                 return res.json();
             }
         })

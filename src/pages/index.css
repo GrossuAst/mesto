@@ -43,6 +43,10 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
+
+@import url(../blocks/popup/__container/_type/popup__container_type_delete-card.css);
+@import url(../blocks/popup/__submit-button/_type/popup__submit-button_type_delete-card.css);
+
 @import url(../blocks/popup/__close-icon/popup__close-icon.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
