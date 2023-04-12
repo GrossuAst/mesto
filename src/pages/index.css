@@ -14,6 +14,7 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__redact/profile__redact.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar-overlay/profileprofile__avatar-overlay.css);
 
 @import url(../blocks/profile/__overlay/__overlay.css);
 

@@ -17,6 +17,7 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api';
 
 import { 
+  avatarButton,
   deleteCardPopup,
   avatarForm,
   avatar,
@@ -85,7 +86,7 @@ profileForm.setEventListeners();
 
 
 // открытие формы редактирования профиля
-editButton.addEventListener('click', () => {
+avatarButton.addEventListener('click', () => {
   validatorProfileForm.switchErrorMode();
   validatorProfileForm.switchProfileButtonMode();
   nameInput.value = profileName.textContent;

@@ -36,6 +36,8 @@ export const popupTypeFullscreen = document.querySelector('.popup_type_fullscree
 
 export const deleteCardPopup = document.querySelector('.popup_type_delete-card');
 
+export const avatarButton = document.querySelector('.profile__avatar-overlay');
+
 
 // начальный массив_______________________________________________________________
 // export const initialCards = [
