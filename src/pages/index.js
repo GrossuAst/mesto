@@ -86,7 +86,7 @@ profileForm.setEventListeners();
 
 
 // открытие формы редактирования профиля
-avatarButton.addEventListener('click', () => {
+editButton.addEventListener('click', () => {
   validatorProfileForm.switchErrorMode();
   validatorProfileForm.switchProfileButtonMode();
   nameInput.value = profileName.textContent;
@@ -112,7 +112,7 @@ const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
   formWithAvatar.setEventListeners();
 
   // открытие формы аватарки
-  avatar.addEventListener('click', () => {
+  avatarButton.addEventListener('click', () => {
     // formWithAvatar.disableFormWithAvatarButton();
     formWithAvatar.open();
   })
