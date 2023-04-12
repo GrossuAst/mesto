@@ -59,39 +59,25 @@ const apiConfig = {
 // инстанс API_________________________________
 const api = new Api(apiConfig);
 
-function handleLikeCard(cardId, checkLike, card) {
-  if(checkLike) {
-    api.deleteLike(cardId)
-      .then((res) => {
-        console.log('удалил лайк');
-      })
-  }
-  else {
-    api.putLike(cardId)
-      .then((res) => {
-        console.log('поставил лайк');
-      })
-  }
-}
-
-
-
 // инстанс UserInfo
 const user = new UserInfo({
   userNameSelector: '.profile__name',
   userAboutSelector: '.profile__description'
-}, profileName, description, avatar);
-
+});
 
 
 // попап формы профиля_________________________________
 const profileForm = new PopupWithForm('.popup_type_profile', (userData) => {
+  profileForm.changeButtonText('Сохранение...')
   api.editProfileInfo(userData)
     .then((res) => {
-      console.log(res, 'данные в момент отправления новой информации профиля');
       profileName.textContent = res.name;
       description.textContent = res.about;
     })
+    .catch((err) => {
+      console.log(`ошибка ${err}`);
+    })
+    .finally(profileForm.changeButtonText('Сохранить'))
 });
 // слушатели попапа профиля
 profileForm.setEventListeners();
@@ -111,14 +97,16 @@ editButton.addEventListener('click', () => {
 
 // попап аватарки____________________________________________________________
 const formWithAvatar = new PopupWithForm('.popup_type_avatar', () => {
+  formWithAvatar.changeButtonText('Сохранение...');
   const urlAvatar = document.querySelector('.popup__input_type_avatar').value;
-
-    console.log(urlAvatar, 'ссылка на аватар')
     api.editAvatar(urlAvatar)
       .then((res) => {
-        console.log(res, 'результат работы аватара');
         avatar.src = res.avatar;
       })
+      .catch((err) => {
+        console.log(`ошибка ${err}`);
+      })
+      .finally(formWithAvatar.changeButtonText('Сохранить'))
   });
   formWithAvatar.setEventListeners();
 
@@ -137,23 +125,21 @@ let userId = null;
 Promise.all([api.getInfoAboutUser(), api.getInitialCards()])
   .then(
     ([userInfo, cards]) => {
-      console.log(userInfo, cards, 'вооооооооооооооот они!!!');
       userId = userInfo._id;
-      // cardId = cards.owner._id;
-      console.log(userId, 'hahahaahha')
+
       // рендер профиля
       const renderProfile = () => {
         profileName.textContent = userInfo.name;
         description.textContent = userInfo.about;
         avatar.src = userInfo.avatar;
-      }; 
+      };
       renderProfile();
       // рендер карточек
       cardList.renderCards(cards.reverse());
     } 
   )
   .catch((err) => {
-    alert(`Страница временно недоступна, ошибка - ${(err)}`);
+    console.log(`ошибка ${err}`);
   })
 
 
@@ -169,6 +155,7 @@ const cardList = new Section({
 // функция создания инстанса карточки_____________________________________________
 function createCard(object) {
   const card = new Card(object, userId, '#card-template', openFullscreenPhoto, 
+
 // удаление карточки
   () => {
     removeCardPopup.open();
@@ -177,26 +164,36 @@ function createCard(object) {
         .then(() => {
           card.deleteCard()
         })
+        .catch((err) => {
+          console.log(`ошибка ${err}`);
+        })
     })
   },
+
 // работа лайка
   () => {
     if(object.likes.some(user => user._id === userId)) {
       api.deleteLike(object._id)
         .then((res) => {
-          console.log('удалил лайк');
+          // console.log('удалил лайк');
           card.deleteLike();
           object.likes = res.likes;
           card.countLikes(res.likes);
+        })
+        .catch((err) => {
+          console.log(`ошибка ${err}`);
         })
     }
     else {
       api.putLike(object._id)
         .then((res) => {
-          console.log('поставил лайк');
+          // console.log('поставил лайк');
           card.addLike();
           object.likes = res.likes;
           card.countLikes(res.likes);
+        })
+        .catch((err) => {
+          console.log(`ошибка ${err}`);
         })
     }
   }
@@ -207,6 +204,7 @@ function createCard(object) {
 
 // попап добавления карточки__________________________________________
 const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
+  addCardForm.changeButtonText('Сохранение...')
 
   const object = {
     name: popupInputTypeCardName.value,
@@ -221,6 +219,10 @@ const addCardForm = new PopupWithForm('.popup_type_add-card', () => {
     .then((res) => {
       cardList.addItem(createCard(res));
     })
+    .catch((err) => {
+      console.log(`ошибка ${err}`);
+    })
+    .finally(addCardForm.changeButtonText('Сохранить'))
 });
 
 // слушатель открытия формы добавления карточки и слушатели попапа
@@ -267,5 +269,5 @@ const validatorAddCardForm = new FormValidator(enableConfig, formTypeAddCard);
 validatorAddCardForm.enableValidation();
 
 // валидатор формы аватарки
-const validatorAvatarForm = new FormValidator(enableConfig, avatarForm);
+// const validatorAvatarForm = new FormValidator(enableConfig, avatarForm);
 // validatorAvatarForm.enableValidation();

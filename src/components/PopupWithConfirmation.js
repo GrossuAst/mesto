@@ -8,6 +8,10 @@ export class PopupWithConfirmation extends Popup {
         this._submitCallback = submitCallback;
     }
 
+    changeButtonText(text) {
+        super.changeButtonText(text);
+    }
+
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {

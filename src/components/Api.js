@@ -16,7 +16,6 @@ export class Api {
                 if(res.ok) {
                     return res.json();
                 }
-                console.log('ошибка получения данных');
             })
     };
 
@@ -31,7 +30,6 @@ export class Api {
                     return res.json();
                 }
             })
-            // .catch(alert('ошибка'))
     };
 
     // метод для редактирования профиля
@@ -48,7 +46,6 @@ export class Api {
                 if(res.ok) {
                     return res.json();
                 }
-                console.log('ошибка обработки данных');
             })
     }
 
@@ -65,7 +62,6 @@ export class Api {
                 if(res.ok) {
                     return res.json();
                 }
-                console.log('ошибка обработки данных аватара');
             })
     }
     
@@ -78,10 +74,8 @@ export class Api {
         })
         .then((res) => {
             if(res.ok) {
-                console.log('отправка карточки прошла успешно')
                 return res.json();
             }
-            console.log('ошибка получения данных');
         })
         
     }
@@ -98,10 +92,8 @@ export class Api {
                 if(res.ok) {
                     return res.json();
                 } 
-                console.log('ошибка удаления карточки.', 'не проходит проверку res.ok');
             })
             .catch((err) => {
-                console.log('не работает', err)
             })
     }
     

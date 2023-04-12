@@ -2,6 +2,11 @@ export class Popup {
     constructor(popupSelector) {
         this._selector = document.querySelector(popupSelector);
         this._closeIcon = this._selector.querySelector('.popup__close-icon');
+        this._saveButton = this._selector.querySelector('.popup__submit-button');
+    };
+
+    changeButtonText(text) {
+        this._saveButton.textContent = text;
     };
 
     // метод открытия попапа

@@ -23,7 +23,6 @@ export class Card {
     // работа лайков 
     addLike() {
         this._likeButton.classList.add('card__like_active');
-        // debugger
     }
 
     deleteLike() {
@@ -36,8 +35,6 @@ export class Card {
         likesCounter.textContent = this._likesArray.length;
     }
 
-
-
     // орисовка урны, если карточка моя
     _showUrn() {
         if(this._userId !== this._ownerId) {
@@ -48,7 +45,6 @@ export class Card {
 // получаю шаблон для создания новой карточки, будет передаваться в метод generateCard для заполнения содержимым. Метод возвращает в консте разметку html
     _getTemplate() {
         const cardElement = document.querySelector(this._templateSelector).content.querySelector('.card').cloneNode(true);
-        
         return cardElement;
     };
 
@@ -85,9 +81,7 @@ export class Card {
         });
 
         this._likeButton.addEventListener('click', () => {
-            this._handleLikeCard(this._cardId, this._isLiked, this.checkMyLikeStatus);
-            // this._switchLike();
-            // this._likesCounter = this._likes.length;
+            this._handleLikeCard(this._cardId);
         });
 
         this._cardImage.addEventListener('click', () => { this._openFullscreen(this._title, this._photo) });

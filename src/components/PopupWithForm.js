@@ -8,8 +8,14 @@ export class PopupWithForm extends Popup {
 
         // массив инпутов формы
         this._formInputList = this._form.querySelectorAll('.popup__input');
+        
+        this._saveButton = this._form.querySelector('.popup__submit-button')
     };
-    
+
+    changeButtonText(text) {
+        super.changeButtonText(text);
+    }
+
     // метод собирает данные всех полей формы
     _getInputValues() {
         this._inputsObject = { };
