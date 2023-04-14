@@ -73,6 +73,11 @@ export class FormValidator {
         this._buttonElement.disabled = true;
     };
 
+    disableFormWithAvatarButton() {
+        this._buttonElement.classList.add(this._config.inactiveButtonClass);
+        this._buttonElement.disabled = true;
+    }
+
 // функция активирует кнопку профиля при открытии попапа
     switchProfileButtonMode() {
         this._buttonElement.classList.remove(this._config.inactiveButtonClass);
@@ -85,7 +90,7 @@ export class FormValidator {
             span.textContent = '';
         })
         this._inputList.forEach((input) => {
-            input.classList.remove('popup__input_type_error');
+            input.classList.remove(this._config.inputErrorClass);
         })
     };
 

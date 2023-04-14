@@ -11,7 +11,7 @@ export const jobInput = document.querySelector('.popup__input_type_profession');
 // для аватарки
 export const avatar = document.querySelector('.profile__avatar');
 export const avatarForm = document.querySelector('.popup__form_type_avatar');
-
+export const avatarButton = document.querySelector('.profile__avatar-overlay');
 
 //кнопеки закрытия попапов
 export const closeButtons = document.querySelectorAll('.popup__close-icon');
@@ -36,33 +36,23 @@ export const popupTypeFullscreen = document.querySelector('.popup_type_fullscree
 
 export const deleteCardPopup = document.querySelector('.popup_type_delete-card');
 
-export const avatarButton = document.querySelector('.profile__avatar-overlay');
 
 
-// начальный массив_______________________________________________________________
-// export const initialCards = [
-//     {
-//       name: 'Архыз',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//     },
-//     {
-//       name: 'Челябинская область',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//     },
-//     {
-//       name: 'Карелия',
-//       link: 'https://www.y-flights.com/blogs/avt-kareliya/avtorskih-turov-v-kareliyu.jpg'
-//     },
-//     {
-//       name: 'Камчатка',
-//       link: 'https://kartinkin.net/pics/uploads/posts/2022-08/1659516813_68-kartinkin-net-p-deistvuyushchie-vulkani-kamchatki-priroda-69.jpg'
-//     },
-//     {
-//       name: 'Петропавловск-Камчатский',
-//       link: 'https://key-ms.ru/wp-content/uploads/2/6/3/263608bcd25634deb0ce89188eb3a623.jpeg'
-//     },
-//     {
-//       name: 'Байкал',
-//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//     }
-//   ];
+// конфиг для API___________________________
+export const apiConfig = {
+    url: 'https://mesto.nomoreparties.co/v1/cohort-63',
+    headers: {
+      authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a',
+      'Content-Type': 'application/json'
+    }
+  };
+
+// конфиг для валидации
+export const enableConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  };

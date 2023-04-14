@@ -1,40 +1,37 @@
 export class Api {
     constructor(config) {
-        this._usersUrl = config.url.usersUrl;
-        this._cardsUrl = config.url.cardsUrl;
-        this._avatarUrl = config.url.avatarUrl;
+        this._url = config.url;
         this._headers = config.headers;
+    }
+
+    _checkResponse(res) {
+            if(res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка ${res.status}`);
     }
     
     // метод для получения информации о пользователе
     getInfoAboutUser() {
-        return fetch(this._usersUrl, {
+        return fetch(`${this._url}/users/me`, {
             method: 'GET',
             headers: this._headers
         })
-            .then((res) => {
-                if(res.ok) {
-                    return res.json();
-                }
-            })
+            .then(this._checkResponse) 
     };
 
     // метод для получения данных о карточках
     getInitialCards() {
-        return fetch(this._cardsUrl, {
+        return fetch(`${this._url}/cards`, {
             method: 'GET',
             headers: this._headers 
         })
-            .then((res) => {
-                if(res.ok) {
-                    return res.json();
-                }
-            })
+            .then(this._checkResponse)
     };
 
     // метод для редактирования профиля
     editProfileInfo(userInfo) {
-        return fetch(this._usersUrl, {
+        return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -42,87 +39,59 @@ export class Api {
             about: userInfo.about
         })},
         )
-            .then((res) => {
-                if(res.ok) {
-                    return res.json();
-                }
-            })
+            .then(this._checkResponse)
     }
 
     // метод для отрисовки аватарки
     editAvatar(urlAvatar) {
-        return fetch(this._avatarUrl, {
+        return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-            avatar: urlAvatar
+            avatar: urlAvatar.avatar
         })},
         )
-            .then((res) => {
-                if(res.ok) {
-                    return res.json();
-                }
-            })
+            .then(this._checkResponse)
     }
     
     // отправка карточки на сервер
     sendCard(object) {
-        return fetch(this._cardsUrl, {
+        return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
-            body: JSON.stringify({name: object.name, link: object.link, likes: object.likes})
+            body: JSON.stringify({
+                name: object.name, 
+                link: object.link
+            })
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-        })
-        
+        .then(this._checkResponse)
     }
 
     // удаление карточки с сервера
     deleteCard(cardId) {
-        return fetch(this._cardsUrl + '/' + cardId, {
+        return fetch(`${this._url}/cards/${cardId}`, {
             method: 'DELETE',
-            headers: {
-                authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
-              }
+            headers: this._headers
         })
-            .then((res) => {
-                if(res.ok) {
-                    return res.json();
-                } 
-            })
-            .catch((err) => {
-            })
+            .then(this._checkResponse)
     }
     
+    // поставить лайк
     putLike(cardId) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-63/cards/${cardId}/likes`, {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'PUT',
-            headers: {
-                authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
-            }
+            headers: this._headers
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-        })
+        .then(this._checkResponse)
     }
 
+    // удалить лайк
     deleteLike(cardId) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-63/cards/${cardId}/likes`, {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'DELETE',
-            headers: {
-                authorization: 'e900e361-a4f9-4167-b7d1-fcc078aa308a'
-            }
+            headers: this._headers
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-        })
+        .then(this._checkResponse)
     }
 
 }

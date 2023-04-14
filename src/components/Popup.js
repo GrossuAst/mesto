@@ -3,6 +3,7 @@ export class Popup {
         this._selector = document.querySelector(popupSelector);
         this._closeIcon = this._selector.querySelector('.popup__close-icon');
         this._saveButton = this._selector.querySelector('.popup__submit-button');
+        this._handleEscClose = this._handleEscClose.bind(this);
     };
 
     changeButtonText(text) {
@@ -12,13 +13,13 @@ export class Popup {
     // метод открытия попапа
     open() {
         this._selector.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose.bind(this));
+        document.addEventListener('keydown', this._handleEscClose);
     };
 
     // метод закрытия
     close() {
         this._selector.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._handleEscClose.bind(this));
+        document.removeEventListener('keydown', this._handleEscClose);
     };
 
     // закрытие на ESC

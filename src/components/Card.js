@@ -17,7 +17,6 @@ export class Card {
 
         // обработка лайка
         this._handleLikeCard = handleLikeCard;
-        // this._isLiked = false;
     };
 
     // работа лайков 
@@ -31,8 +30,7 @@ export class Card {
 
     countLikes(likesArray) {
         this._likesArray = likesArray;
-        const likesCounter = this._newCard.querySelector('.card__likes-counter');
-        likesCounter.textContent = this._likesArray.length;
+        this._likesCounter.textContent = this._likesArray.length;
     }
 
     // орисовка урны, если карточка моя

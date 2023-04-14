@@ -91,7 +91,7 @@
                             <input type="text"
                             required
                             minlength="2" maxlength="30"
-                            placeholder="Название" name="place-name"
+                            placeholder="Название" name="name"
                             id="place-name-input"
                             class="popup__input popup__input_type_card-name">
 
@@ -100,7 +100,7 @@
 <!-- инпут ссылки на фото -->
                             <input type="url"
                             required
-                            placeholder="Ссылка на картинку" name="place-link"
+                            placeholder="Ссылка на картинку" name="link"
                             id="place-link-input"
                             class="popup__input popup__input_type_card-link">
                             
@@ -133,13 +133,14 @@
 
                             required            
                                            
-                            placeholder="Ссылка на аватар" name="avatar-input"
+                            placeholder="Ссылка на аватар" name="avatar"
+
                             id="input-avatar"
 
                             class="popup__input popup__input_type_avatar">
 
                             <!-- спан с ошибкой в инпуте аватара-->
-                            <span class="popup__error avatar-link-input-error"></span>
+                            <span class="popup__error input-avatar-error"></span>
 
                         </div>
                     <button type="submit" class="popup__submit-button popup__submit-button_type_avatar">Сохранить</button>

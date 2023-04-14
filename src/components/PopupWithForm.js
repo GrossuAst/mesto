@@ -34,9 +34,9 @@ export class PopupWithForm extends Popup {
             evt.preventDefault();
             
             this._submitForm(this._getInputValues());
-            // console.log(cardData)
-            // console.log(this._submitForm(this._getInputValues()));
-            this.close();
+            
+            
+            // this.close();
         });
     };
 
